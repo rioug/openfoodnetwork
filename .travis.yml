@@ -1,3 +1,8 @@
 language: ruby
 rvm:
  - 2.3.7
+services:
+  - postgresql
+before_script:
+  - psql -c "CREATE USER ofn WITH SUPERUSER CREATEDB PASSWORD 'f00d';" -U postgres
+  - script/setup
