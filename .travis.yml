@@ -1,12 +1,12 @@
 language: ruby
 rvm:
- - 2.3.7
+  - 2.3.7
 services:
   - postgresql
 before_install:
   - script/install-node 
   - psql -c "CREATE USER ofn WITH SUPERUSER CREATEDB PASSWORD 'f00d';" -U postgres
 install:
-  -script/setup
+  - script/setup
 script:
-  -bundle exec rspec spec
+  - bundle exec rspec spec
