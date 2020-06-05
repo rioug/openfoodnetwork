@@ -10,6 +10,9 @@ blocks:
       jobs:
         - name: setup
           commands:
+            - checkout
+            - sem-service start postgres
+            - 'bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
             - bundle install --deployment --path vendor/bundle
             - cp config/application.yml.example config/application.yml
             - 'RAILS_ENV=test bundle exec rake db:create db:schema:load'
