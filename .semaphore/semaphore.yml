@@ -15,7 +15,8 @@ blocks:
           - checkout
           - sem-service start postgres
           - sem-version ruby 2.1.5
-          - postgres psql -c "CREATE USER ofn WITH SUPERUSER CREATEDB PASSWORD 'f00d'"
+          - sudo apt-get install -y -qq postgresql-client
+          - psql -h 0.0.0.0 -U postgres -c "CREATE USER ofn WITH SUPERUSER CREATEDB PASSWORD 'f00d'"
           - bundle install --deployment --path vendor/bundle
           - cp config/application.yml.example config/application.yml
           - 'RAILS_ENV=test bundle exec rake db:create db:schema:load'
