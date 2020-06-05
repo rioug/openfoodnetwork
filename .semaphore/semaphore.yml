@@ -7,24 +7,19 @@ agent:
 blocks:
   - name: 'Block #1'
     task:
-      jobs:
-        - name: setup
-          commands:
-            - checkout
-            - sem-service start postgres
-            - 'bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
-            - bundle install --deployment --path vendor/bundle
-            - cp config/application.yml.example config/application.yml
-            - 'RAILS_ENV=test bundle exec rake db:create db:schema:load'
-            - change-phantomjs-version 2.1.1
       env_vars:
         - name: TZ
           value: Australia/Melbourne
-  - name: 'Block #2'
-    task:
-      env_vars:
-        - name: TZ
-          value: Australia/Melbourne
+      prologue:
+        commands:
+          - checkout
+          - sem-service start postgres
+          - sem-version ruby 2.1.5
+          - postgres psql -c "CREATE USER ofn WITH SUPERUSER CREATEDB PASSWORD 'f00d'"
+          - bundle install --deployment --path vendor/bundle
+          - cp config/application.yml.example config/application.yml
+          - 'RAILS_ENV=test bundle exec rake db:create db:schema:load'
+          - change-phantomjs-version 2.1.1
       jobs:
         - name: 'Job #1'
           commands:
