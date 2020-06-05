@@ -42,4 +42,13 @@ blocks:
             - npm install
             - npm install -g karma-cli@0.1.2
             - 'RAILS_ENV=test bundle exec rake karma:run'
-            - bundle exec rspec spec/controllers/cart_controller_spec.rb
+            - 'KNAPSACK_TEST_DIR=spec KNAPSACK_TEST_FILE_PATTERN="{spec,engines/**/spec}/**{,/*/**}/*_spec.rb" bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
+        - name: 'Job #2'
+          commands:
+            - 'KNAPSACK_TEST_DIR=spec KNAPSACK_TEST_FILE_PATTERN="{spec,engines/**/spec}/**{,/*/**}/*_spec.rb" bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
+        - name: 'Job #3'
+          commands:
+            - 'KNAPSACK_TEST_DIR=spec KNAPSACK_TEST_FILE_PATTERN="{spec,engines/**/spec}/**{,/*/**}/*_spec.rb" bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
+        - name: 'Job #4'
+          commands:
+            - 'KNAPSACK_TEST_DIR=spec KNAPSACK_TEST_FILE_PATTERN="{spec,engines/**/spec}/**{,/*/**}/*_spec.rb" bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
