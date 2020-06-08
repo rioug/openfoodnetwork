@@ -10,6 +10,8 @@ blocks:
       env_vars:
         - name: TZ
           value: Australia/Melbourne
+        - name: RAILS_ENV
+          value: test
       jobs:
         - name: Bundle
           commands:
@@ -24,6 +26,8 @@ blocks:
       env_vars:
         - name: TZ
           value: Australia/Melbourne
+        - name: RAILS_ENV
+          value: test
       prologue:
         commands:
           - checkout
@@ -34,21 +38,18 @@ blocks:
           - psql -h 0.0.0.0 -U postgres -c "CREATE USER ofn WITH SUPERUSER CREATEDB PASSWORD 'f00d'"
           - bundle install --deployment --path vendor/bundle
           - cp config/application.yml.example config/application.yml
-          - 'RAILS_ENV=test bundle exec rake db:create db:schema:load'
+          - bundle exec rake db:create db:schema:load
       jobs:
-        - name: 'Job #1'
-          commands:
-            - npm install -g npm@'3.8.8'
+      	- name: 'Rub karma test'
+					commands:
+        		- npm install -g npm@'3.8.8'
             - npm install
             - npm install -g karma-cli@0.1.2
-            - 'RAILS_ENV=test bundle exec rake karma:run'
-            - 'KNAPSACK_TEST_DIR=spec KNAPSACK_TEST_FILE_PATTERN="{spec,engines/**/spec}/**{,/*/**}/*_spec.rb" bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
-        - name: 'Job #2'
-          commands:
-            - 'KNAPSACK_TEST_DIR=spec KNAPSACK_TEST_FILE_PATTERN="{spec,engines/**/spec}/**{,/*/**}/*_spec.rb" bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
-        - name: 'Job #3'
-          commands:
-            - 'KNAPSACK_TEST_DIR=spec KNAPSACK_TEST_FILE_PATTERN="{spec,engines/**/spec}/**{,/*/**}/*_spec.rb" bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
-        - name: 'Job #4'
-          commands:
-            - 'KNAPSACK_TEST_DIR=spec KNAPSACK_TEST_FILE_PATTERN="{spec,engines/**/spec}/**{,/*/**}/*_spec.rb" bundle exec rake ''knapsack:rspec[--tag ~performance --format progress -p]'''
+            - bundle exec rake karma:run
+        - name: Run tests with Knapsack
+        	parallelism: 4
+        	commands:
+         	 - bundle exec rake knapsack:rspec
+        
+        
+        
