@@ -616,6 +616,10 @@ module Spree
       end
     end
 
+    def vouchers
+      adjustments.where(originator_type: 'Voucher')
+    end
+
     private
 
     def fee_handler
