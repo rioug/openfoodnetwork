@@ -4,12 +4,9 @@ export default class extends Controller {
   static targets = ["button"];
 
   connect() {
-    // Hacky way to go arount mrjus automatically enabling/disabling form element
-    setTimeout(() => {
-      if (this.hasButtonTarget) {
-        this.buttonTarget.disabled = true;
-      }
-    }, 100);
+    if (this.hasButtonTarget) {
+      this.buttonTarget.disabled = true;
+    }
   }
 
   inputIsChanged(e) {

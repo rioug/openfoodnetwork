@@ -17,4 +17,4 @@
                 = t("split_checkout.step2.voucher.warning_forfeit_remaining_amount")
         - else
           = text_field_tag "[order][voucher_code]", params.dig(:order, :voucher_code), data: { action: "input->toggle-button-disabled#inputIsChanged", }, placeholder: t("split_checkout.step2.voucher.placeholder") , class: "voucher"
-          = submit_tag t("split_checkout.step2.voucher.apply"), name: "apply_voucher", disabled: true, class: "button cancel voucher",  data: { "toggle-button-disabled-target": "button" }, id: "testdisable"
+          = submit_tag t("split_checkout.step2.voucher.apply"), name: "apply_voucher", disabled: true, "data-disable-with": false, class: "button cancel voucher",  data: { "toggle-button-disabled-target": "button" }, id: "testdisable"
