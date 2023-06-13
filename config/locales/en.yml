@@ -685,6 +685,8 @@ en:
         balance_due: "Balance Due"
       destroy:
         has_associated_subscriptions: "Delete failed: This customer has active subscriptions. Cancel them first."
+      create:
+        customer_exists: This customer already exists
     contents:
       edit:
         title: Content

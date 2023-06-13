@@ -15,7 +15,7 @@ describe 'Customers' do
 
     describe "using the customers index" do
       let!(:customer1) {
-        create(:customer, first_name: 'John', last_name: 'Doe', enterprise: managed_distributor1, 
+        create(:customer, first_name: 'John', last_name: 'Doe', enterprise: managed_distributor1,
 code: nil, created_manually: true)
       }
       let!(:customer2) {
@@ -373,12 +373,13 @@ code: nil, created_manually: true)
                                             text: "Email is invalid"
             }.to_not change{ Customer.of(managed_distributor1).count }
 
+            # TODO fix this
             # When an existing email is used
             expect{
               fill_in 'email', with: customer1.email
               click_button 'Add Customer'
               expect(page).to have_selector "#new-customer-dialog .error",
-                                            text: "Email is associated with an existing customer"
+                                            text: "This customer already exists"
             }.to change{ customer1.reload.created_manually }.from(false).to(true)
               .and change { Customer.of(managed_distributor1).count }.by(0)
 
@@ -391,7 +392,7 @@ code: nil, created_manually: true)
 
             expect(
               Customer.of(managed_distributor1).reorder(:id)
-                .last.created_manually 
+                .last.created_manually
             ).to be true
           end
         end

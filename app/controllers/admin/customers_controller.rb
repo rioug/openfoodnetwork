@@ -37,9 +37,14 @@ module Admin
 
     def create
       @customer = Customer.find_or_new(customer_params[:email], customer_params[:enterprise_id])
-      @customer.assign_attributes(customer_params)
+
+      if @customer.id
+        @customer.errors.add(:base, I18n.t('admin.customers.create.customer_exists'))
+        return render json: { errors: @customer.errors.full_messages }, status: :bad_request
+      end
 
       if user_can_create_customer?
+        @customer.assign_attributes(customer_params)
         @customer.set_created_manually_flag
         if @customer.save
           tag_rule_mapping = TagRule.mapping_for(Enterprise.where(id: @customer.enterprise))
