@@ -13,6 +13,7 @@ class VoucherAdjustmentsController < BaseController
 
   def destroy
     @order.voucher_adjustments.find_by(id: params[:id])&.destroy
+    @order.update_order! # adjustments, totals and states
 
     update_payment_section
   end
@@ -38,7 +39,7 @@ class VoucherAdjustmentsController < BaseController
 
     adjustment = voucher.create_adjustment(voucher.code, @order)
 
-    unless adjustment.valid?
+    unless adjustment.persisted?
       @order.errors.add(:voucher_code, I18n.t('split_checkout.errors.add_voucher_error'))
       adjustment.errors.each { |error| @order.errors.import(error) }
       return false

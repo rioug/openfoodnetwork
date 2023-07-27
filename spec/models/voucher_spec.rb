@@ -56,5 +56,9 @@ describe Voucher do
     it 'sets the adjustment as open' do
       expect(adjustment.state).to eq("open")
     end
+
+    it 'updates order totals' do
+      expect{ subject }.to change(order, :total).by(-25)
+    end
   end
 end
