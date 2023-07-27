@@ -21,11 +21,9 @@ class Voucher < ApplicationRecord
   # but vouchers have complicated calculation so we can't easily use Spree::Calculator. We keep
   # the same method to stay as consistent as possible.
   #
-  # Creates a new voucher adjustment for the given order with an amount of 0
-  # The amount will be calculated via VoucherAdjustmentsService#update
   def create_adjustment(label, order)
     adjustment_attributes = {
-      amount: 0,
+      amount: 0, # Amount is updated by VoucherAdjustmentsService below
       originator: self,
       order: order,
       label: label,
@@ -34,7 +32,14 @@ class Voucher < ApplicationRecord
       tax_category: nil
     }
 
-    order.adjustments.create(adjustment_attributes)
+    adjustment = order.adjustments.new(adjustment_attributes)
+
+    if adjustment.save
+      VoucherAdjustmentsService.new(order).update
+      order.update_totals_and_states
+    end
+
+    adjustment
   end
 
   # We limit adjustment to the maximum amount needed to cover the order, ie if the voucher
