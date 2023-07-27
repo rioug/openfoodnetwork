@@ -822,7 +822,6 @@ describe "As a consumer, I want to checkout my order" do
             end
 
             it "can proceed with payment" do
-              pending
               choose "Payment with Fee"
               click_button "Next - Order summary"
               # Expect to be on the Order Summary page

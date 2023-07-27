@@ -13,6 +13,7 @@ class VoucherAdjustmentsController < BaseController
 
   def destroy
     @order.voucher_adjustments.find_by(id: params[:id])&.destroy
+    @order.update_order! # adjustments, totals and states
 
     update_payment_section
   end
