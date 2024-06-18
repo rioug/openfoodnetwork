@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_29_081209) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_18_013850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -977,6 +977,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_29_081209) do
     t.bigint "tax_category_id"
     t.bigint "shipping_category_id"
     t.bigint "primary_taxon_id"
+    t.float "variant_unit_scale"
+    t.string "variant_unit_name", limit: 255
     t.index ["primary_taxon_id"], name: "index_spree_variants_on_primary_taxon_id"
     t.index ["product_id"], name: "index_variants_on_product_id"
     t.index ["shipping_category_id"], name: "index_spree_variants_on_shipping_category_id"
