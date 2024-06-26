@@ -17,11 +17,9 @@ FactoryBot.define do
     supplier { Enterprise.is_primary_producer.first || FactoryBot.create(:supplier_enterprise) }
 
     unit_value { 1 }
-    unit_description { '' }
-
+    unit_description { 'some_variant' }
     variant_unit { 'weight' }
     variant_unit_scale { 1 }
-    variant_unit_name { '' }
 
     # ensure stock item will be created for this products master
     before(:create) { create(:stock_location) if Spree::StockLocation.count.zero? }
