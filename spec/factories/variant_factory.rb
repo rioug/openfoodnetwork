@@ -26,6 +26,10 @@ FactoryBot.define do
       unit_value { 1 }
       unit_description { '' }
 
+      variant_unit { 'weight' }
+      variant_unit_scale { 1 }
+      variant_unit_name { '' }
+
       after(:create) do |variant, evaluator|
         variant.on_demand = evaluator.on_demand
         variant.on_hand = evaluator.on_hand
