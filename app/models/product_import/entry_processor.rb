@@ -230,6 +230,9 @@ module ProductImport
       variant.display_name = entry.display_name if entry.display_name
       variant.on_demand = entry.on_demand if entry.on_demand
       variant.on_hand = entry.on_hand if entry.on_hand
+      variant.variant_unit = entry.variant_unit if entry.variant_unit
+      variant.variant_unit_name = entry.variant_unit_name if entry.variant_unit_name
+      variant.variant_unit_scale = entry.variant_unit_scale if entry.variant_unit_scale
       variant.import_date = @import_time
       variant.save
     end
