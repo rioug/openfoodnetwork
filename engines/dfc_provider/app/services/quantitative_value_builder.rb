@@ -17,7 +17,7 @@ class QuantitativeValueBuilder < DfcBuilder
   end
 
   def self.unit(variant)
-    case variant.product.variant_unit
+    case variant.variant_unit
     when "volume"
       DfcLoader.connector.MEASURES.LITRE
     when "weight"
@@ -27,13 +27,13 @@ class QuantitativeValueBuilder < DfcBuilder
     end
   end
 
-  def self.apply(quantity, product)
+  def self.apply(quantity, variant)
     measure, unit_name, unit_scale = map_unit(quantity.unit)
 
-    product.variant_unit = measure
-    product.variant_unit_name = unit_name if measure == "items"
-    product.variant_unit_scale = unit_scale
-    product.unit_value = quantity.value.to_f * unit_scale
+    variant.variant_unit = measure
+    variant.variant_unit_name = unit_name if measure == "items"
+    variant.variant_unit_scale = unit_scale
+    variant.unit_value = quantity.value.to_f * unit_scale
   end
 
   # Map DFC units to OFN fields:
