@@ -34,7 +34,8 @@ RSpec.describe 'As an enterprise user, I can manage my products' do
   end
 
   describe "creating new variants" do
-    let!(:product) { create(:product, variant_unit: 'weight', variant_unit_scale: 1000) }
+    let!(:product) { create(:product) }
+    #let!(:product) { create(:product, variant_unit: 'weight', variant_unit_scale: 1000) }
 
     before { visit_products_page_as_admin }
 
@@ -45,6 +46,7 @@ RSpec.describe 'As an enterprise user, I can manage my products' do
       expect(page).to have_content "New variant"
     end
 
+    # TODO: check if we still need this
     it "has the 1 unit value for the new variant display_as by default" do
       new_variant_button.click
 
@@ -76,6 +78,7 @@ RSpec.describe 'As an enterprise user, I can manage my products' do
         within page.all("tr.condensed")[1] do # selects second variant row
           find('input[id$="_sku"]').fill_in with: "345"
           find('input[id$="_display_name"]').fill_in with: "Small bag"
+          tomselect_select "Weight (g)", from: "Unit scale"
           find('button[id$="unit_to_display"]').click # opens the unit value pop out
           find('input[id$="_unit_value_with_description"]').fill_in with: "0.002"
           find('input[id$="_display_as"]').fill_in with: "2 grams"
@@ -103,6 +106,8 @@ RSpec.describe 'As an enterprise user, I can manage my products' do
         new_variant = Spree::Variant.where(deleted_at: nil).last
         expect(new_variant.sku).to eq "345"
         expect(new_variant.display_name).to eq "Small bag"
+        expect(new_variant.variant_unit).to eq "weight"
+        expect(new_variant.variant_unit_scale).to eq 1 # g
         expect(new_variant.unit_value).to eq 2.0
         expect(new_variant.display_as).to eq "2 grams"
         expect(new_variant.unit_presentation).to eq "2 grams"
