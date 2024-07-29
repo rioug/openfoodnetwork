@@ -223,10 +223,10 @@ module Spree
     end
 
     # Format as per WeightsAndMeasures
-    # TODO test ?
     def variant_unit_with_scale
       scale_clean = ActiveSupport::NumberHelper.number_to_rounded(variant_unit_scale,
                                                                   precision: nil,
+                                                                  significant: false,
                                                                   strip_insignificant_zeros: true)
       [variant_unit, scale_clean].compact_blank.join("_")
     end
