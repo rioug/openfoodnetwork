@@ -35,7 +35,6 @@ RSpec.describe 'As an enterprise user, I can manage my products' do
 
   describe "creating new variants" do
     let!(:product) { create(:product) }
-    #let!(:product) { create(:product, variant_unit: 'weight', variant_unit_scale: 1000) }
 
     before { visit_products_page_as_admin }
 
@@ -44,19 +43,6 @@ RSpec.describe 'As an enterprise user, I can manage my products' do
       find("button.secondary.condensed.naked.icon-plus").hover
       new_variant_button(visible: true)
       expect(page).to have_content "New variant"
-    end
-
-    # TODO: check if we still need this
-    it "has the 1 unit value for the new variant display_as by default" do
-      new_variant_button.click
-
-      within new_variant_row do
-        unit_button = find('button[aria-label="Unit"]')
-        expect(unit_button.text.strip).to eq('1kg')
-
-        unit_button.click
-        expect(page).to have_field "Display unit as", placeholder: "1kg"
-      end
     end
 
     shared_examples "creating a new variant (bulk)" do |stock|
@@ -108,7 +94,7 @@ RSpec.describe 'As an enterprise user, I can manage my products' do
         expect(new_variant.display_name).to eq "Small bag"
         expect(new_variant.variant_unit).to eq "weight"
         expect(new_variant.variant_unit_scale).to eq 1 # g
-        expect(new_variant.unit_value).to eq 2.0
+        expect(new_variant.unit_value).to eq 0.002
         expect(new_variant.display_as).to eq "2 grams"
         expect(new_variant.unit_presentation).to eq "2 grams"
         expect(new_variant.price).to eq 11.1

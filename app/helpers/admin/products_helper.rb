@@ -10,15 +10,10 @@ module Admin
       end
     end
 
-    def prepare_new_variant(product)
-      product.variants.build do |variant|
-        variant.unit_value = 1.0 * (product.variant_unit_scale || 1)
-        variant.unit_presentation = VariantUnits::OptionValueNamer.new(variant).name
-      end
-    end
-
     def unit_value_with_description(variant)
-      scaled_unit_value = variant.unit_value / (variant.product.variant_unit_scale || 1)
+      return "" if variant.unit_value.nil?
+
+      scaled_unit_value = variant.unit_value / (variant.variant_unit_scale || 1)
       precised_unit_value = number_with_precision(
         scaled_unit_value,
         precision: nil,
