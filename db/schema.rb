@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_28_203544) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_08_053852) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -966,6 +966,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_28_203544) do
     t.bigint "shipping_category_id"
     t.bigint "primary_taxon_id"
     t.bigint "supplier_id"
+    t.float "variant_unit_scale"
+    t.string "variant_unit_name", limit: 255
     t.index ["primary_taxon_id"], name: "index_spree_variants_on_primary_taxon_id"
     t.index ["product_id"], name: "index_variants_on_product_id"
     t.index ["shipping_category_id"], name: "index_spree_variants_on_shipping_category_id"
@@ -1103,6 +1105,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_28_203544) do
     t.datetime "deleted_at", precision: nil
     t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
     t.string "type", limit: 255, default: "Vouchers::FlatRate", null: false
+    t.uuid "external_voucher_id"
+    t.uuid "external_voucher_set_id"
+    t.string "voucher_type"
     t.index ["code", "enterprise_id"], name: "index_vouchers_on_code_and_enterprise_id", unique: true
     t.index ["deleted_at"], name: "index_vouchers_on_deleted_at"
     t.index ["enterprise_id"], name: "index_vouchers_on_enterprise_id"
