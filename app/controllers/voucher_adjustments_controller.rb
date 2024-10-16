@@ -4,7 +4,16 @@ class VoucherAdjustmentsController < BaseController
   before_action :set_order
 
   def create
-    if add_voucher
+    if voucher_params[:voucher_code].blank?
+      @order.errors.add(:voucher_code, I18n.t('checkout.errors.voucher_not_found'))
+      return render_error
+    end
+
+    voucher = load_voucher
+
+    return render_error unless valid_voucher?(voucher)
+
+    if add_voucher_to_order(voucher)
       update_payment_section
     elsif @order.errors.present?
       render_error
@@ -30,19 +39,28 @@ class VoucherAdjustmentsController < BaseController
     @order = current_order
   end
 
-  def add_voucher
-    if voucher_params[:voucher_code].blank?
-      @order.errors.add(:voucher_code, I18n.t('checkout.errors.voucher_not_found'))
-      return false
-    end
-
-    voucher = Voucher.find_by(code: voucher_params[:voucher_code], enterprise: @order.distributor)
+  def valid_voucher?(voucher)
+    return false if @order.errors.present?
 
     if voucher.nil?
       @order.errors.add(:voucher_code, I18n.t('checkout.errors.voucher_not_found'))
       return false
     end
 
+    if !voucher.valid?
+      @order.errors.add(
+        :voucher_code,
+        I18n.t(
+          'checkout.errors.create_voucher_error', error: voucher.errors.full_messages.to_sentence
+        )
+      )
+      return false
+    end
+
+    true
+  end
+
+  def add_voucher_to_order(voucher)
     adjustment = voucher.create_adjustment(voucher.code, @order)
 
     unless adjustment.persisted?
@@ -51,6 +69,7 @@ class VoucherAdjustmentsController < BaseController
       return false
     end
 
+    # calculate_voucher_adjustment
     clear_payments
 
     VoucherAdjustmentsService.new(@order).update
@@ -59,6 +78,36 @@ class VoucherAdjustmentsController < BaseController
     true
   end
 
+  def load_voucher
+    voucher = Voucher.not_vine.find_by(code: voucher_params[:voucher_code],
+                                       enterprise: @order.distributor)
+    return voucher unless voucher.nil?
+
+    vine_voucher
+  end
+
+  def vine_voucher
+    vine_voucher_validator = VineVoucherValidatorService.new(
+      voucher_code: voucher_params[:voucher_code], enterprise: @order.distributor
+    )
+    voucher = vine_voucher_validator.validate
+
+    if vine_voucher_validator.errors.present?
+      return nil if ignored_error(vine_voucher_validator)
+
+      @order.errors.add(:voucher_code, I18n.t('checkout.errors.add_voucher_error'))
+      return nil
+    end
+
+    voucher
+  end
+
+  def ignored_error(validator)
+    # Ignore distributir not set up for VINE or not found error
+    validator.errors[:vine_settings].present? || validator.errors[:not_found_voucher].present?
+  end
+
+  # TODO udpate to turbo
   def update_payment_section
     render cable_ready: cable_car.replace(
       selector: "#checkout-payment-methods",
@@ -66,6 +115,7 @@ class VoucherAdjustmentsController < BaseController
     )
   end
 
+  # TODO udpate to turbo
   def render_error
     flash.now[:error] = @order.errors.full_messages.to_sentence
 
