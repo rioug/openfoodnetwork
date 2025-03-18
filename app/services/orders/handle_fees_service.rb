@@ -84,7 +84,12 @@ module Orders
 
     def create_or_update_line_item_fee!(line_item)
       fee_applicators(line_item.variant).each do |fee_applicator|
-        fee_adjustment = line_item.adjustments.find_by(originator: fee_applicator.enterprise_fee)
+        fee_adjustment = line_item.adjustments
+          .joins(:metadata)
+          .find_by(
+            originator: fee_applicator.enterprise_fee,
+            adjustment_metadata: { enterprise_role: fee_applicator.role }
+          )
 
         if fee_adjustment
           fee_adjustment.update_adjustment!(line_item, force: true)
@@ -95,14 +100,45 @@ module Orders
     end
 
     def delete_removed_fees!(line_item)
-      order_cycle_fees = fee_applicators(line_item.variant).map(&:enterprise_fee)
-      removed_fees = line_item.enterprise_fee_adjustments.where.not(originator: order_cycle_fees)
+      applicators = fee_applicators(line_item.variant)
+
+      # Any fees that don't have a matching fee in the order cycle
+      removed_fees = line_item.enterprise_fee_adjustments.where.not(
+        originator: applicators.map(&:enterprise_fee)
+      )
+
+      # The same fee can be used in the incoming and outgoing exchange, (supplier and distributor
+      # fees), so we need an extra check to see if a fee linked to both exchanges has been removed
+      applicators.each do |applicator|
+        # Check if there is any fee adjustment with a role other than the one in the applicator
+        fee = line_item.enterprise_fee_adjustments
+          .joins(:metadata)
+          .where(originator: applicator.enterprise_fee)
+          .where.not(
+            spree_adjustments: { adjustment_metadata: { enterprise_role: applicator.role } }
+          ).first
+
+        # Check if the fee matches a fee linked to the oder cycle
+        if fee.nil? || applicators_include_fee?(applicators, fee)
+          next
+        end
+
+        # If not linked to the order cycle we add it to the list of fee to be removed
+        removed_fees = removed_fees.to_a.push(fee)
+      end
 
       removed_fees.each(&:destroy)
     end
 
     def fee_applicators(variant)
       calculator.order_cycle_per_item_enterprise_fee_applicators_for(variant)
+    end
+
+    def applicators_include_fee?(applicators, fee)
+      matching = applicators.select do |a|
+        a.enterprise_fee == fee.originator && a.role == fee.metadata.enterprise_role
+      end
+      matching.present?
     end
   end
 end

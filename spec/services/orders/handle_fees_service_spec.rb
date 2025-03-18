@@ -86,7 +86,7 @@ RSpec.describe Orders::HandleFeesService do
         allow(calculator).to receive(
           :order_cycle_per_item_enterprise_fee_applicators_for
         ).and_return([fee_applicator])
-        adjustment = fee.create_adjustment('foo', line_item, true)
+        adjustment = fee_applicator.create_line_item_adjustment(line_item)
 
         expect do
           service.create_or_update_line_item_fees!
@@ -95,7 +95,7 @@ RSpec.describe Orders::HandleFeesService do
 
       context "when enterprise fee is removed from the order cycle" do
         it "removes the line item fee" do
-          adjustment = fee.create_adjustment('foo', line_item, true)
+          adjustment = fee_applicator.create_line_item_adjustment(line_item)
           order_cycle.exchanges.first.enterprise_fees.destroy(fee)
           allow(calculator).to receive(
             :order_cycle_per_item_enterprise_fee_applicators_for
@@ -105,11 +105,49 @@ RSpec.describe Orders::HandleFeesService do
             service.create_or_update_line_item_fees!
           end.to change { line_item.adjustments.reload.enterprise_fee.count }.by(-1)
         end
+
+        context "with the same fee used for both supplier an distributor" do
+          let!(:supplier_adjustment) {
+            fee_applicator.create_line_item_adjustment(line_item)
+          }
+          let!(:distributor_adjustment) {
+            distributor_applicator.create_line_item_adjustment(line_item)
+          }
+          let(:distributor_applicator) {
+            OpenFoodNetwork::EnterpriseFeeApplicator.new(fee, line_item.variant, distributor_role)
+          }
+          let(:distributor_role) { order_cycle.exchanges.last.role }
+
+          it "removes the supplier fee when removed from the order cycle" do
+            allow(calculator).to receive(
+              :order_cycle_per_item_enterprise_fee_applicators_for
+            ).and_return([distributor_applicator])
+
+            enterprise_fees = line_item.adjustments.reload.enterprise_fee
+            expect do
+              service.create_or_update_line_item_fees!
+            end.to change { enterprise_fees.count }.by(-1)
+            expect(enterprise_fees).not_to include(supplier_adjustment)
+          end
+
+          it "removes the distributor fee when removed from the order cycle" do
+            allow(calculator).to receive(
+              :order_cycle_per_item_enterprise_fee_applicators_for
+            ).and_return([fee_applicator])
+
+            enterprise_fees = line_item.adjustments.reload.enterprise_fee
+            expect do
+              service.create_or_update_line_item_fees!
+            end.to change { enterprise_fees.count }.by(-1)
+            expect(enterprise_fees).not_to include(distributor_adjustment)
+          end
+        end
       end
 
       context "when an enterprise fee is deleted" do
         before do
-          fee.create_adjustment('foo', line_item, true)
+          fee_applicator.create_line_item_adjustment(line_item)
+
           allow(calculator).to receive(
             :order_cycle_per_item_enterprise_fee_applicators_for
           ).and_return([])
@@ -141,7 +179,7 @@ RSpec.describe Orders::HandleFeesService do
         let(:fee_applicator2) {
           OpenFoodNetwork::EnterpriseFeeApplicator.new(new_fee, line_item.variant, role)
         }
-        let!(:adjustment) { fee.create_adjustment('foo', line_item, true) }
+        let!(:adjustment) { fee_applicator.create_line_item_adjustment(line_item) }
 
         before do
           allow(service).to receive(:provided_by_order_cycle?) { true }
