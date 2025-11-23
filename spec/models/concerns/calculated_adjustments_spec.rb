@@ -72,9 +72,9 @@ RSpec.describe CalculatedAdjustments do
     subject(:tax_rate) { Spree::TaxRate.new }
 
     it "set the calculator to the given type" do
-      tax_rate.calculator_type = "Calculator::FlatRate"
+      tax_rate.calculator_type = "Calculator::DefaultTax"
 
-      expect(tax_rate.calculator).to be_a(Calculator::FlatRate)
+      expect(tax_rate.calculator).to be_a(Calculator::DefaultTax)
     end
 
     context "when no argument given" do
