@@ -76,6 +76,9 @@ Spree::Core::Engine.routes.draw do
 
     resources :properties
 
+
+    post "orders/bulk_credit", to: "orders#bulk_credit"
+
     resources :orders do
       member do
         put :fire

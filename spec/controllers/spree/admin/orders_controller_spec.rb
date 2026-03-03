@@ -358,4 +358,60 @@ RSpec.describe Spree::Admin::OrdersController do
       end
     end
   end
+
+  describe "#bulk_credit" do
+    let(:order) { create(:order_with_totals, payment_state: "credit_owed", distributor:) }
+    let(:order1) { create(:order_with_totals, payment_state: "credit_owed", distributor:) }
+    let(:order2) { create(:order_with_totals, payment_state: "credit_owed", distributor:) }
+    let(:distributor) { create(:distributor_enterprise) }
+    let(:service_response) { instance_double(Orders::CustomerCreditService::Response) }
+
+    before { controller_login_as_admin }
+
+    it "credits the given orders" do
+      credit_service_mock = mock_credit_service_for(orders: [order, order1, order2])
+
+      allow(service_response).to receive(:failure?).and_return(false)
+      expect(credit_service_mock).to receive(:refund).and_return(service_response).exactly(3).times
+
+      spree_post :bulk_credit, { bulk_ids: [order.id, order1.id, order2.id] }, format: :turbo_stream
+
+      expect(response).to have_http_status :ok
+      expect(response.body).to include("order_#{order.id}", "order_#{order1.id}",
+                                       "order_#{order2.id}")
+    end
+
+    context "when refund fails" do
+      it "displays an error" do
+        credit_service_mock = mock_credit_service_for(orders: [order, order1])
+
+        allow(service_response).to receive(:failure?).and_return(true)
+        allow(service_response).to receive(:message).and_return("No credit owed")
+        expect(credit_service_mock).to receive(:refund).and_return(service_response)
+          .exactly(2).times
+
+        spree_post :bulk_credit, { bulk_ids: [order.id, order1.id] }, format: :turbo_stream
+
+        expect(response).to have_http_status :ok
+        # For some reason the flashes template is not rendered, but we can check the "flashes"
+        # target is included twice
+        expect(response.body).to include("flashes").twice
+        # flash[:error] only include the last entry, it lets us check the error message
+        # is correctly formated
+        expect(flash[:error]).to eq "Order ##{order1.number} could not be credited : No credit owed"
+        expect(response.body).not_to include("order_#{order.id}", "order_#{order1.id}")
+      end
+    end
+  end
+
+  def mock_credit_service_for(orders: [])
+    credit_service_mock = instance_double(Orders::CustomerCreditService)
+    orders.each do |order|
+      expect(Orders::CustomerCreditService).to receive(:new).with(order).and_return(
+        credit_service_mock
+      )
+    end
+
+    credit_service_mock
+  end
 end
