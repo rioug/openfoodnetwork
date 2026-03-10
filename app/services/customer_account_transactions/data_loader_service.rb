@@ -10,8 +10,6 @@ module CustomerAccountTransactions
     end
 
     def customer_account_transactions
-      return [] if user.customers.empty?
-
       enterprise_customer = user.customers.find_by(enterprise: )
       return [] if enterprise_customer.nil?
 
