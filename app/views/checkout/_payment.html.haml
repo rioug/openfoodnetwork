@@ -12,11 +12,11 @@
         %h3= t(:no_payment_required)
         - if @order.zero_priced_order?
           = hidden_field_tag "order[payments_attributes][][amount]", 0
-        - if @paid_with_credit
+        - if @paid_with_credit.present? && @paid_with_credit > 0
           = t(:credit_used, amount: Spree::Money.new(@paid_with_credit))
 
       - else
-        - if @paid_with_credit
+        - if @paid_with_credit.present? && @paid_with_credit > 0
           = t(:credit_used, amount: Spree::Money.new(@paid_with_credit))
 
         - selected_payment_method = @order.payments&.with_state(:checkout)&.first&.payment_method_id
