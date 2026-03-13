@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class VoucherAdjustmentsController < BaseController
+  include CustomerCredit
+
   before_action :set_order
 
   def create
@@ -104,6 +106,8 @@ class VoucherAdjustmentsController < BaseController
   end
 
   def update_payment_section
+    @paid_with_credit = calculate_credit(@order)
+
     render cable_ready: cable_car.replace(
       selector: "#checkout-payment-methods",
       html: render_to_string(partial: "checkout/payment", locals: { step: "payment" })

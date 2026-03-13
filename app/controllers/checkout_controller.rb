@@ -64,6 +64,8 @@ class CheckoutController < BaseController
   private
 
   def render_error
+    @paid_with_credit = calculate_credit(@order) if payment_step?
+
     flash.now[:error] ||= I18n.t('checkout.errors.saving_failed')
 
     render status: :unprocessable_entity, cable_ready: cable_car.

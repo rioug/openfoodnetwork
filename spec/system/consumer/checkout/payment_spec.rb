@@ -110,6 +110,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
       end
 
       context "with credit available" do
+        let!(:payment_method) { create(:payment_method, distributors: [distributor]) }
         let(:credit_payment_method) { create(:customer_credit_payment_method) }
         let(:payment_amount) { 10.00 }
 
@@ -138,6 +139,14 @@ RSpec.describe "As a consumer, I want to checkout my order" do
           it "shows credit used and available payment method" do
             expect(page).to have_content "Credit used: $5.00"
             expect(page).to have_content "Payment with Fee $1.23"
+            expect(page).to have_content "Check Free"
+          end
+
+          it "requires choosing a payment method" do
+            click_on "Next - Order summary"
+
+            expect(page).to have_content "Credit used: $5.00"
+            expect(page).to have_content "Select a payment method"
           end
         end
       end
@@ -159,11 +168,8 @@ RSpec.describe "As a consumer, I want to checkout my order" do
           end
 
           describe "adding voucher to the order" do
-            before do
-              visit checkout_step_path(:payment)
-            end
-
             it "adds a voucher to the order" do
+              visit checkout_step_path(:payment)
               apply_voucher "some_code"
 
               expect(page).to have_content "$15.00 Voucher"
@@ -177,6 +183,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               end
 
               it "shows a warning message and doesn't require payment" do
+                visit checkout_step_path(:payment)
                 apply_voucher "some_code"
 
                 expect(page).to have_content "$15.00 Voucher"
@@ -192,8 +199,33 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               end
             end
 
+            context "when order patially paid with credit" do
+              let(:credit_payment_method) { create(:customer_credit_payment_method) }
+
+              it "shows paid with credit amount" do
+                create(
+                  :customer_account_transaction,
+                  amount: 100, customer: order.customer,
+                )
+                # Add credit payment
+                payment = order.payments.create!(payment_method: credit_payment_method,
+                                                 amount: 5.00)
+                payment.internal_purchase!
+
+                visit checkout_step_path(:payment)
+                expect(page).to have_content "Credit used: $5.00"
+
+                apply_voucher "some_code"
+
+                expect(page).to have_content "$15.00 Voucher"
+                expect(page).to have_content "Credit used: $5.00"
+              end
+            end
+
             context "voucher doesn't exist" do
               it "show an error" do
+                visit checkout_step_path(:payment)
+
                 fill_in "Enter voucher code", with: "non_code"
                 click_button("Apply")
 
@@ -213,6 +245,8 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               end
 
               it "adds a voucher to the order" do
+                visit checkout_step_path(:payment)
+
                 apply_voucher "CI3922"
 
                 expect(page).to have_content "$5.00 Voucher"
@@ -223,6 +257,8 @@ RSpec.describe "As a consumer, I want to checkout my order" do
 
               context "with an invalid voucher" do
                 it "show an error" do
+                  visit checkout_step_path(:payment)
+
                   fill_in "Enter voucher code", with: "KM1891"
                   click_button("Apply")
 
