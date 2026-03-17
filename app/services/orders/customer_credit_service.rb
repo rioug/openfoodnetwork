@@ -62,8 +62,8 @@ module Orders
       # https://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html#module-ActiveRecord::Transactions::ClassMethods-label-Nested+transactions
       ActiveRecord::Base.transaction(requires_new: true) do
         amount = [available_credit, order.total].min
-        payment = order.payments.create!(payment_method: credit_payment_method, amount:)
-        payment.internal_purchase!
+        order.payments.create!(payment_method: credit_payment_method, amount:,
+                               state: "checkout")
       end
     rescue StandardError => e
       # Even though the transaction rolled back, the order still have a payment in memory,

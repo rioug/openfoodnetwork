@@ -6,7 +6,6 @@ module Spree
     include Rails.application.routes.url_helpers
     include CablecarResponses
     include WhiteLabel
-    include CustomerCredit
 
     layout 'darkswarm'
 
@@ -31,7 +30,7 @@ module Spree
     end
 
     def show
-      @paid_with_credit = calculate_credit(@order)
+      @paid_with_credit = @order.payments.customer_credit.sum(:amount)
       @payment_total = @order.payment_total - @paid_with_credit.to_f
     end
 

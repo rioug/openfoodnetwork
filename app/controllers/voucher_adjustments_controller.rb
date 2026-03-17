@@ -132,8 +132,9 @@ class VoucherAdjustmentsController < BaseController
     params.require(:order).permit(:voucher_code)
   end
 
-  # Clear payments and payment fees, to not affect voucher adjustment calculation
+  # Clear non customer credit payments and payment fees, to not affect
+  # voucher adjustment calculation
   def clear_payments
-    @order.payments.incomplete.destroy_all
+    @order.payments.incomplete.not_customer_credit.destroy_all
   end
 end

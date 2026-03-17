@@ -36,6 +36,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
                             name: "Payment with Fee", description: "Payment with fee",
                             calculator: Calculator::FlatRate.new(preferred_amount: 1.23))
   }
+  let!(:customer_credit_payment_method) { create(:customer_credit_payment_method) }
 
   before do
     add_enterprise_fee enterprise_fee
@@ -111,7 +112,6 @@ RSpec.describe "As a consumer, I want to checkout my order" do
 
       context "with credit available" do
         let!(:payment_method) { create(:payment_method, distributors: [distributor]) }
-        let(:credit_payment_method) { create(:customer_credit_payment_method) }
         let(:payment_amount) { 10.00 }
 
         before do
@@ -120,9 +120,8 @@ RSpec.describe "As a consumer, I want to checkout my order" do
             amount: 100, customer: order.customer,
           )
           # Add credit payment
-          payment = order.payments.create!(payment_method: credit_payment_method,
-                                           amount: payment_amount)
-          payment.internal_purchase!
+          payment = order.payments.create!(payment_method: Spree::PaymentMethod.customer_credit,
+                                           amount: payment_amount, state: "checkout")
 
           visit checkout_step_path(:payment)
         end
@@ -199,18 +198,15 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               end
             end
 
-            context "when order patially paid with credit" do
-              let(:credit_payment_method) { create(:customer_credit_payment_method) }
-
+            context "when order partially paid with credit" do
               it "shows paid with credit amount" do
                 create(
                   :customer_account_transaction,
                   amount: 100, customer: order.customer,
                 )
                 # Add credit payment
-                payment = order.payments.create!(payment_method: credit_payment_method,
-                                                 amount: 5.00)
-                payment.internal_purchase!
+                payment = order.payments.create!(payment_method: Spree::PaymentMethod.customer_credit,
+                                                 amount: 5.00, state: "checkout")
 
                 visit checkout_step_path(:payment)
                 expect(page).to have_content "Credit used: $5.00"

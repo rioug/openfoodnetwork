@@ -4,7 +4,6 @@ module CustomerCredit
   extend ActiveSupport::Concern
 
   def calculate_credit(order)
-    credit_payment_method = Spree::PaymentMethod.customer_credit
-    order.payments.where(payment_method: credit_payment_method).sum(:amount)
+    order.payments.incomplete.customer_credit.sum(:amount)
   end
 end

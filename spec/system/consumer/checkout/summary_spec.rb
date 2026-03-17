@@ -35,6 +35,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
     create(:shipping_method, require_ship_address: true,
                              name: "A Free Shipping with required address")
   }
+  let!(:customer_credit_payment_method) { create(:customer_credit_payment_method) }
 
   before do
     add_enterprise_fee enterprise_fee
@@ -383,7 +384,6 @@ RSpec.describe "As a consumer, I want to checkout my order" do
       end
 
       context "with customer credit" do
-        let(:credit_payment_method) { create(:customer_credit_payment_method) }
         let(:order) { create(:order_ready_for_payment, distributor:) }
         let(:payment_amount) { 10.00 }
 
@@ -395,9 +395,8 @@ RSpec.describe "As a consumer, I want to checkout my order" do
             customer: order.customer,
           )
           # Add credit payment
-          payment = order.payments.create!(payment_method: credit_payment_method,
+          payment = order.payments.create!(payment_method: Spree::PaymentMethod.customer_credit,
                                            amount: payment_amount)
-          payment.internal_purchase!
         end
 
         it "displays the customer credit used" do
@@ -427,6 +426,21 @@ RSpec.describe "As a consumer, I want to checkout my order" do
             expect(page).to have_content "Paying via: Customer credit"
             expect(page).to have_selector("#customer-credit", text: with_currency(-10.00))
             expect(page).to have_selector("#amount-paid", text: with_currency(0.00))
+          end
+
+          context "with alow order changes" do
+            it "displays the order as paid" do
+              distributor.update!(allow_order_changes: true)
+              # Move to ready for confirmation
+              order.next!
+
+              visit checkout_step_path(:summary)
+              place_order
+
+              expect(page).to have_content "PAID"
+              expect(page).to have_content "Paying via: Customer credit"
+              expect(page).to have_selector("#customer-credit", text: with_currency(-10.00))
+            end
           end
         end
 

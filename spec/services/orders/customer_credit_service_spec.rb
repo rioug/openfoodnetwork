@@ -27,6 +27,7 @@ RSpec.describe Orders::CustomerCreditService do
       credit_payment = order.payments.find_by(payment_method: credit_payment_method)
       expect(credit_payment).to be_present
       expect(credit_payment.amount).to eq(10.00) # order.total is 10.00
+      expect(credit_payment.state).to eq("checkout")
     end
 
     context "when no credit available" do
@@ -69,31 +70,6 @@ RSpec.describe Orders::CustomerCreditService do
 
         credit_payment = order.payments.find_by(payment_method: credit_payment_method)
         expect(credit_payment.amount).to eq(5.00)
-      end
-    end
-
-    context "when payment creation fails" do
-      before do
-        # Add credit
-        create(
-          :customer_account_transaction,
-          amount: 5.00,
-          customer: order.customer,
-        )
-        allow_any_instance_of(Spree::Payment).to receive(:internal_purchase!)
-          .and_raise(Spree::Core::GatewayError)
-      end
-
-      it "logs the error" do
-        expect(Alert).to receive(:raise).with(Spree::Core::GatewayError)
-        subject.apply
-      end
-
-      it "doesn't create a credit payment" do
-        subject.apply
-
-        credit_payment = order.payments.find_by(payment_method: credit_payment_method)
-        expect(credit_payment).to be_nil
       end
     end
 

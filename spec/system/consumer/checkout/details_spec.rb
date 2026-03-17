@@ -272,6 +272,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
 
             context "with a shipping fee" do
               before do
+                create(:customer_credit_payment_method)
                 proceed_to_payment
                 click_button "Next - Order summary"
               end
