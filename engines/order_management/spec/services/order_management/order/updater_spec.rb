@@ -3,6 +3,7 @@
 RSpec.describe OrderManagement::Order::Updater do
   let(:order) { create(:order) }
   let(:updater) { OrderManagement::Order::Updater.new(order) }
+  let!(:customer_credit_payment_method) { create(:customer_credit_payment_method) }
 
   describe "#update_totals" do
     before do
@@ -168,12 +169,26 @@ RSpec.describe OrderManagement::Order::Updater do
           end
 
           context "with mutiple payments" do
-            it "updates pending payments" do
-              create(:payment, order:, amount: 5.00, state: "completed")
+            it "update pending payment but not payment with credit" do
+              credit_payment =  create(:payment, order:, amount: 5.00, state: "checkout",
+                                                 payment_method: customer_credit_payment_method)
+              order.payments << credit_payment
               last_payment = create(:payment, order:, amount: 10.00)
-              order.payments.reload
+              order.payments << last_payment
 
               expect { updater.update }.to change { last_payment.reload.amount }.from(10).to(5)
+              expect(credit_payment.reload.amount).to eq(5)
+            end
+          end
+
+          context "with only customer credit payment" do
+            it "doesn't update payment with credit" do
+              credit_payment = create(:payment, order:, amount: 5.00, state: "checkout",
+                                                payment_method: customer_credit_payment_method)
+              order.payments << credit_payment
+
+              updater.update
+              expect(credit_payment.reload.amount).to eq(5)
             end
           end
         end
