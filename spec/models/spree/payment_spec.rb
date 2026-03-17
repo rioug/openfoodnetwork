@@ -74,6 +74,17 @@ RSpec.describe Spree::Payment do
 
         expect(incomplete_payment.reload.state).to eq "invalid"
       end
+
+      context "with customer credit payment" do
+        it "doesn't invalidate incomplete customer credit payment" do
+          credit_payment = create(:payment, order:, state: "checkout",
+                                            payment_method: create(:customer_credit_payment_method))
+          new_payment
+
+          expect(incomplete_payment.reload.state).to eq "invalid"
+          expect(credit_payment.reload.state).to eq "checkout"
+        end
+      end
     end
 
     # Regression test for https://github.com/spree/spree/pull/2224
