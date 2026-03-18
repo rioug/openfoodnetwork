@@ -10,17 +10,19 @@ module CustomerAccountTransactions
     end
 
     def customer_account_transactions
-      enterprise_customer = user.customers.find_by(enterprise: )
       return [] if enterprise_customer.nil?
 
       enterprise_customer.customer_account_transactions.order(id: :desc)
     end
 
     def available_credit
-      return 0 if customer_account_transactions.empty?
+      enterprise_customer&.credit_balance || 0.00
+    end
 
-      # We are ordered by newest, so the lastest transaction is the first one
-      customer_account_transactions.first.balance
+    private
+
+    def enterprise_customer
+      user.customers.find_by(enterprise:)
     end
   end
 end
