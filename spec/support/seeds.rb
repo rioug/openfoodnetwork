@@ -22,3 +22,7 @@ if Spree::Country.where(name: "France").empty?
   Spree::State.create!({ "name" => "Alsace", "abbr" => "Als", :country => country })
   Spree::State.create!({ "name" => "Aquitaine", "abbr" => "Aq", :country => country })
 end
+
+if Spree::PaymentMethod.customer_credit.nil?
+  Spree::PaymentMethod::CustomerCredit.create!(environment: "test")
+end
