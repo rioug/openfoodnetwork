@@ -26,7 +26,7 @@ class CustomerAccountTransaction < ApplicationRecord
     # Locking the customer to prevent two transactions from behing created at the same time
     # resulting in a potentially wrong balance calculation.
     customer.with_lock(requires_new: true) do
-      last_transaction = CustomerAccountTransaction.where(customer: customer).last
+      last_transaction = self.class.where(customer: customer).last
 
       self.balance = if last_transaction.present?
                        last_transaction.balance + amount

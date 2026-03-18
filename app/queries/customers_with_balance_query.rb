@@ -38,7 +38,7 @@ class CustomersWithBalanceQuery
 
   def available_credit
     <<~SQL.squish
-      CASE WHEN EXISTS (#{available_credit_subquery}) THEN (#{available_credit_subquery})#{' '}
+      CASE WHEN EXISTS (#{available_credit_subquery}) THEN (#{available_credit_subquery})
       ELSE 0.00 END
     SQL
   end
