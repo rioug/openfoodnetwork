@@ -38,7 +38,7 @@ RSpec.describe Balance do
 
         it "returns the order balance minus the credit payment" do
           payment = create(:payment, order:, amount: 5.00, state: "checkout",
-                                     payment_method: create(:customer_credit_payment_method))
+                                     payment_method: Spree::PaymentMethod.customer_credit)
           order.payments << payment
 
           expect(order.new_outstanding_balance).to eq(100 - 5)
@@ -58,7 +58,7 @@ RSpec.describe Balance do
 
         it "returns the order balance minus the credit payment" do
           payment = create(:payment, order:, amount: 5.00, state: "checkout",
-                                     payment_method: create(:customer_credit_payment_method))
+                                     payment_method: Spree::PaymentMethod.customer_credit)
           order.payments << payment
 
           expect(order.new_outstanding_balance).to eq(100 - 5)

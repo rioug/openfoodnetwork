@@ -122,7 +122,6 @@ RSpec.describe Customer do
       let!(:customer3) { create(:customer) }
       let!(:customer4) { create(:customer) }
       let!(:customer5) { create(:customer, created_manually: true) }
-      let!(:customer_credit_payment_method) { create(:customer_credit_payment_method) }
 
       let!(:order_ready_for_details) { create(:order_ready_for_details, customer:) }
       let!(:order_ready_for_payment) { create(:order_ready_for_payment, customer: customer2) }

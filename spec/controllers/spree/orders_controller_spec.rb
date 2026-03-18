@@ -224,7 +224,6 @@ RSpec.describe Spree::OrdersController do
 
   describe "removing items from a completed order" do
     context "with shipping and transaction fees" do
-      let!(:customer_credit_payment_method) { create(:customer_credit_payment_method) }
       let(:distributor) {
         create(:distributor_enterprise, charges_sales_tax: true, allow_order_changes: true)
       }

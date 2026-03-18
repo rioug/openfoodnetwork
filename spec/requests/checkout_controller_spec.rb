@@ -9,11 +9,10 @@ RSpec.describe CheckoutController do
   let(:order_cycle) { create(:order_cycle, distributors: [distributor]) }
   let(:exchange) { order_cycle.exchanges.outgoing.first }
   let(:order) {
-    create(:order_with_line_items, line_items_count: 1, distributor:, order_cycle:,)
+    create(:order_with_line_items, line_items_count: 1, distributor:, order_cycle:)
   }
   let(:shipping_method) { distributor.shipping_methods.first }
   let(:payment_method) { distributor.payment_methods.first }
-  let!(:credit_payment_method) { create(:customer_credit_payment_method) }
 
   before do
     exchange.variants << order.line_items.first.variant
@@ -272,7 +271,9 @@ RSpec.describe CheckoutController do
         before do
           ## Add payment with credit
           payment = order.payments.create!(
-            amount: order.total, payment_method: credit_payment_method, state: "checkout"
+            amount: order.total,
+            payment_method: Spree::PaymentMethod.customer_credit,
+            state: "checkout"
           )
         end
 

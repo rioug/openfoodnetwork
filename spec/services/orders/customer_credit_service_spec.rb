@@ -7,7 +7,7 @@ RSpec.describe Orders::CustomerCreditService do
 
   let(:distributor) { create(:distributor_enterprise) }
   let(:order_cycle) { create(:order_cycle, distributors: [distributor]) }
-  let!(:credit_payment_method) { create(:customer_credit_payment_method) }
+  let(:credit_payment_method) { Spree::PaymentMethod.customer_credit }
   let(:user) { create(:enterprise_user) }
 
   describe "#apply" do
@@ -81,7 +81,7 @@ RSpec.describe Orders::CustomerCreditService do
           amount: 5.00,
           customer: order.customer,
         )
-        credit_payment_method.destroy!
+        Spree::PaymentMethod.customer_credit.really_destroy!
       end
 
       it "logs the error" do
@@ -155,13 +155,14 @@ RSpec.describe Orders::CustomerCreditService do
 
     context "when credit payment method is missing" do
       before do
-        credit_payment_method.destroy!
+        credit_payment_method.really_destroy!
       end
 
       it "logs the error" do
         expect(Alert).to receive(:raise).with(
           "Customer credit payment method is missing, please check configuration"
         )
+
         subject.refund
       end
 

@@ -35,7 +35,6 @@ RSpec.describe "As a consumer, I want to checkout my order" do
     create(:shipping_method, require_ship_address: true,
                              name: "A Free Shipping with required address")
   }
-  let!(:customer_credit_payment_method) { create(:customer_credit_payment_method) }
 
   before do
     add_enterprise_fee enterprise_fee
