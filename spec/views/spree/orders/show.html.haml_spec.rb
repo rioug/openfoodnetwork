@@ -19,6 +19,7 @@ RSpec.describe "spree/orders/show.html.haml" do
 
   before do
     assign(:order, order)
+    assign(:paid_with_credit, 0.00)
     allow(view).to receive_messages(
       current_order: order,
       last_payment_method: nil,
