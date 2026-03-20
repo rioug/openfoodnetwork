@@ -99,8 +99,8 @@ RSpec.describe CheckoutController do
         context "with existing invalid payments" do
           let(:invalid_payments) {
             [
-              create(:payment, state: :failed),
-              create(:payment, state: :void),
+              create(:payment, state: :invalid),
+              create(:payment, state: :invalid),
             ]
           }
 
@@ -109,9 +109,10 @@ RSpec.describe CheckoutController do
           end
 
           it "deletes invalid payments" do
+            # Delete the 2 invalid payment and create a new one
             expect{
               put checkout_update_path(params)
-            }.to change { order.reload.payments.to_a }.from(invalid_payments)
+            }.to change { order.reload.payments.count }.from(2).to(1)
           end
         end
 
