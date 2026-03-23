@@ -212,6 +212,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
 
                 expect(page).to have_content "$15.00 Voucher"
                 expect(page).to have_content "Credit used: $5.00"
+                expect(page).to have_content "No payment required"
               end
             end
 
