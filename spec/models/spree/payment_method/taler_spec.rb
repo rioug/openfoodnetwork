@@ -12,8 +12,8 @@ RSpec.describe Spree::PaymentMethod::Taler do
   let(:backend_url) { "https://backend.demo.taler.net/instances/sandbox" }
   let(:token_url) { "#{backend_url}/private/token" }
 
-  describe "#external_payment_url", vcr: true do
-    it "creates an order reference and retrieves a URL to pay at" do
+  describe "#external_payment_url" do
+    it "creates an order reference and retrieves a URL to pay at", vcr: true do
       order = create(:order_ready_for_confirmation, payment_method: taler)
 
       url = subject.external_payment_url(order:)
@@ -22,6 +22,26 @@ RSpec.describe Spree::PaymentMethod::Taler do
 
       payment = order.payments.last.reload
       expect(payment.response_code).to match "20...[0-9A-Z-]{17}$"
+    end
+
+    it "creates the Taler order with the right currency" do
+      order = create(:order_ready_for_confirmation, payment_method: taler)
+
+      backend_url = "https://taler.example.com"
+      token_url = "https://taler.example.com/private/token"
+      order_url = "https://taler.example.com/private/orders"
+      taler = Spree::PaymentMethod::Taler.new(
+        preferred_backend_url: "https://taler.example.com",
+        preferred_api_key: "sandbox",
+      )
+
+      stub_request(:post, token_url).to_return(body: { token: "1234" }.to_json)
+      stub_request(:post, order_url)
+        .with(body: /"amount":"AUD:10.0"/)
+        .to_return(body: { order_id: "one" }.to_json)
+
+      url = taler.external_payment_url(order:)
+      expect(url).to eq "#{backend_url}/orders/one"
     end
   end
 
