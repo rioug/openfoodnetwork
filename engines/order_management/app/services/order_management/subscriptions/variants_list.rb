@@ -32,14 +32,14 @@ module OrderManagement
           .merge(Enterprise.is_primary_producer)
           .select(:parent_id)
 
-        # Append to the potentially gigantic array instead of using union, which creates a new array
-        # The db IN statement won't care if there's a duplicate.
         Enterprise.where(id: distributor.id)
           .select(:id)
           .or(Enterprise.where(id: other_permitted_producer_ids))
       end
 
       def self.outgoing_exchange_variant_ids(distributor)
+        # DISTINCT is not required here since this subquery is used within an IN clause,
+        # where duplicate values do not impact the result.
         ExchangeVariant.joins(:exchange)
           .where(exchanges: { incoming: false, receiver_id: distributor.id })
           .select(:variant_id)
