@@ -151,11 +151,9 @@ RSpec.describe "As a consumer, I want to checkout my order" do
 
       describe "vouchers" do
         context "with no voucher available" do
-          before do
-            visit checkout_step_path(:payment)
-          end
-
           it "doesn't show voucher input" do
+            visit checkout_step_path(:payment)
+
             expect(page).not_to have_content "Apply voucher"
           end
         end
