@@ -167,7 +167,7 @@ GEM
       zeitwerk (>= 2.4, < 3.0)
     acts_as_list (1.0.4)
       activerecord (>= 4.2)
-    addressable (2.8.8)
+    addressable (2.8.9)
       public_suffix (>= 2.0.2, < 8.0)
     aes_key_wrap (1.1.0)
     afm (1.0.0)
@@ -402,7 +402,7 @@ GEM
     highline (3.1.2)
       reline
     htmlentities (4.4.2)
-    http_parser.rb (0.8.0)
+    http_parser.rb (0.8.1)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     i18n-js (3.9.2)
@@ -515,7 +515,7 @@ GEM
     money (6.16.0)
       i18n (>= 0.6.4, <= 2)
     msgpack (1.8.0)
-    multi_json (1.17.0)
+    multi_json (1.19.1)
     multi_xml (0.6.0)
     mutex_m (0.3.0)
     net-http (0.9.1)
@@ -604,9 +604,10 @@ GEM
     psych (5.3.1)
       date
       stringio
-    public_suffix (7.0.2)
-    puffing-billy (4.0.2)
+    public_suffix (7.0.5)
+    puffing-billy (4.0.4)
       addressable (~> 2.5)
+      cgi
       em-http-request (~> 1.1, >= 1.1.0)
       em-synchrony
       eventmachine (~> 1.2)
