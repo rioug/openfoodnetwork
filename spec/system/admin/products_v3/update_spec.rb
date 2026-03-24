@@ -350,8 +350,8 @@ RSpec.describe 'As an enterprise user, I can update my products' do
           click_on "On Hand" # activate popout
           fill_in "On Hand", with: "3"
 
-          select producer.name, from: 'Producer'
-          select taxon.name, from: 'Category'
+          tomselect_select producer.name, from: 'Producer'
+          tomselect_select taxon.name, from: 'Category'
         end
 
         expect {
@@ -586,8 +586,8 @@ RSpec.describe 'As an enterprise user, I can update my products' do
             fill_in "Name", with: "Nice box"
             fill_in "SKU", with: "APL-02"
 
-            select producer.name, from: 'Producer'
-            select taxon.name, from: 'Category'
+            tomselect_select producer.name, from: 'Producer'
+            tomselect_select taxon.name, from: 'Category'
           end
 
           expect {

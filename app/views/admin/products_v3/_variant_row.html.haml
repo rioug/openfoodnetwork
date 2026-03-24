@@ -79,6 +79,7 @@
       options: variant.tax_category_id ? [[variant.tax_category.name, variant.tax_category_id]] : [],
       selected_option: variant.tax_category_id,
       aria_label: t('.tax_category_field_name'),
+      include_blank: t('.none_tax_category'),
       remote_url: admin_products_search_tax_categories_url,
       placeholder_value: t('.search_for_tax_categories')))
   = error_message_on variant, :tax_category

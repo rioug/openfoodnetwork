@@ -15,10 +15,6 @@ RSpec.describe 'As an enterprise user, I can perform actions on the products scr
     login_as user
   end
 
-  let(:producer_search_selector) { 'input[placeholder="Select producer"]' }
-  let(:categories_search_selector) { 'input[placeholder="Select category"]' }
-  let(:tax_categories_search_selector) { 'input[placeholder="Search for tax categories"]' }
-
   describe "column selector" do
     let!(:product) { create(:simple_product) }
 
@@ -102,54 +98,7 @@ RSpec.describe 'As an enterprise user, I can perform actions on the products scr
     }
     let!(:product_a) { create(:simple_product, name: "Apples", sku: "APL-00") }
 
-    context "when they are under 11" do
-      before do
-        create_list(:supplier_enterprise, 9, users: [user])
-        create_list(:tax_category, 9)
-        create_list(:taxon, 2)
-
-        visit admin_products_url
-      end
-
-      it "should not display search input, change the producers, category and tax category" do
-        producer_to_select = random_producer(variant_a1)
-        category_to_select = random_category(variant_a1)
-        tax_category_to_select = random_tax_category
-
-        within row_containing_name(variant_a1.display_name) do
-          validate_tomselect_without_search!(
-            page, "Producer",
-            producer_search_selector
-          )
-          tomselect_select(producer_to_select, from: "Producer")
-        end
-
-        within row_containing_name(variant_a1.display_name) do
-          validate_tomselect_without_search!(
-            page, "Category",
-            categories_search_selector
-          )
-          tomselect_select(category_to_select, from: "Category")
-
-          validate_tomselect_without_search!(
-            page, "Tax Category",
-            tax_categories_search_selector
-          )
-          tomselect_select(tax_category_to_select, from: "Tax Category")
-        end
-
-        click_button "Save changes"
-
-        expect(page).to have_content "Changes saved"
-
-        variant_a1.reload
-        expect(variant_a1.supplier.name).to eq(producer_to_select)
-        expect(variant_a1.primary_taxon.name).to eq(category_to_select)
-        expect(variant_a1.tax_category.name).to eq(tax_category_to_select)
-      end
-    end
-
-    context "when they are over 11" do
+    context "when there are products" do
       before do
         create_list(:supplier_enterprise, 11, users: [user])
         create_list(:tax_category, 11)
@@ -167,9 +116,13 @@ RSpec.describe 'As an enterprise user, I can perform actions on the products scr
         tax_category_to_select = random_tax_category
 
         within row_containing_name(variant_a1.display_name) do
-          tomselect_search_and_select(producer_to_select, from: "Producer")
-          tomselect_search_and_select(category_to_select, from: "Category")
-          tomselect_search_and_select(tax_category_to_select, from: "Tax Category")
+          tomselect_search_and_select(producer_to_select, from: "Producer", remote_search: true)
+          tomselect_search_and_select(category_to_select, from: "Category", remote_search: true)
+          tomselect_search_and_select(
+            tax_category_to_select,
+            from: "Tax Category",
+            remote_search: true
+          )
         end
 
         click_button "Save changes"
