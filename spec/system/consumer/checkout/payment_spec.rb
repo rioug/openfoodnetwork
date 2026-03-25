@@ -370,6 +370,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               Spree::PaymentMethod::Taler.create!(
                 name: "Taler",
                 environment: "test",
+                preferred_backend_url: "https://taler.example.com/",
                 distributors: [distributor]
               )
             end

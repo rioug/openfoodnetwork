@@ -18,6 +18,9 @@ module Spree
     # - backend_url: https://backend.demo.taler.net/instances/sandbox
     # - api_key: sandbox
     class Taler < PaymentMethod
+      # Demo backend instances will use the KUDOS currency.
+      DEMO_PREFIX = "https://backend.demo.taler.net/instances"
+
       preference :backend_url, :string
       preference :api_key, :password
 
@@ -123,7 +126,7 @@ module Spree
       def create_taler_order(payment)
         # We are ignoring currency for now so that we can test with the
         # current demo backend only working with the KUDOS currency.
-        taler_amount = "KUDOS:#{payment.amount}"
+        taler_amount = "#{currency(payment)}:#{payment.amount}"
         urls = Rails.application.routes.url_helpers
         fulfillment_url = urls.payment_gateways_confirm_taler_url(payment_id: payment.id)
         taler_order.create(
@@ -139,6 +142,12 @@ module Spree
           password: preferred_api_key,
           id:,
         )
+      end
+
+      def currency(payment)
+        return "KUDOS" if preferred_backend_url.starts_with?(DEMO_PREFIX)
+
+        payment.order.currency
       end
     end
   end
