@@ -80,25 +80,22 @@ module Spree
         field_options =
           case options[:type]
           when :integer
-            { size: 10, class: 'input_integer', step: 1 }
+            { class: 'input_integer', step: 1 }
           when :decimal
             # Allow any number of decimal places
-            { size: 10, class: 'input_integer', step: :any }
+            { class: 'input_integer', step: :any }
           when :boolean
             {}
           when :password
-            { size: 10, class: 'password_string fullwidth' }
+            { class: 'password_string fullwidth' }
           when :text
             { rows: 15, cols: 85, class: 'fullwidth' }
           else
-            { size: 10, class: 'input_string fullwidth' }
+            { class: 'input_string fullwidth' }
           end
 
         field_options.merge!(
-          autocomplete: options[:autocomplete],
-          readonly: options[:readonly],
-          disabled: options[:disabled],
-          size: options[:size]
+          options.slice(:autocomplete, :readonly, :disabled, :size)
         )
       end
 

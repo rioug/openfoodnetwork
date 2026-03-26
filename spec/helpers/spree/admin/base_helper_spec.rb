@@ -28,12 +28,8 @@ RSpec.describe Spree::Admin::BaseHelper do
 
       it 'returns correct options' do
         expect(subject).to eq(
-          autocomplete: nil,
-          size: nil,
           class: 'input_integer',
           step: 1,
-          readonly: nil,
-          disabled: nil,
         )
       end
     end
@@ -43,12 +39,8 @@ RSpec.describe Spree::Admin::BaseHelper do
 
       it 'returns correct options' do
         expect(subject).to eq(
-          autocomplete: nil,
-          size: nil,
           class: 'input_integer',
           step: :any,
-          readonly: nil,
-          disabled: nil,
         )
       end
     end
@@ -57,12 +49,7 @@ RSpec.describe Spree::Admin::BaseHelper do
       let(:options) { { type: :boolean } }
 
       it 'returns correct options' do
-        expect(subject).to eq(
-          autocomplete: nil,
-          readonly: nil,
-          disabled: nil,
-          size: nil,
-        )
+        expect(subject).to eq({})
       end
     end
 
@@ -71,11 +58,7 @@ RSpec.describe Spree::Admin::BaseHelper do
 
       it 'returns correct options' do
         expect(subject).to eq(
-          autocomplete: nil,
-          size: nil,
           class: 'password_string fullwidth',
-          readonly: nil,
-          disabled: nil,
         )
       end
     end
@@ -85,13 +68,9 @@ RSpec.describe Spree::Admin::BaseHelper do
 
       it 'returns correct options' do
         expect(subject).to eq(
-          autocomplete: nil,
-          size: nil,
           rows: 15,
           cols: 85,
           class: 'fullwidth',
-          readonly: nil,
-          disabled: nil,
         )
       end
     end
@@ -101,11 +80,7 @@ RSpec.describe Spree::Admin::BaseHelper do
 
       it 'returns correct options' do
         expect(subject).to eq(
-          autocomplete: nil,
-          size: nil,
           class: 'input_string fullwidth',
-          readonly: nil,
-          disabled: nil,
         )
       end
     end
@@ -115,7 +90,6 @@ RSpec.describe Spree::Admin::BaseHelper do
 
       it 'returns correct options' do
         expect(subject).to eq(
-          autocomplete: nil,
           size: 20,
           class: 'input_integer',
           step: 1,
