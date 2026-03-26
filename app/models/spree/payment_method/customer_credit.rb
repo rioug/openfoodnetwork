@@ -35,7 +35,7 @@ module Spree
         return error_response("missing_payment") if options[:payment_id].nil?
 
         available_credit = customer.credit_balance
-        return error_response("no_credit_available") if available_credit == 0.00
+        return error_response("no_credit_available") if available_credit.zero?
 
         return error_response("not_enough_credit_available") if calculated_amount > available_credit
 

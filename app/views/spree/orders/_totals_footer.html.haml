@@ -25,7 +25,7 @@
           = t :order_total_price
       %td.text-right.total
         %h5#order_total= order.display_total.to_html
-    - if @paid_with_credit > 0
+    - if @paid_with_credit.positive?
       %tr.total
         %td.text-right{colspan: "3"}
           %strong
