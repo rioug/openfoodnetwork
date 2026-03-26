@@ -83,6 +83,10 @@ RSpec.describe Spree::PaymentMethod::Taler do
       "taler://refund/backend.demo.taler.net/instances/sandbox/taler-order-8/"
     }
 
+    before do
+      stub_request(:post, token_url).to_return(body: { token: "12345" }.to_json)
+    end
+
     it "starts the refund process" do
       order_status = { order_status: "paid" }
       stub_request(:get, order_endpoint).to_return(body: order_status.to_json)
