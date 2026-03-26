@@ -169,8 +169,8 @@ RSpec.describe OrderManagement::Order::Updater do
 
           context "with mutiple payments" do
             it "update pending payment but not payment with credit" do
-              credit_payment =  create(:payment, order:, amount: 5.00, state: "checkout",
-                                                 payment_method: Spree::PaymentMethod.customer_credit)
+              credit_payment = create(:payment, order:, amount: 5.00, state: "checkout",
+                                                payment_method: Spree::PaymentMethod.customer_credit)
               order.payments << credit_payment
               last_payment = create(:payment, order:, amount: 10.00)
               order.payments << last_payment
