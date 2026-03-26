@@ -92,7 +92,7 @@ module Orders
     end
 
     def translation_scope
-      "orders.customer_credit_service"
+      "customer_credit_service"
     end
 
     class Response

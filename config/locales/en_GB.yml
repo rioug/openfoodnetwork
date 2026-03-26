@@ -5037,8 +5037,7 @@ en_GB:
       credit_payment_method_missing: Credit payment method is missing
       no_credit_available: No credit available
       not_enough_credit_available: Not enough credit available
-  orders:
-    customer_credit_service:
-      no_credit_owed: No credit owed
-      credit_payment_method_missing: Customer credit payment method is missing, please check configuration
-      refund_sucessful: Refund successful!
+  customer_credit_service:
+    no_credit_owed: No credit owed
+    credit_payment_method_missing: Customer credit payment method is missing, please check configuration
+    refund_sucessful: Refund successful!
