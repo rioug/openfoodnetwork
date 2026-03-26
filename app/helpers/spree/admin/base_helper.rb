@@ -109,10 +109,11 @@ module Spree
         object.preferences.keys.map { |key|
           preference_label = form.label("preferred_#{key}",
                                         "#{Spree.t(key.to_s.gsub('_from_list', ''))}: ")
+          field_options = { type: object.preference_type(key) }
           preference_field = preference_field_for(
             form,
             "preferred_#{key}",
-            { type: object.preference_type(key) }, object
+            field_options, object
           )
           { label: preference_label, field: preference_field }
         }
