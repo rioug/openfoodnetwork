@@ -5116,7 +5116,8 @@ fr:
       credit_payment_method_missing: Le mode de paiement par crédit est manquant.
       no_credit_available: Aucun crédit disponible
       not_enough_credit_available: Crédit disponible insuffisant
-  customer_credit_service:
-    no_credit_owed: Aucun crédit dû
-    credit_payment_method_missing: Le mode de paiement par crédit client est manquant. Veuillez vérifier la configuration.
-    refund_sucessful: Remboursement effectué avec succès !
+  orders:
+    customer_credit_service:
+      no_credit_owed: Aucun crédit dû
+      credit_payment_method_missing: Le mode de paiement par crédit client est manquant. Veuillez vérifier la configuration.
+      refund_sucessful: Remboursement effectué avec succès !
