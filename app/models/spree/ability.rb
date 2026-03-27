@@ -113,7 +113,11 @@ module Spree
           item.order.changes_allowed?
       end
 
-      can [:cancel, :bulk_cancel], Spree::Order do |order|
+      can :cancel, Spree::Order do |order, token|
+        order.user == user || (order.token && token == order.token)
+      end
+
+      can :bulk_cancel, Spree::Order do |order|
         order.user == user
       end
 
