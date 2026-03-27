@@ -17,12 +17,6 @@ module Orders
         )
       end
 
-      if credit_payment_method.nil?
-        error_message = I18n.t(:credit_payment_method_missing, scope: translation_scope)
-        log_error(error_message)
-        return Response.new(success: false, message: error_message)
-      end
-
       amount = order.new_outstanding_balance
       order.customer.with_lock do
         payment = order.payments.create!( payment_method: credit_payment_method, amount: amount,

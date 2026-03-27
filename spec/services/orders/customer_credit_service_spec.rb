@@ -72,31 +72,6 @@ RSpec.describe Orders::CustomerCreditService do
         expect(credit_payment.amount).to eq(5.00)
       end
     end
-
-    context "when credit payment method is missing" do
-      before do
-        # Add credit
-        create(
-          :customer_account_transaction,
-          amount: 5.00,
-          customer: order.customer,
-        )
-        Spree::PaymentMethod.customer_credit.really_destroy!
-      end
-
-      it "logs the error" do
-        expect(Alert).to receive(:raise).with(
-          "Customer credit payment method is missing, please check configuration"
-        )
-        subject.apply
-      end
-
-      it "doesn't create a credit payment" do
-        subject.apply
-
-        expect(order.payments).to be_empty
-      end
-    end
   end
 
   describe "#refund" do
@@ -150,33 +125,6 @@ RSpec.describe Orders::CustomerCreditService do
 
         expect(response.failure?).to eq(true)
         expect(response.message).to eq("No credit owed")
-      end
-    end
-
-    context "when credit payment method is missing" do
-      before do
-        credit_payment_method.really_destroy!
-      end
-
-      it "logs the error" do
-        expect(Alert).to receive(:raise).with(
-          "Customer credit payment method is missing, please check configuration"
-        )
-
-        subject.refund
-      end
-
-      it "doesn't create a credit payment" do
-        expect { subject.refund }.not_to change { order.payments.count }
-      end
-
-      it "returns a failed response" do
-        response = subject.refund
-
-        expect(response.failure?).to be(true)
-        expect(response.message).to eq(
-          "Customer credit payment method is missing, please check configuration"
-        )
       end
     end
 
