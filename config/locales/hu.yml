@@ -1298,10 +1298,10 @@ hu:
             add_new_button: '+ Új alapértelmezett szabály hozzáadása'
           no_tags_yet: Ehhez a vállalkozáshoz még nem tartozik címke
           add_new_tag: '+ Új címke hozzáadása'
-          show_hide_variants: 'Változatok megjelenítése vagy elrejtése a kirakatomban'
+          show_hide_variants: 'Termékváltozatok megjelenítése vagy elrejtése a kínálatomban'
           show_hide_shipping: 'Áruátadási módok megjelenítése vagy elrejtése fizetéskor'
-          show_hide_payment: 'Fizetési módok megjelenítése vagy elrejtése a pénztárnál'
-          show_hide_order_cycles: 'Rendelési ciklusok megjelenítése vagy elrejtése az online kirakatban'
+          show_hide_payment: 'Fizetési módok megjelenítése vagy elrejtése rendelés leadásakor'
+          show_hide_order_cycles: 'Rendelési ciklusok megjelenítése vagy elrejtése a kínálatomban'
         users:
           legend: "Felhasználók"
           email_confirmation_notice_html: "Az email megerősítés függőben van. Megerősítő emailt küldtünk a következő címre: %{email}."
@@ -1878,6 +1878,7 @@ hu:
       new:
         back: Vissza
         description: "Hívj meg egy felhasználót, hogy regisztráljon és a vállalkozás menedzsere legyen."
+        eg_email_address: írd be egy új vagy meglévő felhasználó e-mail címét
         email: Email
         invite_new_user: Új felhasználó meghívása
         invite: Meghívás
@@ -4776,16 +4777,16 @@ hu:
       default_placeholder: Adj hozzá egy címkét
     tag_rule_form:
       tag_rules:
-        shipping_method_tagged_top: "Áruátadási módok felcímkézve"
-        shipping_method_tagged_bottom: "vannak:"
-        payment_method_tagged_top: "Fizetési módok felcímkézve"
-        payment_method_tagged_bottom: "vannak:"
-        order_cycle_tagged_top: "Rendelési ciklusok felcímkézve"
-        order_cycle_tagged_bottom: "vannak:"
-        inventory_tagged_top: "Leltár változatok felcímkézve"
-        inventory_tagged_bottom: "vannak:"
-        variant_tagged_top: "Változat felcímkézve"
-        variant_tagged_bottom: "vannak:"
+        shipping_method_tagged_top: "Ezen címkéjű áruátadási módok:"
+        shipping_method_tagged_bottom: "hatása:"
+        payment_method_tagged_top: "Ezen címkéjű fizetési módok:"
+        payment_method_tagged_bottom: "hatása:"
+        order_cycle_tagged_top: "Ezen címkéjű rendelési ciklusok:"
+        order_cycle_tagged_bottom: "hatása:"
+        inventory_tagged_top: "Ezen címkéjű termékváltozatok:"
+        inventory_tagged_bottom: "hatása:"
+        variant_tagged_top: "Ezen címkéjű termékváltozatok:"
+        variant_tagged_bottom: "hatása:"
         visible: LÁTHATÓ
         not_visible: NEM LÁTHATÓ
     tag_rule_group_form:

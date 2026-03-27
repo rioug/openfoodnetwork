@@ -1432,7 +1432,7 @@ en_GB:
           legend: "Users"
           email_confirmation_notice_html: "Email confirmation is pending. We've sent a confirmation email to %{email}."
           resend: Resend
-          contact: "Contact"
+          contact: "Notifications"
           manager: "Manager"
           owner: 'Owner'
           contact_tip: "The manager who will receive enterprise emails for orders and notifications. Must have a confirmed email adress."

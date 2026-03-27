@@ -669,8 +669,11 @@ fr:
         delete: Supprimer
         remove: Supprimer
         preview: Prévisualisation
+        create_linked_variant: Créer une variante liée
       image:
         edit: Modifier
+      variant_row:
+        sourced_from: "Source : %{source_name} ( %{source_id} ) ; Hub : %{hub_name}"
       product_preview:
         product_preview: Prévisualisation du produit
         shop_tab: Boutique
@@ -1028,6 +1031,8 @@ fr:
       clone:
         success: Le produit a bien été dupliqué
         error: Impossible de dupliquer le produit
+      create_linked_variant:
+        success: "Variante liée créée avec succès"
       tag_rules:
         rules_per_tag:
           one: "%{tag} comporte une règle"
@@ -3799,6 +3804,7 @@ fr:
       manage_products: "modifier les produits"
       edit_profile: "modifier le profil"
       add_products_to_inventory: "ajouter les produits au catalogue boutique"
+      create_linked_variants: "créer des variantes liées [BÊTA]"
     resources:
       could_not_delete_customer: 'L''acheteur n''a pas pu être supprimé'
     product_import:
