@@ -57,7 +57,8 @@ module Spree
     # These method is used to get the internal payment method. It is accessible to all
     # enterprise, but the accessibility is managed by the code, as opposed to using the database.
     def self.customer_credit
-      unscoped.find_by(type: "Spree::PaymentMethod::CustomerCredit", deleted_at: nil)
+      unscoped.find_or_create_by(type: "Spree::PaymentMethod::CustomerCredit", deleted_at: nil,
+                                 environment: Rails.env)
     end
 
     def configured?
