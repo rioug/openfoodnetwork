@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# We are moving to request spec, this file only covers payment step specs, see
+# spec/controllers/checkout_controller_spec.rb for the any other spec.
+# Use this file instead of updating spec/controllers/checkout_controller_spec.rb when possible.
+#
 RSpec.describe CheckoutController do
   include_context "session helper"
 

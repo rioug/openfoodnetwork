@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# We are moving to request spec, please use spec/request/checkout_spec.rb instead of updating this
+# file when possible.
+#
 RSpec.describe CheckoutController do
   let(:user) { order.user }
   let(:address) { create(:address) }
