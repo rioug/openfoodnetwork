@@ -427,7 +427,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
             expect(page).to have_selector("#amount-paid", text: with_currency(0.00))
           end
 
-          context "with alow order changes" do
+          context "with allow order changes" do
             it "displays the order as paid" do
               distributor.update!(allow_order_changes: true)
               # Move to ready for confirmation

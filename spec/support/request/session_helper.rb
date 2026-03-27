@@ -6,7 +6,7 @@
 #  describe "your test" do
 #   include_context "session helper"
 #
-#   before { session[:order_id] = order.id }
+#   before { session_hash[:order_id] = order.id }
 #
 #   it "does something involving session" do
 #     ...
