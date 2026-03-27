@@ -220,13 +220,9 @@ RSpec.describe '
       let(:product) { create(:simple_product) }
       let(:variant) { product.variants.first }
 
-      around do |example|
-        I18n.default_locale = :es
-        example.run
-        I18n.default_locale = :en
-      end
-
       before do
+        allow(I18n).to receive(:default_locale).and_return(:es)
+
         variant.update( unit_value: 1, unit_description: 'foo' )
 
         # When I view the variant
