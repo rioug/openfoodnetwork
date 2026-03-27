@@ -56,7 +56,7 @@ class Customer < ApplicationRecord
   end
 
   def credit_balance
-    customer_account_transactions.order(:created_at).last&.balance || 0.00
+    customer_account_transactions.order(:id).last&.balance || 0.00
   end
 
   private
