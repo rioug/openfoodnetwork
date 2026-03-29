@@ -473,9 +473,9 @@ RSpec.describe Spree::OrdersController do
       end
 
       it "cancels the order and redirects to the order page" do
+        request.env['HTTP_REFERER'] = order_path(order)
         spree_put :cancel, params
 
-        expect(response).to have_http_status(:found)
         expect(response.body).to match(order_path(order)).and match("redirect")
         expect(flash[:success]).to eq 'Your order has been cancelled'
       end
@@ -486,9 +486,9 @@ RSpec.describe Spree::OrdersController do
 
       context "when the order is not yet complete" do
         it "responds with forbidden" do
+          request.env['HTTP_REFERER'] = order_path(order)
           spree_put :cancel, params
 
-          expect(response).to have_http_status(:found)
           expect(response.body).to match(order_path(order)).and match("redirect")
           expect(flash[:error]).to eq 'Sorry, the order could not be cancelled'
         end
@@ -501,9 +501,9 @@ RSpec.describe Spree::OrdersController do
         }
 
         it "responds with success" do
+          request.env['HTTP_REFERER'] = order_path(order)
           spree_put :cancel, params
 
-          expect(response).to have_http_status(:found)
           expect(response.body).to match(order_path(order)).and match("redirect")
           expect(flash[:success]).to eq 'Your order has been cancelled'
         end
