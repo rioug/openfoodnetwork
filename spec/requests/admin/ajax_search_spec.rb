@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe "Admin::AjaxSearch" do
+RSpec.describe "/admin/ajax_search" do
   include AuthenticationHelper
 
   let(:admin_user) { create(:admin_user) }
