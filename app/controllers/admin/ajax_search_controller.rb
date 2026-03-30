@@ -1,23 +1,21 @@
 # frozen_string_literal: true
 
-module Products
-  module AjaxSearch
-    extend ActiveSupport::Concern
-
-    def search_producers
+module Admin
+  class AjaxSearchController < Spree::Admin::BaseController
+    def producers
       query = OpenFoodNetwork::Permissions.new(spree_current_user)
         .managed_product_enterprises.is_primary_producer.by_name
 
       render json: build_search_response(query)
     end
 
-    def search_categories
+    def categories
       query = Spree::Taxon.all
 
       render json: build_search_response(query)
     end
 
-    def search_tax_categories
+    def tax_categories
       query = Spree::TaxCategory.all
 
       render json: build_search_response(query)

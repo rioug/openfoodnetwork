@@ -228,11 +228,10 @@ module Spree
         :destroy,
         :destroy_variant,
         :clone,
-        :create_linked_variant,
-        :search_producers,
-        :search_categories,
-        :search_tax_categories
+        :create_linked_variant
       ], :products_v3
+
+      can [:admin, :producers, :categories, :tax_categories], :ajax_search
 
       can [:create], Spree::Variant
       can [:admin, :index, :read, :edit,
