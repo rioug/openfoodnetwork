@@ -83,6 +83,13 @@ Openfoodnetwork::Application.routes.draw do
     delete 'products_v3/destroy_variant/:id', to: 'products_v3#destroy_variant', as: 'destroy_variant'
     post 'clone/:id', to: 'products_v3#clone', as: 'clone_product'
     post 'products/create_linked_variant', to: 'products_v3#create_linked_variant', as: 'create_linked_variant'
+
+    scope :ajax_search, as: :ajax_search, controller: :ajax_search do
+      get :producers
+      get :categories
+      get :tax_categories
+    end
+
     resources :product_preview, only: [:show]
 
     resources :variant_overrides do

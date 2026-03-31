@@ -106,13 +106,19 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
             visit spree.admin_products_path
 
             within row_containing_name "Variant1" do
-              expect(page).to have_select "Producer", with_options: ["Producer A", "Producer B"],
-                                                      selected: "Producer A"
+              expect_tomselect_existing_with_selected_options(
+                from: 'Producer',
+                existing_options: ["Producer A", "Producer B"],
+                selected_options: ["Producer A"]
+              )
             end
 
             within row_containing_name "Variant2a" do
-              expect(page).to have_select "Producer", with_options: ["Producer A", "Producer B"],
-                                                      selected: "Producer B"
+              expect_tomselect_existing_with_selected_options(
+                from: 'Producer',
+                existing_options: ["Producer A", "Producer B"],
+                selected_options: ["Producer B"]
+              )
             end
           end
         end
@@ -543,24 +549,21 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
 
     it "shows only suppliers that I manage or have permission to" do
       visit spree.admin_products_path
+      existing_options = [supplier_managed1.name, supplier_managed2.name, supplier_permitted.name]
 
       within row_containing_placeholder(product_supplied.name) do
-        expect(page).to have_select(
-          '_products_0_variants_attributes_0_supplier_id',
-          options: [
-            'Select producer',
-            supplier_managed1.name, supplier_managed2.name, supplier_permitted.name
-          ], selected: supplier_managed1.name
+        expect_tomselect_existing_with_selected_options(
+          existing_options:,
+          from: '_products_0_variants_attributes_0_supplier_id',
+          selected_options: [supplier_managed1.name]
         )
       end
 
       within row_containing_placeholder(product_supplied_permitted.name) do
-        expect(page).to have_select(
-          '_products_1_variants_attributes_0_supplier_id',
-          options: [
-            'Select producer',
-            supplier_managed1.name, supplier_managed2.name, supplier_permitted.name
-          ], selected: supplier_permitted.name
+        expect_tomselect_existing_with_selected_options(
+          existing_options:,
+          from: '_products_1_variants_attributes_0_supplier_id',
+          selected_options: [supplier_permitted.name]
         )
       end
     end

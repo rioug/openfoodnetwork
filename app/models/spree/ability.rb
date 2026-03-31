@@ -225,9 +225,17 @@ module Spree
         OpenFoodNetwork::Permissions.new(user).
           enterprises_granting_linked_variants.include? variant.supplier
       end
+      can [
+        :admin,
+        :index,
+        :bulk_update,
+        :destroy,
+        :destroy_variant,
+        :clone,
+        :create_linked_variant
+      ], :products_v3
 
-      can [:admin, :index, :bulk_update, :destroy, :destroy_variant, :clone,
-           :create_linked_variant], :products_v3
+      can [:admin, :producers, :categories, :tax_categories], :ajax_search
 
       can [:create], Spree::Variant
       can [:admin, :index, :read, :edit,

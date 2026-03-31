@@ -86,14 +86,14 @@ RSpec.describe 'As an enterprise user, I can manage my products' do
           find('button[aria-label="On Hand"]').click
           find('input[id$="_price"]').fill_in with: "11.1"
 
-          select supplier.name, from: 'Producer'
-          select taxon.name, from: 'Category'
-
           if stock == "on_hand"
             find('input[id$="_on_hand_desired"]').fill_in with: "66"
           elsif stock == "on_demand"
             find('input[id$="_on_demand_desired"]').check
           end
+
+          tomselect_select supplier.name, from: 'Producer'
+          tomselect_select taxon.name, from: 'Category'
         end
 
         expect(page).to have_content "1 product modified."
