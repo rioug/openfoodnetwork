@@ -285,8 +285,9 @@ RSpec.describe 'As an enterprise user, I can perform actions on the products scr
     end
 
     describe "Create linked variant" do
-      let!(:variant) {
-        create(:variant, display_name: "My box", supplier: producer)
+      let!(:variant) { create(:variant, display_name: "My box", supplier: producer) }
+      let!(:linked_variant) {
+        variant.create_linked_variant(user).tap{ |v| v.update! display_name: "My linked variant" }
       }
       let!(:other_producer) { create(:supplier_enterprise) }
       let!(:other_variant) {
@@ -312,6 +313,15 @@ RSpec.describe 'As an enterprise user, I can perform actions on the products scr
 
             expect(page).to have_link "Create linked variant"
           end
+          close_action_menu
+
+          # Check my own linked variant
+          within row_containing_name("My linked variant") do
+            page.find(".vertical-ellipsis-menu").click
+
+            expect(page).not_to have_link "Create linked variant"
+          end
+          close_action_menu
 
           # Create linked variant sourced from my friend
           within row_containing_name("My friends box") do
