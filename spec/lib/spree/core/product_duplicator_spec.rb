@@ -36,6 +36,7 @@ RSpec.describe Spree::Core::ProductDuplicator do
 
     it "can duplicate a product" do
       duplicator = Spree::Core::ProductDuplicator.new(product)
+      allow(duplicator).to receive(:duplicate_variant_links) # tested elsewhere
       expect(new_product).to receive(:name=).with("COPY OF foo")
       expect(new_product).to receive(:sku=).with("")
       expect(new_product).to receive(:product_properties=).with([new_property])
@@ -62,6 +63,29 @@ RSpec.describe Spree::Core::ProductDuplicator do
       expect(new_property).to receive(:updated_at=).with(nil)
 
       duplicator.duplicate
+    end
+  end
+
+  describe "duplicating" do
+    subject { described_class.new(product).duplicate }
+    context "with variant links" do
+      let!(:product) { create(:product) }
+      let!(:source_variant) { product.variants.first }
+      let!(:linked_variant1) { source_variant.create_linked_variant(source_variant.supplier.owner) }
+      let!(:linked_variant2) { source_variant.create_linked_variant(source_variant.supplier.owner) }
+
+      it "duplicates variant links" do
+        expect(subject).to be_a Spree::Product
+        expect(subject.variants.count).to eq 3
+
+        # assuming they are cloned in the same order
+        new_source_variant = subject.variants[0]
+        new_linked_variant1 = subject.variants[1]
+        new_linked_variant2 = subject.variants[2]
+        expect(new_source_variant.target_variants).to eq [new_linked_variant1, new_linked_variant2]
+        expect(new_linked_variant1.source_variants).to eq [new_source_variant]
+        expect(new_linked_variant2.source_variants).to eq [new_source_variant]
+      end
     end
   end
 
