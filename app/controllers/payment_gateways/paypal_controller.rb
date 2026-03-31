@@ -82,7 +82,7 @@ module PaymentGateways
           LandingPage: payment_method.preferred_landing_page.presence || "Billing",
           cppheaderimage: payment_method.preferred_logourl.presence || "",
           NoShipping: 1,
-          PaymentDetails: [payment_details(order)]
+          PaymentDetails: [payment_details]
         }
       }
     end
@@ -122,60 +122,8 @@ module PaymentGateways
       payment_method.provider
     end
 
-    def payment_details(order)
-      items = PaypalItemsBuilder.new(order).call
-
-      item_sum = items.sum { |i| i[:Quantity] * i[:Amount][:value] }
-      tax_adjustments_total = current_order.all_adjustments.tax.additional.sum(:amount)
-
-      if item_sum.zero?
-        # Paypal does not support no items or a zero dollar ItemTotal
-        # This results in the order summary being simply "Current purchase"
-        {
-          OrderTotal: {
-            currencyID: current_order.currency,
-            value: current_order.total
-          }
-        }
-      else
-        {
-          OrderTotal: {
-            currencyID: current_order.currency,
-            value: current_order.total
-          },
-          ItemTotal: {
-            currencyID: current_order.currency,
-            value: item_sum
-          },
-          ShippingTotal: {
-            currencyID: current_order.currency,
-            value: current_order.ship_total
-          },
-          TaxTotal: {
-            currencyID: current_order.currency,
-            value: tax_adjustments_total,
-          },
-          ShipToAddress: address_options,
-          PaymentDetailsItem: items,
-          ShippingMethod: "Shipping Method Name Goes Here",
-          PaymentAction: "Sale"
-        }
-      end
-    end
-
-    def address_options
-      return {} unless address_required?
-
-      {
-        Name: current_order.bill_address.try(:full_name),
-        Street1: current_order.bill_address.address1,
-        Street2: current_order.bill_address.address2,
-        CityName: current_order.bill_address.city,
-        Phone: current_order.bill_address.phone,
-        StateOrProvince: current_order.bill_address.state_text,
-        Country: current_order.bill_address.country.iso,
-        PostalCode: current_order.bill_address.zipcode
-      }
+    def payment_details
+      Paypal::PaymentDetailsService.new(order: @order, address_required: address_required?).call
     end
 
     def address_required?
