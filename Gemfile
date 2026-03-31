@@ -118,8 +118,6 @@ gem 'immigrant'
 gem 'roo' # read spreadsheets
 gem 'spreadsheet_architect' # write spreadsheets
 
-gem 'whenever', require: false
-
 gem 'coffee-rails', '~> 5.0.0'
 
 gem 'angular_rails_csrf'
