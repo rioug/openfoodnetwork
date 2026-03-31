@@ -285,12 +285,11 @@ RSpec.describe 'As an enterprise user, I can perform actions on the products scr
             # Close action menu (shouldn't need this, it should close itself)
             last_box.click
 
-            # And I can perform actions on the new product
+            # And I can perform actions on the new variant
             within last_box do
               page.find(".vertical-ellipsis-menu").click
               expect(page).to have_link "Edit"
-              # expect(page).to have_link "Clone" # tofix: menu is partially obscured
-              # expect(page).to have_link "Delete" # it's not a proper link
+              expect(page).to have_selector "a", text: "Delete" # it's not a proper link
 
               fill_in "Name", with: "My copy of Apples"
             end
