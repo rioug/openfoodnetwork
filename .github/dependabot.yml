@@ -9,6 +9,8 @@ multi-ecosystem-groups:
   turbo_power:
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
 
 updates:
   - package-ecosystem: "bundler"
