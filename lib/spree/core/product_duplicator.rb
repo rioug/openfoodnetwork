@@ -56,10 +56,10 @@ module Spree
                                           target_variant: [mapped_variants.keys])
         # Link the new variants
         variant_links.find_each do |variant_link|
-          VariantLink.create(
-            source_variant: mapped_variants[variant_link.source_variant],
-            target_variant: mapped_variants[variant_link.target_variant]
-          )
+          source_variant = mapped_variants[variant_link.source_variant]
+          target_variant = mapped_variants[variant_link.target_variant]
+
+          target_variant.variant_links_as_target.new(source_variant:)
         end
       end
 
