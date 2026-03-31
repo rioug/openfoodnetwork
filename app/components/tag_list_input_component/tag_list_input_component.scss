@@ -35,7 +35,7 @@
     li.tag-item {
       border-radius: 3px;
       margin: 1px 0 1px 3px;
-      padding: 2px 5px;
+      padding: 2px 3px 2px 5px;
       display: inline-block;
       float: left;
       font-size: 14px;
@@ -51,13 +51,15 @@
         margin-left: 2px;
         padding: 0 6px;
         background: 0 0;
+        border-radius: $border-radius;
         cursor: pointer;
         vertical-align: middle;
         font-size: 14px;
         color: white;
+        float: right;
 
         &:hover {
-          background: rgba(0, 0, 0, 0.05);
+          background: rgba(0, 0, 0, 0.25);
         }
       }
     }
