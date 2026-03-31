@@ -19,3 +19,6 @@
       every: "5m"
     OrderCycleClosingJob:
       every: "5m"
+    RakeJob:
+      args: ["ofn:data:remove_transient_data"]
+      cron: "30 4 1 * *"
