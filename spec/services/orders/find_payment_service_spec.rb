@@ -60,4 +60,32 @@ RSpec.describe Orders::FindPaymentService do
       end
     end
   end
+
+  describe "#last_customer_credit" do
+    let!(:credit_payment) {
+      create(:payment, order:, state: 'processing',
+                       payment_method: Spree::PaymentMethod.customer_credit)
+    }
+    let!(:last_credit_payment) {
+      create(:payment, order:, state: 'processing',
+                       payment_method: Spree::PaymentMethod.customer_credit)
+    }
+
+    it "returns the last customer credit" do
+      expect(finder.last_customer_credit).to eq(last_credit_payment)
+    end
+
+    context "with other payments" do
+      let!(:complete_credit_paymnet) {
+        create(:payment, order:, state: 'completed',
+                         payment_method: Spree::PaymentMethod.customer_credit)
+      }
+      let!(:processing_payment) { create(:payment, order:, state: 'processing') }
+      let!(:failed_payment) { create(:payment, order:, state: 'failed') }
+
+      it "returns the last customer credit" do
+        expect(finder.last_customer_credit).to eq(last_credit_payment)
+      end
+    end
+  end
 end

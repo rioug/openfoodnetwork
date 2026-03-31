@@ -14,6 +14,14 @@ module Orders
       last(@order.pending_payments)
     end
 
+    def last_customer_credit
+      last(
+        @order.pending_payments.select do |payment|
+          payment.payment_method == Spree::PaymentMethod.customer_credit
+        end
+      )
+    end
+
     private
 
     # `max_by` avoids additional database queries when payments are loaded
