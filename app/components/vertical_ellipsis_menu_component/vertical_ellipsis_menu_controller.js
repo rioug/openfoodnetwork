@@ -8,7 +8,7 @@ export default class extends Controller {
     window.addEventListener("click", this.#hideIfClickedOutside);
 
     // Close menu when making a selection
-    this.contentTarget.addEventListener("click", this.#selected.bind(this));
+    this.contentTarget.addEventListener("click", this.#selected);
   }
 
   disconnect() {
@@ -19,7 +19,7 @@ export default class extends Controller {
     this.#toggleShow();
   }
 
-  #selected() {
+  #selected = () => {
     this.contentTarget.classList.add("selected");
   }
 
