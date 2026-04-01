@@ -90,8 +90,11 @@ module OrderCompletion
   end
 
   def notify_failure(error = RuntimeError.new(order_processing_error))
+    return if flash.present?
+
+    Rails.logger.error "OrderCompletion#notify_failure: #{error}"
     Alert.raise_with_record(error, @order)
-    flash[:error] = order_processing_error if flash.blank?
+    flash[:error] = order_processing_error
   end
 
   def order_processing_error
@@ -101,6 +104,8 @@ module OrderCompletion
   end
 
   def gateway_error(error)
+    Rails.logger.error "OrderCompletion#gateway_error: #{error}"
+    Alert.raise_with_record(error, @order)
     flash[:error] = t(:spree_gateway_error_flash_for_checkout, error: error.message)
   end
 end
