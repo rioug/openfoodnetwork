@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rake"
+
 # Executes a rake task
 class RakeJob < ApplicationJob
   def perform(task_string)
