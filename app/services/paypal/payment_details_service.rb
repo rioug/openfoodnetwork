@@ -8,7 +8,7 @@ module Paypal
     end
 
     def call # rubocop:disable Metrics/MethodLength
-      items = PaypalItemsBuilder.new(order).call
+      items = Paypal::ItemsBuilderService.new(order).call
 
       item_sum = items.sum { |i| i[:Quantity] * i[:Amount][:value] }
       tax_adjustments_total = order.all_adjustments.tax.additional.sum(:amount)
