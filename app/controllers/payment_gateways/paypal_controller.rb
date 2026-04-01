@@ -30,6 +30,10 @@ module PaymentGateways
           # sent back and the response is handled in the #confirm action in this controller.
           redirect_to provider.express_checkout_url(pp_response, useraction: 'commit')
         else
+          Rails.logger.error(
+            "PaypalController#express: #{pp_response.errors.map(&:long_message).join(' ')}"
+          )
+          Alert.raise_with_record(pp_response.errors, @order)
           flash[:error] =
             Spree.t(
               'flash.generic_error',

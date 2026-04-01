@@ -139,6 +139,14 @@ RSpec.describe PaymentGateways::PaypalController do
           .to redirect_to checkout_step_path(:payment)
         expect(flash[:error]).to eq "PayPal failed. "
       end
+
+      it "logs the error" do
+        # redirect_to will also call Rails.logger.error with the controller name
+        expect(Rails.logger).to receive(:error).with(/PaypalController#express/).twice
+        expect(Alert).to receive(:raise_with_record)
+
+        post(:express, params: { payment_method_id: payment_method.id })
+      end
     end
 
     context "when a SocketError is encountered during processing" do
