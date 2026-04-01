@@ -68,23 +68,28 @@ RSpec.describe Spree::Core::ProductDuplicator do
 
   describe "duplicating" do
     subject { described_class.new(product).duplicate }
-    context "with variant links" do
-      let!(:product) { create(:product) }
-      let!(:source_variant) { product.variants.first }
-      let!(:linked_variant1) { source_variant.create_linked_variant(source_variant.supplier.owner) }
-      let!(:linked_variant2) { source_variant.create_linked_variant(source_variant.supplier.owner) }
+
+    context "with multiple variant links" do
+      let(:product) { create(:product) }
+
+      before do
+        src_variant = product.variants.first.tap { it.update! display_name: "SRC" }
+        user = src_variant.supplier.owner
+        src_variant.create_linked_variant(user).tap { it.update! display_name: "LNK1" }
+        src_variant.create_linked_variant(user).tap { it.update! display_name: "LNK2" }
+      end
 
       it "duplicates variant links" do
         expect(subject).to be_a Spree::Product
         expect(subject.variants.count).to eq 3
 
-        # assuming they are cloned in the same order
-        new_source_variant = subject.variants[0]
-        new_linked_variant1 = subject.variants[1]
-        new_linked_variant2 = subject.variants[2]
-        expect(new_source_variant.target_variants).to eq [new_linked_variant1, new_linked_variant2]
-        expect(new_linked_variant1.source_variants).to eq [new_source_variant]
-        expect(new_linked_variant2.source_variants).to eq [new_source_variant]
+        new_src_variant = subject.variants.find { it.display_name == "SRC" }
+        new_lnk_variant1 = subject.variants.find { it.display_name == "LNK1" }
+        new_lnk_variant2 = subject.variants.find { it.display_name == "LNK2" }
+
+        expect(new_src_variant.target_variants).to eq [new_lnk_variant1, new_lnk_variant2]
+        expect(new_lnk_variant1.source_variants).to eq [new_src_variant]
+        expect(new_lnk_variant2.source_variants).to eq [new_src_variant]
       end
 
       it "minimises(?) database queries" do
