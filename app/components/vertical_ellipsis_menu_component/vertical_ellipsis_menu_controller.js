@@ -21,7 +21,7 @@ export default class extends Controller {
 
   #selected = () => {
     this.contentTarget.classList.add("selected");
-  }
+  };
 
   #hideIfClickedOutside = (event) => {
     if (this.element.contains(event.target)) {
