@@ -1,19 +1,17 @@
 # frozen_string_literal: false
 
 module Spree
-  class DefaultTaxZoneValidator < ActiveModel::Validator
-    def validate(record)
-      return unless record.included_in_price
-
-      return if Zone.default_tax
-
-      record.errors.add(:included_in_price, Spree.t("errors.messages.included_price_validation"))
-    end
-  end
-end
-
-module Spree
   class TaxRate < ApplicationRecord
+    class DefaultTaxZoneValidator < ActiveModel::Validator
+      def validate(record)
+        return unless record.included_in_price
+
+        return if Zone.default_tax
+
+        record.errors.add(:included_in_price, Spree.t("errors.messages.included_price_validation"))
+      end
+    end
+
     acts_as_paranoid
     include CalculatedAdjustments
 
