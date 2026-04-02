@@ -13,7 +13,7 @@ class ColumnPreference < ApplicationRecord
 
   validates :action_name, presence: true, inclusion: { in: proc { known_actions } }
   validates :column_name, presence: true, inclusion: { in: proc { |p|
-                                                             valid_columns_for(p.action_name)
+                                                             valid_columns_for(p.action_name, p.user)
                                                            } }
   scope :bulk_edit_product, -> { where(action_name: 'products_v3_index') }
 
@@ -36,8 +36,8 @@ class ColumnPreference < ApplicationRecord
     end
   end
 
-  def self.valid_columns_for(action_name)
-    get_default_preferences(action_name, Spree::User.new).keys.map(&:to_s)
+  def self.valid_columns_for(action_name, user = nil)
+    get_default_preferences(action_name, user || Spree::User.new).keys.map(&:to_s)
   end
 
   def self.known_actions
