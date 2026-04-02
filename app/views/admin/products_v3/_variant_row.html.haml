@@ -93,7 +93,7 @@
     - if variant.persisted?
       = link_to t('admin.products_page.actions.edit'), edit_admin_product_variant_path(variant.product, variant)
 
-      - if allowed_source_producers.include?(variant.supplier)
+      - if variant.source_variants.empty? && allowed_source_producers.include?(variant.supplier)
         = link_to t('admin.products_page.actions.create_linked_variant'), admin_create_linked_variant_path(variant_id: variant.id, product_index:), 'data-turbo-method': :post
 
       - if variant.product.variants.size > 1
