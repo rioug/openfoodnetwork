@@ -44,6 +44,7 @@ module CheckoutCallbacks
     @order.checkout_processing = true
 
     redirect_to(main_app.shop_path) && return if redirect_to_shop?
+
     redirect_to_cart_path && return unless valid_order_line_items?
   end
 
