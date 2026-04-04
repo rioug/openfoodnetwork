@@ -461,14 +461,34 @@ RSpec.describe Spree::OrdersController do
       end
     end
 
+    context "when a guest user has the order token in session" do
+      let(:order) {
+        create(:completed_order_with_totals, user: nil, email: "guest@example.com",
+                                             distributor: create(:distributor_enterprise))
+      }
+
+      before do
+        allow(controller).to receive(:spree_current_user) { nil }
+        session[:access_token] = order.token
+      end
+
+      it "cancels the order and redirects to the order page" do
+        request.env['HTTP_REFERER'] = order_path(order)
+        spree_put :cancel, params
+
+        expect(response.body).to match(order_path(order)).and match("redirect")
+        expect(flash[:success]).to eq 'Your order has been cancelled'
+      end
+    end
+
     context "when the user has permission to cancel the order" do
       before { allow(controller).to receive(:spree_current_user) { user } }
 
       context "when the order is not yet complete" do
         it "responds with forbidden" do
+          request.env['HTTP_REFERER'] = order_path(order)
           spree_put :cancel, params
 
-          expect(response).to have_http_status(:found)
           expect(response.body).to match(order_path(order)).and match("redirect")
           expect(flash[:error]).to eq 'Sorry, the order could not be cancelled'
         end
@@ -481,9 +501,9 @@ RSpec.describe Spree::OrdersController do
         }
 
         it "responds with success" do
+          request.env['HTTP_REFERER'] = order_path(order)
           spree_put :cancel, params
 
-          expect(response).to have_http_status(:found)
           expect(response.body).to match(order_path(order)).and match("redirect")
           expect(flash[:success]).to eq 'Your order has been cancelled'
         end

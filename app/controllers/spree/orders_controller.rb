@@ -107,7 +107,7 @@ module Spree
 
     def cancel
       @order = Spree::Order.find_by!(number: params[:id])
-      authorize! :cancel, @order
+      authorize! :cancel, @order, session[:access_token]
 
       if Orders::CustomerCancellationService.new(@order).call
         flash[:success] = I18n.t(:orders_your_order_has_been_cancelled)
