@@ -193,6 +193,7 @@ de_DE:
               not_available_to_shop: "ist nicht verfügbar für %{shop}"
   card_details: "Kreditkartendaten"
   card_type: "Kreditkartentyp"
+  use_new_cc: "Eine neue Kreditkarte verwenden"
   cardholder_name: "Kreditkarteninhaber"
   community_forum_url: "URL des Community-Forums"
   customer_instructions: "Informationen für Kunden"
@@ -665,6 +666,7 @@ de_DE:
         bill_address: "Rechnungsadresse"
         ship_address: "Lieferadresse"
         balance: "Saldo"
+        credit: "Verfügbares Guthaben"
         update_address_success: "Adresse wurde erfolgreich aktualisiert."
         update_address_error: "Bitte füllen Sie alle erforderlichen Felder aus."
         edit_bill_address: "Rechnungsadresse bearbeiten"
@@ -683,6 +685,7 @@ de_DE:
         has_associated_subscriptions: "Löschen fehlgeschlagen: Dieser Kunde hat aktive Abonnements. Bitte kündigen Sie diese zuerst."
     customer_account_transaction:
       index:
+        available_credit: "Verfügbares Guthaben: %{available_credit}"
         description: Beschreibung
         amount: Summe
         running_balance: Fortlaufender Saldo
@@ -2203,6 +2206,7 @@ de_DE:
   order_total: 'Gesamtsumme:'
   order_payment: "Zahlungsart:"
   no_payment_required: "Keine Zahlung erforderlich."
+  credit_used: "Verwendetes Guthaben: %{amount}"
   customer_credit: Guthaben
   order_billing_address: Rechnungsadresse
   order_delivery_on: Lieferung am
@@ -4363,7 +4367,7 @@ de_DE:
     date_picker:
       flatpickr_date_format: "d.m.Y"
       flatpickr_datetime_format: "d.m.Y H:i"
-      today: "heute"
+      today: "Heute"
       now: "Jetzt"
       close: "Schließen"
     orders:

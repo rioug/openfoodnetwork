@@ -208,6 +208,10 @@ hu:
               no_default_card: "^Ennél az ügyfélnél nem áll rendelkezésre alapértelmezett kártya"
             shipping_method:
               not_available_to_shop: "nem érhető el a %{shop} számára"
+        user_invitation:
+          attributes:
+            email:
+              is_already_manager: már menedzser
   card_details: "A kártya adatai"
   card_type: "Kártyatípus"
   card_type_is: "A kártya típusa: "
@@ -513,7 +517,7 @@ hu:
     create: "Létrehozás"
     cancel: "Mégsem"
     cancel_order: "Törlés"
-    resume: "Összefoglaló"
+    resume: "Visszaállítás"
     save: "Mentés"
     edit: "Szerkesztés"
     update: "Frissítés"
@@ -570,8 +574,11 @@ hu:
         delete: Törlés
         remove: Eltávolítás
         preview: Előnézet
+        create_linked_variant: Kapcsolt termékváltozat létrehozása
       image:
         edit: Szerkesztés
+      variant_row:
+        sourced_from: "Forrás: %{source_name} ( %{source_id} ); Elosztó: %{hub_name}"
       product_preview:
         product_preview: Termék előnézet
         shop_tab: Átvételi pont
@@ -1051,7 +1058,7 @@ hu:
         back_to_my_inventory: Vissza a leltárhoz
     orders:
       edit:
-        order_sure_want_to: Biztosan %{event} akarod ezt a megrendelést?
+        order_sure_want_to: 'Biztosan végrehajtod a rendelésen ezt a műveletet? %{event} '
         voucher_tax_included_in_price: "%{label}(a kupon tartalmazza az adót)"
         tax_on_fees: "Díjak adója"
       invoice_email_sent: 'Számla e-mail elküldve'
@@ -1561,7 +1568,7 @@ hu:
         coordinator: Koordinátor
         orders_close: A rendelések lezárulnak
       row:
-        suppliers: beszállítók
+        suppliers: beszállító
         distributors: elosztó
         variants: változat
       simple_form:
