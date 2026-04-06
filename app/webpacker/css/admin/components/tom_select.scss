@@ -24,10 +24,6 @@
     input {
       font-size: $body-font-size;
       height: auto;
-
-      &::placeholder {
-        color: $near-black;
-      }
     }
 
     .item {
