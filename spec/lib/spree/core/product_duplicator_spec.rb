@@ -36,6 +36,7 @@ RSpec.describe Spree::Core::ProductDuplicator do
 
     it "can duplicate a product" do
       duplicator = Spree::Core::ProductDuplicator.new(product)
+      allow(duplicator).to receive(:duplicate_variant_links) # tested elsewhere
       expect(new_product).to receive(:name=).with("COPY OF foo")
       expect(new_product).to receive(:sku=).with("")
       expect(new_product).to receive(:product_properties=).with([new_property])
@@ -62,6 +63,92 @@ RSpec.describe Spree::Core::ProductDuplicator do
       expect(new_property).to receive(:updated_at=).with(nil)
 
       duplicator.duplicate
+    end
+  end
+
+  describe "duplicating" do
+    subject { described_class.new(product).duplicate }
+
+    context "with multiple variant links" do
+      let(:product) { create(:product) }
+
+      before do
+        src_variant = product.variants.first.tap { it.update! display_name: "SRC" }
+        user = src_variant.supplier.owner
+        src_variant.create_linked_variant(user).tap { it.update! display_name: "LNK1" }
+        src_variant.create_linked_variant(user).tap { it.update! display_name: "LNK2" }
+      end
+
+      it "duplicates variant links" do
+        expect(subject).to be_a Spree::Product
+        expect(subject.variants.count).to eq 3
+
+        new_src_variant = subject.variants.find { it.display_name == "SRC" }
+        new_lnk_variant1 = subject.variants.find { it.display_name == "LNK1" }
+        new_lnk_variant2 = subject.variants.find { it.display_name == "LNK2" }
+
+        expect(new_src_variant.target_variants).to eq [new_lnk_variant1, new_lnk_variant2]
+        expect(new_lnk_variant1.source_variants).to eq [new_src_variant]
+        expect(new_lnk_variant2.source_variants).to eq [new_src_variant]
+      end
+
+      it "minimises(?) database queries" do
+        expect { subject }.to query_database [
+          "Spree::ProductProperty Load",
+          "Spree::Image Load",
+          "Spree::Variant Load",
+          "Spree::Image Load",
+          "Spree::Price Load",
+          "Spree::Image Load",
+          "Spree::Price Load",
+          "Spree::Image Load",
+          "Spree::Price Load",
+          "VariantLink Load",
+          "Spree::Variant Load",
+          "Spree::Variant Load",
+          "Spree::Variant Load",
+          "Spree::Variant Load",
+          "TRANSACTION",
+          "Spree::ShippingCategory Load",
+          "Spree::Taxon Load",
+          "Enterprise Load",
+          "Spree::ShippingCategory Load",
+          "Spree::Taxon Load",
+          "Enterprise Load",
+          "Spree::ShippingCategory Load",
+          "Spree::Taxon Load",
+          "Enterprise Load",
+          "Spree::Product Create",
+          "Spree::Variant Create",
+          "Spree::Price Create",
+          "Spree::StockItem Exists?",
+          "Spree::StockItem Exists?",
+          "Spree::StockItem Create",
+          "ActsAsTaggableOn::Tagging Load",
+          "Spree::Variant Update",
+          "Spree::Variant Create",
+          "Spree::Price Create",
+          "VariantLink Create",
+          "Spree::StockItem Exists?",
+          "Spree::StockItem Exists?",
+          "Spree::StockItem Create",
+          "ActsAsTaggableOn::Tagging Load",
+          "Spree::Variant Update",
+          "Spree::Variant Create",
+          "Spree::Price Create",
+          "VariantLink Create",
+          "Spree::StockItem Exists?",
+          "Spree::StockItem Exists?",
+          "Spree::StockItem Create",
+          "ActsAsTaggableOn::Tagging Load",
+          "Spree::Variant Update",
+          "Spree::Product Update",
+          "Enterprise Update",
+          "Enterprise Update All",
+          "Spree::Taxon Update",
+          "TRANSACTION"
+        ]
+      end
     end
   end
 
