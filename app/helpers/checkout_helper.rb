@@ -125,4 +125,13 @@ module CheckoutHelper
   def checkout_page_title
     t("checkout_#{checkout_step}_title")
   end
+
+  def display_voucher?(order, paid_with_credit)
+    # We have a voucher so we need the voucher section to be able to remove said voucher
+    return true if order.voucher_adjustments.first
+
+    return false if paid_with_credit&.positive? && order.outstanding_balance.zero?
+
+    order.distributor.vouchers.present? || order.distributor.connected_apps.vine.present?
+  end
 end

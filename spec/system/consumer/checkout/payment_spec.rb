@@ -112,6 +112,10 @@ RSpec.describe "As a consumer, I want to checkout my order" do
       context "with credit available" do
         let!(:payment_method) { create(:payment_method, distributors: [distributor]) }
         let(:payment_amount) { 10.00 }
+        # Add a voucher so we can test the voucher input as well
+        let!(:voucher) do
+          create(:voucher_flat_rate, code: 'some_code', enterprise: distributor, amount: 15)
+        end
 
         before do
           create(
@@ -125,19 +129,22 @@ RSpec.describe "As a consumer, I want to checkout my order" do
           visit checkout_step_path(:payment)
         end
 
-        it "displays no payment required" do
+        it "displays no payment required and hide voucher" do
           expect(page).to have_content "No payment required"
           expect(page).to have_content "Credit used: $10.00"
+
+          expect(page).not_to have_content "Apply voucher"
         end
 
         context "when credit does not cover the whole order" do
           let(:credit_amount) { 5.00 }
           let(:payment_amount) { 5.00 }
 
-          it "shows credit used and available payment method" do
+          it "shows credit used, available payment method and voucher" do
             expect(page).to have_content "Credit used: $5.00"
             expect(page).to have_content "Payment with Fee $1.23"
             expect(page).to have_content "Check Free"
+            expect(page).to have_content "Apply voucher"
           end
 
           it "requires choosing a payment method" do
