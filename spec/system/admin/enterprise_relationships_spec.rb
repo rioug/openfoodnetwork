@@ -44,9 +44,9 @@ create(:enterprise)
 
       check 'to add to order cycle'
       check 'to manage products'
-      uncheck 'to manage products'
+      check 'to manage products'
       check 'to edit profile'
-      check 'to add products to inventory'
+      uncheck 'to add products to inventory'
       check 'to create linked variants'
       select2_select 'Two', from: 'enterprise_relationship_child_id'
       click_button 'Create'
@@ -57,12 +57,12 @@ create(:enterprise)
       expect_relationship_with_permissions e1, e2,
                                            ['to add to order cycle',
                                             'to create linked variants [BETA]',
-                                            'to add products to inventory',
-                                            'to edit profile']
+                                            'to edit profile',
+                                            'to manage products']
       er = EnterpriseRelationship.where(parent_id: e1, child_id: e2).first
       expect(er).to be_present
       expect(er.permissions.map(&:name)).to match_array ['add_to_order_cycle', 'edit_profile',
-                                                         'create_variant_overrides',
+                                                         'manage_products',
                                                          'create_linked_variants']
     end
 
@@ -80,6 +80,24 @@ create(:enterprise)
 
         # Then I should see an error message
         expect(page).to have_content "That relationship is already established."
+      end.to change { EnterpriseRelationship.count }.by(0)
+    end
+
+    it "attempting to create a relationship with conflicting permissions" do
+      e1 = create(:enterprise, name: 'One')
+      e2 = create(:enterprise, name: 'Two')
+
+      expect do
+        # When I attempt to create a duplicate relationship
+        visit admin_enterprise_relationships_path
+        select2_select 'One', from: 'enterprise_relationship_parent_id'
+        select2_select 'Two', from: 'enterprise_relationship_child_id'
+        check "to add products to inventory"
+        check "to create linked variants"
+        click_button 'Create'
+
+        # Then I should see an error message
+        expect(page).to have_content "Cannot grant both inventory and linked variants permissions."
       end.to change { EnterpriseRelationship.count }.by(0)
     end
 

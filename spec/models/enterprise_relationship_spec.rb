@@ -1,6 +1,46 @@
 # frozen_string_literal: true
 
 RSpec.describe EnterpriseRelationship do
+  describe "validation" do
+    let(:parent) { create(:enterprise, name: 'Child') }
+    let(:child) { create(:enterprise, name: 'Parent') }
+
+    describe "validate_permissions_list" do
+      it "invalid when both create_variant_overrides and create_linked_variants are selected" do
+        enterprise_relationship = build(:enterprise_relationship, parent:, child:, permissions_list:
+                                        [
+                                          "create_linked_variants",
+                                          "create_variant_overrides"
+                                        ])
+
+        expect(enterprise_relationship).not_to be_valid
+        expect(enterprise_relationship.errors.full_messages).to eq [
+          "Cannot grant both inventory and linked variants permissions."
+        ]
+      end
+
+      it "valid when create_variant_overrides and another are selected" do
+        enterprise_relationship = build(:enterprise_relationship, parent:, child:, permissions_list:
+                                        [
+                                          "one",
+                                          "create_variant_overrides"
+                                        ])
+
+        expect(enterprise_relationship).to be_valid
+      end
+
+      it "valid when create_linked_variants and another are selected" do
+        enterprise_relationship = build(:enterprise_relationship, parent:, child:, permissions_list:
+                                        [
+                                          "one",
+                                          "create_linked_variants"
+                                        ])
+
+        expect(enterprise_relationship).to be_valid
+      end
+    end
+  end
+
   describe "scopes" do
     let(:e1)  { create(:enterprise, name: 'A') }
     let(:e2)  { create(:enterprise, name: 'B') }
