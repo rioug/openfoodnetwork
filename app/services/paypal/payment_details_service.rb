@@ -13,7 +13,9 @@ module Paypal
       item_sum = items.sum { |i| i[:Quantity] * i[:Amount][:value] }
       tax_adjustments_total = order.all_adjustments.tax.additional.sum(:amount)
 
-      last_payment = payment_finder.last_pending_payment
+      last_payment = payment_finder.last_pending_paypal_payment
+      return {} if last_payment.nil?
+
       customer_credit_payment = payment_finder.last_customer_credit
 
       if item_sum.zero?

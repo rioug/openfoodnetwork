@@ -35,7 +35,7 @@ RSpec.describe PaymentGateways::PaypalController do
       expect(payment.source.payer_id).to eq(payer_id)
     end
 
-    it 'resets the order' do
+    it "resets the order" do
       mock_current_order
 
       post :confirm, params: { payment_method_id: payment_method.id }
@@ -43,12 +43,26 @@ RSpec.describe PaymentGateways::PaypalController do
       expect(controller.current_order).not_to eq(order)
     end
 
-    it 'sets the access token of the session' do
+    it "sets the access token of the session" do
       mock_current_order
 
       post :confirm, params: { payment_method_id: payment_method.id }
 
       expect(session[:access_token]).to eq(controller.current_order.token)
+    end
+
+    context "when no pending paypal payment" do
+      it "redirects to payment step with an error message" do
+        # Mark paypal payment as failed
+        order.payments.first.update(state: "failed")
+        # Add a non paypal pending payment
+        order.payments << create(:payment, state: "checkout", order: )
+
+        expect(
+          post(:confirm, params: { payment_method_id: payment_method.id })
+        ).to redirect_to(checkout_step_path(step: :payment))
+        expect(flash[:error]).to eq("No pending Paypal payment found")
+      end
     end
 
     context "when the order cycle has closed" do

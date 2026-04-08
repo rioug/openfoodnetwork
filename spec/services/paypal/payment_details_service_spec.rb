@@ -43,6 +43,18 @@ RSpec.describe Paypal::PaymentDetailsService do
     expect(subject.call).to match(payment_hash)
   end
 
+  context "with no pending paypal payment" do
+    let(:other_payment) {
+      create(:payment, state: "checkout", order:, amount: payment_amount)
+    }
+
+    it "returns an empty hash" do
+      order.payments << other_payment
+
+      expect(subject.call).to match({})
+    end
+  end
+
   context "with no line items" do
     let(:order) { create(:order, distributor: create(:distributor_enterprise)) }
 

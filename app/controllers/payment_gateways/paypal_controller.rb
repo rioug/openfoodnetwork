@@ -52,7 +52,12 @@ module PaymentGateways
 
       # At this point the user has come back from the Paypal form, and we get one
       # last chance to interact with the payment process before the money moves...
-      last_payment = Orders::FindPaymentService.new(@order).last_pending_payment
+      last_payment = Orders::FindPaymentService.new(@order).last_pending_paypal_payment
+
+      if last_payment.nil?
+        flash[:error] = Spree.t('flash.no_payment_found', scope: 'paypal')
+        return redirect_to main_app.checkout_step_path(:payment)
+      end
 
       last_payment.update!(
         source: Spree::PaypalExpressCheckout.create(
