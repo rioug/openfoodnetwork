@@ -12,9 +12,8 @@ class ColumnPreference < ApplicationRecord
   belongs_to :user, class_name: "Spree::User"
 
   validates :action_name, presence: true, inclusion: { in: proc { known_actions } }
-  validates :column_name, presence: true, inclusion: { in: proc { |p|
-                                                             valid_columns_for(p.action_name, p.user)
-                                                           } }
+  validates :column_name, presence: true,
+                          inclusion: { in: proc { |p| valid_columns_for(p.action_name, p.user) } }
   scope :bulk_edit_product, -> { where(action_name: 'products_v3_index') }
 
   def self.for(user, action_name)

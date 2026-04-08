@@ -78,11 +78,8 @@ RSpec.describe ColumnPreference do
       let(:user) { create(:user) }
       let(:enterprise) { create(:distributor_enterprise, owner: user) }
 
-      it "is valid when the feature toggle is enabled for the user's enterprise" do
-        allow(OpenFoodNetwork::FeatureToggle).to receive(:enabled?).and_return(false)
-        allow(OpenFoodNetwork::FeatureToggle).to receive(:enabled?).with(:variant_tag,
-                                                                         enterprise).
-          and_return(true)
+      it "is valid when the feature toggle is enabled for the user's enterprise",
+         feature: :variant_tag do
         enterprise # ensure enterprise is created and associated
 
         pref = ColumnPreference.new(user:, action_name: "products_v3_index",
