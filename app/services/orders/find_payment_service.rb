@@ -22,6 +22,14 @@ module Orders
       )
     end
 
+    def last_pending_paypal_payment
+      last(
+        @order.pending_payments.select do |payment|
+          payment.payment_method.type == "Spree::Gateway::PayPalExpress"
+        end
+      )
+    end
+
     private
 
     # `max_by` avoids additional database queries when payments are loaded

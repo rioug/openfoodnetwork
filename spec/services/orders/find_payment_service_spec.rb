@@ -88,4 +88,46 @@ RSpec.describe Orders::FindPaymentService do
       end
     end
   end
+
+  describe "#last_pending_paypal_payment" do
+    let!(:payment) { create(:payment, order:, state: "checkout") }
+    let(:payment_method) { create(:paypal_payment_method) }
+    let(:paypal_payment) {
+      create(:payment, order:, state: 'processing', payment_method:)
+    }
+    let(:last_paypal_payment) {
+      create(:payment, order:, state: 'processing', payment_method:)
+    }
+
+    it "returns the last pending paypal payment" do
+      paypal_payment
+      last_paypal_payment
+
+      expect(finder.last_pending_paypal_payment).to eq(last_paypal_payment)
+    end
+
+    context "with other payments" do
+      let(:completed_paypal_payment) {
+        create(:payment, order:, state: "completed", payment_method: )
+      }
+      let(:processing_payment) { create(:payment, order:, state: "processing") }
+      let(:failed_payment) { create(:payment, order:, state: "failed") }
+
+      it "returns the last pending paypal payment" do
+        paypal_payment
+        last_paypal_payment
+        completed_paypal_payment
+        processing_payment
+        failed_payment
+
+        expect(finder.last_pending_paypal_payment).to eq(last_paypal_payment)
+      end
+    end
+
+    context "when no paypal payment method" do
+      it "returns nil" do
+        expect(finder.last_pending_paypal_payment).to be_nil
+      end
+    end
+  end
 end
