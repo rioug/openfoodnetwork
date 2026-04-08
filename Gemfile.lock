@@ -167,7 +167,7 @@ GEM
       zeitwerk (>= 2.4, < 3.0)
     acts_as_list (1.0.4)
       activerecord (>= 4.2)
-    addressable (2.8.9)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     aes_key_wrap (1.1.0)
     afm (1.0.0)
@@ -1149,7 +1149,7 @@ CHECKSUMS
   activesupport (7.1.6) sha256=7f12140a813b1c4922a322663e547129aef1840fc512fa262378f6d7e7fd3a7c
   acts-as-taggable-on (13.0.0) sha256=dca776c6ddebc458d175b57554ad692488e283f27047117e01ed871f1cba6135
   acts_as_list (1.0.4) sha256=5516558f4058b369191e3cb9af0428d1c75f8e98f886b218b3ad10960a14e28a
-  addressable (2.8.9) sha256=cc154fcbe689711808a43601dee7b980238ce54368d23e127421753e46895485
+  addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
   aes_key_wrap (1.1.0) sha256=b935f4756b37375895db45669e79dfcdc0f7901e12d4e08974d5540c8e0776a5
   afm (1.0.0) sha256=5bd4d6f6241e7014ef090985ec6f4c3e9745f6de0828ddd58bc1efdd138f4545
   angular-rails-templates (1.4.0) sha256=1eaf00a796eaeca9574acdc1adc3c4f005d004c3d938003520fa19853236398d
