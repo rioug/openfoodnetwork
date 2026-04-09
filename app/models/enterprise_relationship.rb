@@ -9,6 +9,7 @@ class EnterpriseRelationship < ApplicationRecord
     scope: :parent_id,
     message: I18n.t('validation_msg_relationship_already_established')
   }
+  validate :validate_permissions_list
 
   before_destroy :revoke_all_child_variant_overrides
   before_destroy :destroy_related_exchanges
@@ -71,6 +72,10 @@ class EnterpriseRelationship < ApplicationRecord
     relatives
   end
 
+  def permissions_list
+    permissions.map(&:name)
+  end
+
   def permissions_list=(perms)
     if perms.nil?
       permissions.destroy_all
@@ -85,6 +90,13 @@ class EnterpriseRelationship < ApplicationRecord
   end
 
   private
+
+  def validate_permissions_list
+    if permissions_list.include?('create_variant_overrides') &&
+       permissions_list.include?('create_linked_variants')
+      errors.add(:base, :inventory_vs_linked_variants)
+    end
+  end
 
   def update_permissions_of_child_variant_overrides
     if has_permission?(:create_variant_overrides)
