@@ -50,7 +50,7 @@ namespace :ofn do
                      first_name = concat('Customer Number ', id),
                      last_name = '(without connected User)'")
       Customer.where.not(user_id: nil)
-        .update_all("email = concat(user_id, '_ofn_user@example.com'),
+        .update_all("email = concat(user_id, '_ofn_user+customer_', id, '@example.com'),
                      name = concat('Customer Number ', id, ' - User ', user_id),
                      first_name = concat('Customer Number ', id),
                      last_name = concat('User ', user_id)")
