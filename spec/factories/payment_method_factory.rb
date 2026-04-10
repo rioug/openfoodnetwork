@@ -29,8 +29,4 @@ FactoryBot.define do
     distributor { FactoryBot.create(:distributor_enterprise) }
     payment_method { FactoryBot.create(:payment_method) }
   end
-
-  factory :customer_credit_payment_method, class: Spree::PaymentMethod::CustomerCredit do
-    environment { 'test' }
-  end
 end

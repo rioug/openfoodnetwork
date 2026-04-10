@@ -3,7 +3,7 @@
 require "spec_helper"
 
 RSpec.describe Spree::PaymentMethod::CustomerCredit do
-  subject { build(:customer_credit_payment_method) }
+  subject { described_class.new }
 
   describe "#name" do
     it { expect(subject.name).to eq("credit_payment_method.name") }
@@ -16,7 +16,6 @@ RSpec.describe Spree::PaymentMethod::CustomerCredit do
   describe "#purchase" do
     let(:response) { subject.purchase(amount, nil, options) }
 
-    let!(:credit_payment_method) { create(:customer_credit_payment_method) }
     let(:amount) { 1000 } # in cents
     let(:options) {
       {
@@ -26,7 +25,7 @@ RSpec.describe Spree::PaymentMethod::CustomerCredit do
       }
     }
     let(:customer) { create(:customer) }
-    let!(:payment) { create(:payment, payment_method: credit_payment_method) }
+    let!(:payment) { create(:payment, payment_method: Spree::PaymentMethod.customer_credit) }
 
     it "returns a success response" do
       create(:customer_account_transaction, amount: 25.00, customer:)
@@ -107,8 +106,7 @@ RSpec.describe Spree::PaymentMethod::CustomerCredit do
       }
     }
     let(:customer) { create(:customer) }
-    let!(:payment) { create(:payment, payment_method: credit_payment_method) }
-    let!(:credit_payment_method) { create(:customer_credit_payment_method) }
+    let!(:payment) { create(:payment, payment_method: Spree::PaymentMethod.customer_credit) }
 
     it "returns a success response" do
       expect(response).to be_a(ActiveMerchant::Billing::Response)

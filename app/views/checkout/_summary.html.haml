@@ -79,7 +79,7 @@
         .summary-right-line-label= t :order_includes_tax
         .summary-right-line-value#tax-row= display_checkout_tax_total(@order)
 
-    - if @paid_with_credit.present?
+    - if @paid_with_credit > 0.00
       .summary-right-line
         .summary-right-line-label= t :customer_credit
         .summary-right-line-value#customer-credit= Spree::Money.new(-1 * @paid_with_credit).to_html

@@ -198,15 +198,13 @@ RSpec.describe "Order Management" do
       end
 
       context "with customer credit" do
-        let(:credit_payment_method) { create(:customer_credit_payment_method) }
-
         it "displays the credit used" do
           create(
             :customer_account_transaction,
             amount: 100, customer: order.customer,
           )
           # Add credit payment
-          payment = order.payments.create!(payment_method: credit_payment_method,
+          payment = order.payments.create!(payment_method: Spree::PaymentMethod.customer_credit,
                                            amount: 2.00)
           payment.internal_purchase!
 

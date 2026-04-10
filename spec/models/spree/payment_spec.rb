@@ -74,6 +74,17 @@ RSpec.describe Spree::Payment do
 
         expect(incomplete_payment.reload.state).to eq "invalid"
       end
+
+      context "with customer credit payment" do
+        it "doesn't invalidate incomplete customer credit payment" do
+          credit_payment = create(:payment, order:, state: "checkout",
+                                            payment_method: Spree::PaymentMethod.customer_credit)
+          new_payment
+
+          expect(incomplete_payment.reload.state).to eq "invalid"
+          expect(credit_payment.reload.state).to eq "checkout"
+        end
+      end
     end
 
     # Regression test for https://github.com/spree/spree/pull/2224
@@ -143,10 +154,8 @@ RSpec.describe Spree::Payment do
         end
 
         context "with an internal payment method" do
-          let(:payment_method) { create(:customer_credit_payment_method) }
-
           it "calls internal_purchase!" do
-            payment = build_stubbed(:payment, payment_method:)
+            payment = build_stubbed(:payment, payment_method: Spree::PaymentMethod.customer_credit)
             expect(payment).to receive(:internal_purchase!)
             payment.process!
           end
@@ -301,7 +310,7 @@ RSpec.describe Spree::Payment do
       describe "internal_purchase!" do
         let(:order) { create(:order, customer:) }
         let(:customer) { create(:customer) }
-        let(:payment_method) { create(:customer_credit_payment_method) }
+        let(:payment_method) { Spree::PaymentMethod.customer_credit }
         let(:success_response) do
           instance_double(
             ActiveMerchant::Billing::Response,
@@ -950,7 +959,7 @@ RSpec.describe Spree::Payment do
 
       let(:order) { create(:order, customer:) }
       let(:customer) { create(:customer) }
-      let(:payment_method) { create(:customer_credit_payment_method) }
+      let(:payment_method) { Spree::PaymentMethod.customer_credit }
       let(:success_response) do
         instance_double(
           ActiveMerchant::Billing::Response,
@@ -1159,7 +1168,7 @@ RSpec.describe Spree::Payment do
 
   describe "#payment_method" do
     it "returns internal payment method properly" do
-      payment_method = create(:customer_credit_payment_method)
+      payment_method = Spree::PaymentMethod.customer_credit
       payment = create(:payment, payment_method: )
 
       expect(payment.reload.payment_method).to eq(payment_method)

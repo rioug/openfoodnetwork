@@ -352,7 +352,6 @@ RSpec.describe "As a consumer, I want to checkout my order" do
         end
 
         context "wiht customer credit" do
-          let!(:credit_payment_method) { create(:customer_credit_payment_method) }
           let(:credit_amount) { 100.00 }
           let(:customer) { create(:customer, user:, enterprise: distributor) }
 
@@ -373,7 +372,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
           end
 
           it "adds a customer credit payment" do
-            credit_payment = order.payments.find_by(payment_method: credit_payment_method)
+            credit_payment = order.payments.find_by(payment_method: Spree::PaymentMethod.customer_credit)
             expect(credit_payment).not_to be_nil
             expect(credit_payment.amount).to eq(10.00) # order.total is 10.00
           end
@@ -382,7 +381,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
             let(:credit_amount) { 5.00 }
 
             it "adds a customer credit payment using the remaining credit" do
-              credit_payment = order.payments.find_by(payment_method: credit_payment_method)
+              credit_payment = order.payments.find_by(payment_method: Spree::PaymentMethod.customer_credit)
               expect(credit_payment).not_to be_nil
               expect(credit_payment.amount).to eq(5.00) # order.total is 10.00
             end

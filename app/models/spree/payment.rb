@@ -60,6 +60,8 @@ module Spree
     scope :authorization_action_required, -> { where.not(redirect_auth_url: nil) }
     scope :requires_authorization, -> { with_state("requires_authorization") }
     scope :with_payment_intent, ->(code) { where(response_code: code) }
+    scope :customer_credit, -> { where(payment_method: Spree::PaymentMethod.customer_credit) }
+    scope :not_customer_credit, -> { where.not(payment_method: Spree::PaymentMethod.customer_credit) }
 
     # order state machine (see http://github.com/pluginaweek/state_machine/tree/master for details)
     state_machine initial: :checkout do
@@ -233,7 +235,7 @@ module Spree
     # Makes newly entered payments invalidate previously entered payments so the most recent payment
     # is used by the gateway.
     def invalidate_old_payments
-      order.payments.incomplete.where.not(id:).each do |payment|
+      order.payments.incomplete.not_customer_credit.where.not(id:).each do |payment|
         # Using update_column skips validations and so it skips validate_source. As we are just
         # invalidating past payments here, we don't want to validate all of them at this stage.
         payment.update_columns(

@@ -55,6 +55,10 @@ class Customer < ApplicationRecord
     "#{first_name} #{last_name}".strip
   end
 
+  def credit_balance
+    customer_account_transactions.order(:id).last&.balance || 0.00
+  end
+
   private
 
   def downcase_email

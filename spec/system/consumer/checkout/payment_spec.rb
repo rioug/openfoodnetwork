@@ -110,8 +110,12 @@ RSpec.describe "As a consumer, I want to checkout my order" do
       end
 
       context "with credit available" do
-        let(:credit_payment_method) { create(:customer_credit_payment_method) }
+        let!(:payment_method) { create(:payment_method, distributors: [distributor]) }
         let(:payment_amount) { 10.00 }
+        # Add a voucher so we can test the voucher input as well
+        let!(:voucher) do
+          create(:voucher_flat_rate, code: 'some_code', enterprise: distributor, amount: 15)
+        end
 
         before do
           create(
@@ -119,36 +123,44 @@ RSpec.describe "As a consumer, I want to checkout my order" do
             amount: 100, customer: order.customer,
           )
           # Add credit payment
-          payment = order.payments.create!(payment_method: credit_payment_method,
-                                           amount: payment_amount)
-          payment.internal_purchase!
+          payment = order.payments.create!(payment_method: Spree::PaymentMethod.customer_credit,
+                                           amount: payment_amount, state: "checkout")
 
           visit checkout_step_path(:payment)
         end
 
-        it "displays no payment required" do
+        it "displays no payment required and hide voucher" do
           expect(page).to have_content "No payment required"
           expect(page).to have_content "Credit used: $10.00"
+
+          expect(page).not_to have_content "Apply voucher"
         end
 
         context "when credit does not cover the whole order" do
           let(:credit_amount) { 5.00 }
           let(:payment_amount) { 5.00 }
 
-          it "shows credit used and available payment method" do
+          it "shows credit used, available payment method and voucher" do
             expect(page).to have_content "Credit used: $5.00"
             expect(page).to have_content "Payment with Fee $1.23"
+            expect(page).to have_content "Check Free"
+            expect(page).to have_content "Apply voucher"
+          end
+
+          it "requires choosing a payment method" do
+            click_on "Next - Order summary"
+
+            expect(page).to have_content "Credit used: $5.00"
+            expect(page).to have_content "Select a payment method"
           end
         end
       end
 
       describe "vouchers" do
         context "with no voucher available" do
-          before do
-            visit checkout_step_path(:payment)
-          end
-
           it "doesn't show voucher input" do
+            visit checkout_step_path(:payment)
+
             expect(page).not_to have_content "Apply voucher"
           end
         end
@@ -159,11 +171,8 @@ RSpec.describe "As a consumer, I want to checkout my order" do
           end
 
           describe "adding voucher to the order" do
-            before do
-              visit checkout_step_path(:payment)
-            end
-
             it "adds a voucher to the order" do
+              visit checkout_step_path(:payment)
               apply_voucher "some_code"
 
               expect(page).to have_content "$15.00 Voucher"
@@ -177,6 +186,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               end
 
               it "shows a warning message and doesn't require payment" do
+                visit checkout_step_path(:payment)
                 apply_voucher "some_code"
 
                 expect(page).to have_content "$15.00 Voucher"
@@ -192,8 +202,31 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               end
             end
 
+            context "when order partially paid with credit" do
+              it "shows paid with credit amount" do
+                create(
+                  :customer_account_transaction,
+                  amount: 100, customer: order.customer,
+                )
+                # Add credit payment
+                payment = order.payments.create!(payment_method: Spree::PaymentMethod.customer_credit,
+                                                 amount: 5.00, state: "checkout")
+
+                visit checkout_step_path(:payment)
+                expect(page).to have_content "Credit used: $5.00"
+
+                apply_voucher "some_code"
+
+                expect(page).to have_content "$15.00 Voucher"
+                expect(page).to have_content "Credit used: $5.00"
+                expect(page).to have_content "No payment required"
+              end
+            end
+
             context "voucher doesn't exist" do
               it "show an error" do
+                visit checkout_step_path(:payment)
+
                 fill_in "Enter voucher code", with: "non_code"
                 click_button("Apply")
 
@@ -213,6 +246,8 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               end
 
               it "adds a voucher to the order" do
+                visit checkout_step_path(:payment)
+
                 apply_voucher "CI3922"
 
                 expect(page).to have_content "$5.00 Voucher"
@@ -223,6 +258,8 @@ RSpec.describe "As a consumer, I want to checkout my order" do
 
               context "with an invalid voucher" do
                 it "show an error" do
+                  visit checkout_step_path(:payment)
+
                   fill_in "Enter voucher code", with: "KM1891"
                   click_button("Apply")
 

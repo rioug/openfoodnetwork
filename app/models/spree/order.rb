@@ -200,9 +200,11 @@ module Spree
       line_items.inject(0.0) { |sum, li| sum + li.amount }
     end
 
-    # Order total without any applied discounts from vouchers
+    # Order total without pending payment or any applied discounts from vouchers
     def pre_discount_total
-      item_total + all_adjustments.additional.eligible.non_voucher.sum(:amount)
+      item_total +
+        all_adjustments.additional.eligible.non_voucher.sum(:amount) -
+        payments.customer_credit.incomplete.sum(:amount)
     end
 
     def currency

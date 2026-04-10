@@ -63,7 +63,7 @@ RSpec.describe VoucherAdjustmentsController do
       end
     end
 
-    context "when the order has a payment and payment feed" do
+    context "when the order has a payment and payment fees" do
       let(:payment_method) { create(:payment_method, calculator:) }
       let(:calculator) { Calculator::FlatPercentItemTotal.new(preferred_flat_percent: 10) }
 
@@ -81,6 +81,17 @@ RSpec.describe VoucherAdjustmentsController do
         expect do
           post "/voucher_adjustments", params:
         end.to change { order.reload.all_adjustments.payment_fee.count }.from(1).to(0)
+      end
+
+      context "with customer credit payment" do
+        it "doens't remove existing customer credit payments" do
+          credit_payment =
+            create(:payment, order:, payment_method: Spree::PaymentMethod.customer_credit,
+                             amount: 2.00)
+          post("/voucher_adjustments", params:)
+
+          expect(order.payments.reload.customer_credit.count).to be(1)
+        end
       end
     end
 

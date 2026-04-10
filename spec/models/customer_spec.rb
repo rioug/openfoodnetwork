@@ -135,4 +135,21 @@ RSpec.describe Customer do
       end
     end
   end
+
+  describe "#credit_balance" do
+    subject(:customer) { create(:customer) }
+
+    it "returns the availble credit balance" do
+      create(:customer_account_transaction, customer:, amount: 5)
+      create(:customer_account_transaction, customer:, amount: 10)
+
+      expect(customer.credit_balance).to eq(15.00)
+    end
+
+    context "when no existing customer account transaction" do
+      it "returns 0" do
+        expect(customer.credit_balance).to eq(0.00)
+      end
+    end
+  end
 end

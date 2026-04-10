@@ -330,6 +330,38 @@ RSpec.describe Spree::Order do
     end
   end
 
+  context "#pre_discount_total" do
+    subject(:order) { create(:order_ready_for_payment, distributor:) }
+    let(:distributor) { create(:distributor_enterprise) }
+    let(:voucher) { create(:voucher_flat_rate, code: 'new_code', enterprise: order.distributor) }
+
+    it "returns total excluding any voucher discount" do
+      # Add a shipping fee
+      shipping_method = create(:shipping_method, calculator: Calculator::FlatRate.new )
+      shipping_method.calculator.set_preference :amount, 2.00
+      shipping_method.create_adjustment("test shipping", order, true)
+      voucher.create_adjustment(voucher.code, order)
+
+      order.update_order!
+
+      # order total (10.00) + shipping fee (2.00)
+      expect(order.pre_discount_total).to eq(12.00)
+    end
+
+    context "with customer credit pending payment" do
+      it "deducts any pending payment" do
+        order.payments.create!(payment_method: Spree::PaymentMethod.customer_credit, amount: 5.00,
+                               state: "checkout")
+        voucher.create_adjustment(voucher.code, order)
+
+        order.update_order!
+
+        # order total (10.00) - pending payments (5.00)
+        expect(order.pre_discount_total).to eq(5.00)
+      end
+    end
+  end
+
   context "#can_cancel?" do
     it "should be false for completed order in the canceled state" do
       order.state = 'canceled'

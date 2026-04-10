@@ -109,7 +109,7 @@ RSpec.describe '
           :payment,
           :completed,
           order:,
-          payment_method: create(:customer_credit_payment_method),
+          payment_method: Spree::PaymentMethod.customer_credit,
           created_at: 1.day.ago
         )
         order.save!

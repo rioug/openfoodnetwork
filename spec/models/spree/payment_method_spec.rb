@@ -23,7 +23,7 @@ RSpec.describe Spree::PaymentMethod do
 
     context "with internal payment method" do
       it "doesn't requires a hub" do
-        pm = build(:customer_credit_payment_method)
+        pm = Spree::PaymentMethod::CustomerCredit.new
         expect(pm).to be_valid
       end
     end
@@ -82,7 +82,6 @@ RSpec.describe Spree::PaymentMethod do
 
   describe "#customer_credit" do
     it "returns the customer credit payment method" do
-      create(:customer_credit_payment_method)
       expect(Spree::PaymentMethod.customer_credit).to be_a(Spree::PaymentMethod::CustomerCredit)
     end
   end
@@ -252,7 +251,7 @@ RSpec.describe Spree::PaymentMethod do
     end
 
     context "with internal payment method" do
-      subject { build(:customer_credit_payment_method) }
+      subject { described_class.customer_credit }
 
       it "returns false" do
         expect(subject.internal?).to be(true)

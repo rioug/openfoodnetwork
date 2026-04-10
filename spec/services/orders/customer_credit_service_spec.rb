@@ -7,7 +7,7 @@ RSpec.describe Orders::CustomerCreditService do
 
   let(:distributor) { create(:distributor_enterprise) }
   let(:order_cycle) { create(:order_cycle, distributors: [distributor]) }
-  let!(:credit_payment_method) { create(:customer_credit_payment_method) }
+  let(:credit_payment_method) { Spree::PaymentMethod.customer_credit }
   let(:user) { create(:enterprise_user) }
 
   describe "#apply" do
@@ -27,6 +27,7 @@ RSpec.describe Orders::CustomerCreditService do
       credit_payment = order.payments.find_by(payment_method: credit_payment_method)
       expect(credit_payment).to be_present
       expect(credit_payment.amount).to eq(10.00) # order.total is 10.00
+      expect(credit_payment.state).to eq("checkout")
     end
 
     context "when no credit available" do
@@ -69,56 +70,6 @@ RSpec.describe Orders::CustomerCreditService do
 
         credit_payment = order.payments.find_by(payment_method: credit_payment_method)
         expect(credit_payment.amount).to eq(5.00)
-      end
-    end
-
-    context "when payment creation fails" do
-      before do
-        # Add credit
-        create(
-          :customer_account_transaction,
-          amount: 5.00,
-          customer: order.customer,
-        )
-        allow_any_instance_of(Spree::Payment).to receive(:internal_purchase!)
-          .and_raise(Spree::Core::GatewayError)
-      end
-
-      it "logs the error" do
-        expect(Alert).to receive(:raise).with(Spree::Core::GatewayError)
-        subject.apply
-      end
-
-      it "doesn't create a credit payment" do
-        subject.apply
-
-        credit_payment = order.payments.find_by(payment_method: credit_payment_method)
-        expect(credit_payment).to be_nil
-      end
-    end
-
-    context "when credit payment method is missing" do
-      before do
-        # Add credit
-        create(
-          :customer_account_transaction,
-          amount: 5.00,
-          customer: order.customer,
-        )
-        credit_payment_method.destroy!
-      end
-
-      it "logs the error" do
-        expect(Alert).to receive(:raise).with(
-          "Customer credit payment method is missing, please check configuration"
-        )
-        subject.apply
-      end
-
-      it "doesn't create a credit payment" do
-        subject.apply
-
-        expect(order.payments).to be_empty
       end
     end
   end
@@ -174,32 +125,6 @@ RSpec.describe Orders::CustomerCreditService do
 
         expect(response.failure?).to eq(true)
         expect(response.message).to eq("No credit owed")
-      end
-    end
-
-    context "when credit payment method is missing" do
-      before do
-        credit_payment_method.destroy!
-      end
-
-      it "logs the error" do
-        expect(Alert).to receive(:raise).with(
-          "Customer credit payment method is missing, please check configuration"
-        )
-        subject.refund
-      end
-
-      it "doesn't create a credit payment" do
-        expect { subject.refund }.not_to change { order.payments.count }
-      end
-
-      it "returns a failed response" do
-        response = subject.refund
-
-        expect(response.failure?).to be(true)
-        expect(response.message).to eq(
-          "Customer credit payment method is missing, please check configuration"
-        )
       end
     end
 

@@ -17,12 +17,6 @@ module Orders
         )
       end
 
-      if credit_payment_method.nil?
-        error_message = I18n.t(:credit_payment_method_missing, scope: translation_scope)
-        log_error(error_message)
-        return Response.new(success: false, message: error_message)
-      end
-
       amount = order.new_outstanding_balance
       order.customer.with_lock do
         payment = order.payments.create!( payment_method: credit_payment_method, amount: amount,
@@ -62,8 +56,8 @@ module Orders
       # https://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html#module-ActiveRecord::Transactions::ClassMethods-label-Nested+transactions
       ActiveRecord::Base.transaction(requires_new: true) do
         amount = [available_credit, order.total].min
-        payment = order.payments.create!(payment_method: credit_payment_method, amount:)
-        payment.internal_purchase!
+        order.payments.create!(payment_method: credit_payment_method, amount:,
+                               state: "checkout")
       end
     rescue StandardError => e
       # Even though the transaction rolled back, the order still have a payment in memory,

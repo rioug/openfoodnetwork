@@ -245,7 +245,14 @@ module OrderManagement
         return unless order.state.in? ["payment", "confirmation", "complete"]
         return unless order.pending_payments.any?
 
-        @payment = order.pending_payments.first
+        # Customer credit payment should not be updated, as they are based on the available credit
+        # at the time the order was started
+        @payment = order.pending_payments.reject { |p|
+          p.payment_method_id == Spree::PaymentMethod.customer_credit.id
+        }.first
+
+        return if @payment.nil?
+
         return update_payment if @payment.adjustment.nil?
 
         # Update payment tax fees if needed

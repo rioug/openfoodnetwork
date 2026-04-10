@@ -12,6 +12,7 @@ class CheckoutController < BaseController
   include OrderCompletion
   include CablecarResponses
   include WhiteLabel
+  include CustomerCredit
 
   helper 'terms_and_conditions'
   helper 'checkout'
@@ -32,8 +33,7 @@ class CheckoutController < BaseController
     end
 
     if payment_step? || summary_step?
-      credit_payment_method = @order.distributor.payment_methods.customer_credit
-      @paid_with_credit = @order.payments.find_by(payment_method: credit_payment_method)&.amount
+      @paid_with_credit = calculate_credit(@order)
     end
 
     return if available_shipping_methods.any?
@@ -64,6 +64,8 @@ class CheckoutController < BaseController
   private
 
   def render_error
+    @paid_with_credit = calculate_credit(@order) if payment_step?
+
     flash.now[:error] ||= I18n.t('checkout.errors.saving_failed')
 
     render status: :unprocessable_entity, cable_ready: cable_car.

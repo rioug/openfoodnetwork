@@ -1,5 +1,5 @@
 .medium-6#checkout-payment-methods
-  - if @order.distributor.vouchers.present? || @order.distributor.connected_apps.vine.present?
+  - if display_voucher?(@order, @paid_with_credit)
     .checkout-substep
       = render partial: "checkout/voucher_section", locals: { order: @order, voucher_adjustment: @order.voucher_adjustments.first }
 
@@ -8,15 +8,15 @@
       .checkout-title
         = t("checkout.step2.payment_method.title")
 
-      - if @order.zero_priced_order? || @order.outstanding_balance.zero? 
+      - if @order.outstanding_balance.zero?
         %h3= t(:no_payment_required)
         - if @order.zero_priced_order?
           = hidden_field_tag "order[payments_attributes][][amount]", 0
-        - if @paid_with_credit
+        - if @paid_with_credit&.positive?
           = t(:credit_used, amount: Spree::Money.new(@paid_with_credit))
 
       - else
-        - if @paid_with_credit
+        - if @paid_with_credit&.positive?
           = t(:credit_used, amount: Spree::Money.new(@paid_with_credit))
 
         - selected_payment_method = @order.payments&.with_state(:checkout)&.first&.payment_method_id

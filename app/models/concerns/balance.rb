@@ -23,7 +23,8 @@ module Balance
     if state.in?(FINALIZED_NON_SUCCESSFUL_STATES)
       -payment_total
     else
-      total - payment_total
+      # Exclude incomplete customer credit payment, as they are not yet included in "payment_total"
+      total - payment_total - payments.incomplete.customer_credit.sum(:amount)
     end
   end
 
