@@ -2602,6 +2602,7 @@ nb:
   shops_signup_help: Vi er klar til å hjelpe.
   shops_signup_help_text: Du trenger bedre resultater. Du trenger nye kunder og logistikkpartnere. Du trenger å få din historie fortalt hos grossister, i dagligvaren og rundt kjøkkenbordet.
   shops_signup_detail: Detaljene.
+  orders: "Bestillinger"
   orders_fees: "Gebyrer..."
   orders_edit_title: "Handlekurv"
   orders_edit_headline: "Din handlekurv"

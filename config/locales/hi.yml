@@ -2398,6 +2398,7 @@ hi:
   shops_signup_help: हम मदद के लिए तैयार हैं।
   shops_signup_help_text: आपको बेहतर रिटर्न चाहिए। आपको नए खरीदार और लॉजिस्टिक पार्टनर चाहिए। आपको चाहिए की आपकी कहानी थोक, रिटेल और किचन टेबल पर बताई जाए।
   shops_signup_detail: यहां विस्तार से बताया गया है।
+  orders: "ऑर्डर्स"
   orders_fees: "फीस..."
   orders_edit_title: "शॉपिंग कार्ट"
   orders_edit_headline: "आपका शॉपिंग कार्ट"

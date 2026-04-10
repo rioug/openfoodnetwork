@@ -115,6 +115,9 @@ es:
         blank: "no puede estar vacío"
         too_short: "es demasiado corto (el mínimo es %{count}caracteres)"
   errors:
+    messages:
+      attachment_missing: "Falta el adjunto"
+      media_metadata_missing: "No es formato media valido"
     not_found:
       title: "La página que estas buscando no existe (404)"
       message_html: "<b>Por favor, inténtelo de nuevo</b> <p>Esto puede ser un problema temporal. Haga clic en el botón Atrás para volver a la pantalla anterior o vuelva a <a href='/'>Inicio</a> e inténtelo de nuevo</p>. <b>Póngase en contacto con el servicio de asistencia</b> <p>Si el problema persiste o es urgente, comuníquenoslo. Encuentre nuestros datos de contacto en la <a href='https://openfoodnetwork.org/ofn-local/' target='blank'>página local de Open Food Network</a>. </p><p>Nos será de gran ayuda que nos facilite todos los detalles posibles sobre el motivo de la página que falta.</p>"
@@ -208,6 +211,10 @@ es:
               no_default_card: "^ Ninguna tarjeta predeterminada disponible para esta consumidora"
             shipping_method:
               not_available_to_shop: "no está disponible para %{shop}"
+        user_invitation:
+          attributes:
+            email:
+              is_already_manager: Ya es una administradora
   card_details: "Detalles de tarjeta"
   card_type: "Tipo de tarjeta"
   card_type_is: "El tipo de tarjeta es"
@@ -737,6 +744,7 @@ es:
         bill_address: "Dirección de Facturación"
         ship_address: "Dirección de Envío"
         balance: "Saldo"
+        credit: "Saldo disponible"
         update_address_success: "Dirección actualizada correctamente."
         update_address_error: "Introduce todos los campos requeridos"
         edit_bill_address: "Edita la Dirección de Facturación"
@@ -751,10 +759,12 @@ es:
         guest_label: "Pedido hecho como invitada"
         credit_owed: "Crédito debido"
         balance_due: "Saldo adeudado"
+        id: Id
       destroy:
         has_associated_subscriptions: "Eliminación fallida: este consumidor tiene suscripciones activas. Cancélelas primero."
     customer_account_transaction:
       index:
+        available_credit: "Saldo disponible: %{available_credit}"
         description: Descripción
         amount: Cantidad
         running_balance: Saldo actual
@@ -2284,6 +2294,7 @@ es:
   order_not_paid: NO PAGADO
   order_total: Pedido total
   order_payment: "Pagando con:"
+  credit_used: "Saldo usado: %{amount}"
   customer_credit: Crédito
   order_billing_address: Dirección de cobro
   order_delivery_on: Entregar en
@@ -2547,6 +2558,7 @@ es:
   shops_signup_help: Estamos listos para ayudar.
   shops_signup_help_text: Usted necesita un mejor retorno. Usted necesita nuevos compradores y socios de logística. Usted necesita que su historia sea contada a través de ventas al por mayor, al detalle y en la mesa de la cocina.
   shops_signup_detail: Aquí está el detalle.
+  orders: "Pedidos"
   orders_fees: "Comisiones..."
   orders_edit_title: "Carrito de compras"
   orders_edit_headline: "Su carrito de compras"
@@ -3232,6 +3244,7 @@ es:
   no_orders_found: "No se encontraron pedidos"
   order_information: "información del pedido"
   new_payment: "Nuevo pago"
+  credit_customer: Saldo de la consumidora
   create_or_update_invoice: "Crear o actualizar factura"
   date_completed: "Fecha de finalización"
   amount: "Cantidad"
@@ -4300,6 +4313,7 @@ es:
           check: "Efectivo / transferencia / etc. (pagos para los que no se requiere validación automática)"
           paypalexpress: "PayPal Express"
           stripesca: "Stripe SCA"
+          customercredit: "Saldo de la consumidora"
       payments:
         source_forms:
           stripe:
@@ -4307,6 +4321,7 @@ es:
             submitting_payment: Enviando pago...
           paypal:
             no_payment_via_admin_backend: Los pagos de PayPal no se pueden marcar como pagados desde la administración
+        customer_credit_successful: ¡El saldo de la consumidora ha sido actualizado!
       products:
         image_upload_error: "Por favor, sube la imagen en formato JPG, PNG, GIF, SVG o WEBP."
         image_not_processable: "La imagen adjunta no es una imagen válida."
@@ -4622,6 +4637,7 @@ es:
         authorisation_required: Autorización requerida
         authorise: Autorizar
       customer_account_transactions:
+        credit_available: "Saldo disponible: %{credit}"
         description: Descripción
         amount: Cantidad
         running_balance: Saldo actual
@@ -4770,3 +4786,18 @@ es:
   invisible_captcha:
     sentence_for_humans: "Por favor, dejalo vacio"
     timestamp_error_message: "Por favor, inténtelo de nuevo después de 5 segundos."
+  api_customer_credit: "API credit: %{description}"
+  credit_payment_method:
+    name: Saldo del consumidor
+    description: Permitir a la consumidora pagar con saldo
+    success: El pago con saldo se ha realizado correctamente
+    void_success: La anulación del saldo se ha realizado correctamente
+    order_payment_description: "Saldo de la consumidora: Pago del pedido:"
+    order_void_description: "Saldo de la consumidora: Reembolso del pedido:"
+    errors:
+      credit_payment_method_missing: Falta el método de pago con saldo
+      no_credit_available: No hay saldo disponible
+      not_enough_credit_available: No hay suficiente saldo disponible
+  customer_credit_service:
+    no_credit_owed: No hay saldo pendiente
+    credit_payment_method_missing: Falta el método de pago con saldo, por favor revisa la configuración

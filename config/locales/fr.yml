@@ -2752,6 +2752,7 @@ fr:
   shops_signup_help: Rejoindre le réseau
   shops_signup_help_text: Créez votre profil distributeur, et dès que vous êtes prêt, changez de formule pour ouvrir votre boutique en ligne.
   shops_signup_detail: Les avantages CoopCircuits
+  orders: "Commandes"
   orders_fees: "Frais..."
   orders_edit_title: "Panier"
   orders_edit_headline: "Votre panier"
@@ -5122,8 +5123,7 @@ fr:
       credit_payment_method_missing: Le mode de paiement par crédit est manquant.
       no_credit_available: Aucun crédit disponible
       not_enough_credit_available: Crédit disponible insuffisant
-  orders:
-    customer_credit_service:
-      no_credit_owed: Aucun crédit dû
-      credit_payment_method_missing: Le mode de paiement par crédit client est manquant. Veuillez vérifier la configuration.
-      refund_sucessful: Remboursement effectué avec succès !
+  customer_credit_service:
+    no_credit_owed: Aucun crédit dû
+    credit_payment_method_missing: Le mode de paiement par crédit client est manquant. Veuillez vérifier la configuration.
+    refund_sucessful: Remboursement effectué avec succès !

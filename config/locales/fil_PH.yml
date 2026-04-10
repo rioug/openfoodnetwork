@@ -1904,6 +1904,7 @@ fil_PH:
   shops_signup_help: handa kaming tumulong.
   shops_signup_help_text: kailangan mo ng mas malaking kita. kailangan mo ng bagong mga mamimili at mga katulong sa operasyon. kailangang malaman ng lahat ang tungkol sa iyong produkto.
   shops_signup_detail: 'ito ang mga detalye:'
+  orders: "mga order"
   orders_fees: "Mga bayarin..."
   orders_edit_title: "Cart para sa pamimili"
   orders_edit_headline: "ang iyong cart sa pamimili"

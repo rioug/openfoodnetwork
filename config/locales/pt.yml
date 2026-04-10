@@ -1962,6 +1962,7 @@ pt:
   shops_signup_help: Estamos prontos para ajudar.
   shops_signup_help_text: Você está a precisar de melhor retorno, de novos clientes e parceiros de logística. Está a precisar que a sua história seja contada em grupos de consumo, em retalho e à mesa de jantar.
   shops_signup_detail: Aqui está o detalhe.
+  orders: "Encomendas"
   orders_fees: "Taxas..."
   orders_edit_title: "Carrinho de Compras"
   orders_edit_headline: "O seu carrinho de compras"

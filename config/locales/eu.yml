@@ -2466,6 +2466,7 @@ eu:
   shops_signup_help: Laguntzeko prest gaude.
   shops_signup_help_text: Itzulera hobea behar duzu. Erosle eta logistikako bazkide berriak behar dituzu. Zure istorioa handizkako salmenten bidez kontatzea behar duzu, xehetasunez eta sukaldeko mahaian.
   shops_signup_detail: Hemen dago xehetasuna.
+  orders: "Eskaerak"
   orders_fees: "Komisioak..."
   orders_edit_title: "Erosketa-orga"
   orders_edit_headline: "Zure erosketa-orgatxoa"

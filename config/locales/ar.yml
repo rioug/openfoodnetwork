@@ -2295,6 +2295,7 @@ ar:
   shops_signup_help: نحن على استعداد للمساعدة.
   shops_signup_help_text: أنت بحاجة إلى عائد أفضل. تحتاج لمشترين جدد وشركاء لوجستيين. تحتاج إلى سرد قصتك عبر الجملة والتجزئة وطاولة المطبخ.
   shops_signup_detail: هنا التفاصيل.
+  orders: "الطلبات"
   orders_fees: "رسوم ..."
   orders_edit_title: "سلة التسوق"
   orders_edit_headline: "سلة التسوق الخاصة بك"

@@ -2754,6 +2754,7 @@ fr_CA:
   shops_signup_help: Nous sommes là pour vous aider.
   shops_signup_help_text: Vous avez besoin de pouvoir travailler de manière efficace. Vous avez besoin de nouveaux acheteurs et de partenaires logistiques. Vous souhaitez que votre histoire soit racontée tout au long du circuit, que l'acheteur final sache qui se trouve derrière les produits.
   shops_signup_detail: Comment ça marche.
+  orders: "Commandes"
   orders_fees: "Frais..."
   orders_edit_title: "Panier"
   orders_edit_headline: "Votre panier"
@@ -5108,8 +5109,7 @@ fr_CA:
       credit_payment_method_missing: Le mode de paiement par crédit est manquant.
       no_credit_available: Aucune carte de paiement autorisée disponible
       not_enough_credit_available: Crédit disponible insuffisant
-  orders:
-    customer_credit_service:
-      no_credit_owed: Aucun crédit dû
-      credit_payment_method_missing: Le mode de paiement par crédit client est manquant. Veuillez vérifier la configuration.
-      refund_sucessful: Remboursement effectué avec succès !
+  customer_credit_service:
+    no_credit_owed: Aucun crédit dû
+    credit_payment_method_missing: Le mode de paiement par crédit client est manquant. Veuillez vérifier la configuration.
+    refund_sucessful: Remboursement effectué avec succès !
