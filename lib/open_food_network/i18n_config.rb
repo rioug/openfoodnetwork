@@ -21,7 +21,7 @@ module OpenFoodNetwork
     end
 
     def self.fallbacks
-      [default_locale, source_locale].uniq
+      [source_locale]
     end
 
     # The default locale that is used when the user doesn't have a preference.
