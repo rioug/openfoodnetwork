@@ -1113,7 +1113,7 @@ DEPENDENCIES
   stimulus_reflex
   stimulus_reflex_testing!
   stringex (~> 2.8.5)
-  stripe (~> 19)
+  stripe
   taler
   turbo-rails
   turbo_power
