@@ -890,7 +890,7 @@ GEM
       redis (>= 4.0, < 6.0)
     stringex (2.8.6)
     stringio (3.2.0)
-    stripe (17.2.0)
+    stripe (18.4.2)
     swd (2.0.3)
       activesupport (>= 3)
       attr_required (>= 0.0.5)
@@ -1111,7 +1111,7 @@ DEPENDENCIES
   stimulus_reflex
   stimulus_reflex_testing!
   stringex (~> 2.8.5)
-  stripe (~> 17)
+  stripe (~> 18)
   taler
   turbo-rails
   turbo_power
@@ -1432,7 +1432,7 @@ CHECKSUMS
   stimulus_reflex_testing (0.3.1)
   stringex (2.8.6) sha256=c7b382d2b2a47a1e1646f256df201c48d487d6296fbb289d76802f67f5e929c4
   stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
-  stripe (17.2.0) sha256=a87942fdfac885a9e42efbe8f8d6582e81436b7fc5f162746c781cb5a0bf2395
+  stripe (18.4.2) sha256=fd08a73ab87fc0b0ad938ca71293e1051e593001b70de5e9fcf12d1097133831
   swd (2.0.3) sha256=4cdbe2a4246c19f093fce22e967ec3ebdd4657d37673672e621bf0c7eb770655
   sysexits (1.2.0) sha256=598241c4ae57baa403c125182dfdcc0d1ac4c0fb606dd47fbed57e4aaf795662
   taler (0.3.0) sha256=905da226ad420eda7ebe0e57b91086efac51a0f11205aaab671168534e02a559

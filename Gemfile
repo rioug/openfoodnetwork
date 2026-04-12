@@ -57,7 +57,7 @@ gem 'state_machines-activerecord'
 gem 'stringex', '~> 2.8.5', require: false
 
 gem 'paypal-sdk-merchant', '1.117.2'
-gem 'stripe', '~> 17'
+gem 'stripe', '~> 18'
 gem "taler"
 
 gem 'devise'
