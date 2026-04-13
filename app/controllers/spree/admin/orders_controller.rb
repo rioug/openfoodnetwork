@@ -80,7 +80,7 @@ module Spree
       rescue Spree::Core::GatewayError => e
         flash[:error] = e.message.to_s
       ensure
-        redirect_back fallback_location: spree.admin_dashboard_path
+        redirect_back_or_to(spree.admin_dashboard_path)
       end
 
       def resend
@@ -88,7 +88,7 @@ module Spree
         flash[:success] = t('admin.orders.order_email_resent')
 
         respond_with(@order) do |format|
-          format.html { redirect_back(fallback_location: spree.admin_dashboard_path) }
+          format.html { redirect_back_or_to(spree.admin_dashboard_path) }
         end
       end
 
@@ -98,7 +98,7 @@ module Spree
         flash[:success] = t('admin.orders.invoice_email_sent')
 
         respond_with(@order) { |format|
-          format.html { redirect_to spree.edit_admin_order_path(@order) }
+          format.html { redirect_back_or_to spree.edit_admin_order_path(@order) }
         }
       end
 
