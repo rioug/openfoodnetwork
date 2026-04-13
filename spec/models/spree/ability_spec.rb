@@ -649,6 +649,7 @@ RSpec.describe Spree::Ability do
 
       it "is able to credit a customer" do
         is_expected.to have_ability([:credit_customer], for: Spree::Order)
+        is_expected.to have_ability([:bulk_credit], for: Spree::Order)
         is_expected.to have_ability([:credit_customer], for: Spree::Payment)
       end
 

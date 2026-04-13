@@ -364,7 +364,7 @@ RSpec.describe Spree::Admin::OrdersController do
     let(:format) { :turbo_stream }
 
     before do
-      sign_in admin
+      sign_in distributor.owner
     end
 
     it "credits the given orders" do
@@ -401,6 +401,24 @@ RSpec.describe Spree::Admin::OrdersController do
         # is correctly formated
         expect(flash[:error]).to eq "Order ##{order1.number} could not be credited : No credit owed"
         expect(response.body).not_to include("order_#{order.id}", "order_#{order1.id}")
+      end
+    end
+
+    context "with a non editable order" do
+      let(:other_order) {
+        create(:order_with_totals, payment_state: "credit_owed",
+                                   distributor: create(:distributor_enterprise))
+      }
+
+      it "doesn't refung the order" do
+        expect(Orders::CustomerCreditService).not_to receive(:new).with(other_order)
+
+        post(
+          "/admin/orders/bulk_credit", params: { bulk_ids: [other_order], format: }
+        )
+
+        expect(response).to have_http_status :ok
+        expect(response.body).not_to include("order_#{other_order.id}")
       end
     end
   end
