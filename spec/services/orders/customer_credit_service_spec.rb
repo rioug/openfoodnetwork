@@ -40,21 +40,42 @@ RSpec.describe Orders::CustomerCreditService do
     end
 
     context "when credit payment already added" do
-      it "doesn't had more credit payment" do
+      before do
         create(
           :customer_account_transaction,
           amount: 100.00,
           customer: order.customer,
         )
+      end
+
+      it "doesn't add more credit payment" do
         subject.apply
 
         credit_payment = order.payments.find_by(payment_method: credit_payment_method)
-        expect(credit_payment).to be_present
+        expect(credit_payment.amount).to eq(10.00)
 
         subject.apply
 
-        credit_payments = order.payments.where(payment_method: credit_payment_method)
-        expect(order.payments.where(payment_method: credit_payment_method).count).to eq(1)
+        credit_payments = order.payments.customer_credit
+        expect(credit_payments.count).to eq(1)
+        expect(credit_payments.first.amount).to eq(10.00)
+      end
+
+      context "when order total changed" do
+        it "update the credit amount" do
+          subject.apply
+
+          credit_payment = order.payments.find_by(payment_method: credit_payment_method)
+          expect(credit_payment.amount).to eq(10.00)
+
+          order.update!(total: 15.00)
+
+          subject.apply
+
+          credit_payments = order.payments.customer_credit
+          expect(credit_payments.count).to eq(1)
+          expect(credit_payments.first.amount).to eq(15.00)
+        end
       end
     end
 

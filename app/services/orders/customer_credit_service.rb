@@ -49,7 +49,8 @@ module Orders
         return
       end
 
-      return if order.payments.where(payment_method: credit_payment_method).exists?
+      # Delete existing payment with credit, so we can apply new credit amount if needed
+      order.payments.customer_credit.incomplete&.destroy_all
 
       # we are already in a transaction because the order is locked, so we force creating a new one
       # to make sure the rollback works as expected :
