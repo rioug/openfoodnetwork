@@ -825,8 +825,8 @@ GEM
       nokogiri (>= 1.16.8)
     sd_notify (0.1.1)
     securerandom (0.4.1)
-    semantic_range (3.1.0)
-    shakapacker (8.4.0)
+    semantic_range (3.1.1)
+    shakapacker (9.7.0)
       activesupport (>= 5.2)
       package_json
       rack-proxy (>= 0.6.1)
@@ -1096,7 +1096,7 @@ DEPENDENCIES
   rubocop-rspec_rails
   sd_notify
   select2-rails!
-  shakapacker (= 8.4.0)
+  shakapacker (~> 9.7)
   shoulda-matchers
   sidekiq
   sidekiq-scheduler
@@ -1410,8 +1410,8 @@ CHECKSUMS
   sd_notify (0.1.1) sha256=cbc7ac6caa7cedd26b30a72b5eeb6f36050dc0752df263452ea24fb5a4ad3131
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   select2-rails (3.4.9)
-  semantic_range (3.1.0) sha256=9fc01ee40f2e5f81042e95d421837f688177dd603753b5eab41ff9bba50a34a1
-  shakapacker (8.4.0) sha256=df234ed4a9173407adc288df0d7f156c485ada9214b23d8f0e2c734f11c1aca8
+  semantic_range (3.1.1) sha256=508333196ef0c7ba33e79579d4df7eb0a41080595e6a655c2515b03d634ec4a9
+  shakapacker (9.7.0) sha256=4126bf96529fcf84c770c07c8c7310167172e4a8a1a3f71616ea6d247d8ab24f
   shoulda-matchers (7.0.1) sha256=b4bfd8744c10e0a36c8ac1a687f921ee7e25ed529e50488d61b79a8688749c77
   sidekiq (7.3.10) sha256=781eb4f65ef36042534ad73d72f211283afb7fee82eec786ada4ed1972ef8e3c
   sidekiq-scheduler (6.0.1) sha256=e1fc04e851a3e2d9896bc6ab00f03d790fef8923bb56915e5b141804bca34062
