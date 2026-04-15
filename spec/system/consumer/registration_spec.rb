@@ -256,6 +256,15 @@ RSpec.describe "Registration" do
         click_button "Let's get started!"
         expect(find("div#progress-bar")).to be_visible
       end
+
+      it "records ToS acceptance when checkbox is checked" do
+        visit registration_path
+
+        expect {
+          check "accept_terms"
+          user2.reload
+        }.to change { user2.terms_of_service_accepted_at }
+      end
     end
   end
 
