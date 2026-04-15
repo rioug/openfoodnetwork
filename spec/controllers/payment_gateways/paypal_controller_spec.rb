@@ -136,7 +136,9 @@ RSpec.describe PaymentGateways::PaypalController do
 
       context "with gateway error" do
         before do
-          expect(current_order).to receive(:process_payments!).and_raise(Spree::Core::GatewayError)
+          expect(current_order).to receive(:process_payments!).and_raise(
+            Spree::Core::GatewayError.new("Connection issue")
+          )
         end
 
         it "redirects to checkout details step" do
@@ -144,7 +146,7 @@ RSpec.describe PaymentGateways::PaypalController do
             to redirect_to checkout_step_path(step: :details)
 
           expect(flash[:error]).to eq(
-            "There was a problem with your payment information: Spree::Core::GatewayError"
+            "There was a problem with your payment information: Connection issue"
           )
         end
 
@@ -152,7 +154,7 @@ RSpec.describe PaymentGateways::PaypalController do
           # redirect_to will also call Rails.logger.error
           allow(Rails.logger).to receive(:error)
           expect(Rails.logger).to receive(:error).with(
-            "OrderCompletion#gateway_error: Spree::Core::GatewayError"
+            "OrderCompletion#gateway_error: Connection issue"
           )
           expect(Alert).to receive(:raise_with_record).with(instance_of(Spree::Core::GatewayError),
                                                             Object)

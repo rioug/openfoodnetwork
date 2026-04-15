@@ -49,7 +49,7 @@ module Paypal
         },
         ShipToAddress: address_options,
         PaymentDetailsItem: items,
-        ShippingMethod: "Shipping Method Name Goes Here",
+        ShippingMethod: "Shipping Method",
         PaymentAction: "Sale"
       }
 
@@ -73,18 +73,18 @@ module Paypal
       Orders::FindPaymentService.new(order)
     end
 
-    def address_options
+    def address_options # rubocop:disable Metrics/CyclomaticComplexity
       return {} unless address_required
 
       {
         Name: order.bill_address.try(:full_name),
-        Street1: order.bill_address.address1,
-        Street2: order.bill_address.address2,
-        CityName: order.bill_address.city,
-        Phone: order.bill_address.phone,
-        StateOrProvince: order.bill_address.state_text,
-        Country: order.bill_address.country.iso,
-        PostalCode: order.bill_address.zipcode
+        Street1: order.bill_address&.address1,
+        Street2: order.bill_address&.address2,
+        CityName: order.bill_address&.city,
+        Phone: order.bill_address&.phone,
+        StateOrProvince: order.bill_address&.state_text,
+        Country: order.bill_address&.country&.iso,
+        PostalCode: order.bill_address&.zipcode
       }
     end
   end

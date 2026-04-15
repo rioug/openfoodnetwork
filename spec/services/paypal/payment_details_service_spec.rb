@@ -36,7 +36,7 @@ RSpec.describe Paypal::PaymentDetailsService do
       },
       ShipToAddress: {},
       PaymentDetailsItem: Array,
-      ShippingMethod: "Shipping Method Name Goes Here",
+      ShippingMethod: "Shipping Method",
       PaymentAction: "Sale"
     }
 
@@ -98,7 +98,7 @@ RSpec.describe Paypal::PaymentDetailsService do
         },
         ShipToAddress: {},
         PaymentDetailsItem: Array,
-        ShippingMethod: "Shipping Method Name Goes Here",
+        ShippingMethod: "Shipping Method",
         PaymentAction: "Sale"
       }
 
@@ -142,7 +142,7 @@ RSpec.describe Paypal::PaymentDetailsService do
         },
         ShipToAddress: {},
         PaymentDetailsItem: Array,
-        ShippingMethod: "Shipping Method Name Goes Here",
+        ShippingMethod: "Shipping Method",
         PaymentAction: "Sale"
       }
 
@@ -181,7 +181,7 @@ RSpec.describe Paypal::PaymentDetailsService do
         },
         ShipToAddress: {},
         PaymentDetailsItem: Array,
-        ShippingMethod: "Shipping Method Name Goes Here",
+        ShippingMethod: "Shipping Method",
         PaymentAction: "Sale"
       }
 
@@ -225,7 +225,7 @@ RSpec.describe Paypal::PaymentDetailsService do
         },
         ShipToAddress: address_hash,
         PaymentDetailsItem: Array,
-        ShippingMethod: "Shipping Method Name Goes Here",
+        ShippingMethod: "Shipping Method",
         PaymentAction: "Sale"
       }
 
