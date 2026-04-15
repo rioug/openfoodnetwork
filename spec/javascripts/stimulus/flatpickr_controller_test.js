@@ -31,5 +31,15 @@ describe("FlatpickrController", () => {
       expect(locale).toHaveProperty("weekAbbreviation");
       expect(locale.weekAbbreviation).toBe("Sem");
     });
+
+    it("returns locale object for Finnish (fi)", async () => {
+      const controller = new FlatpickrController();
+      const locale = await controller.importFlatpickrLocale("fi");
+      expect(locale).toBeInstanceOf(Object);
+      expect(locale).toHaveProperty("weekdays");
+      expect(locale).toHaveProperty("months");
+      expect(locale.weekdays.shorthand).toContain("ma");
+      expect(locale.months.shorthand).toContain("tammi");
+    });
   });
 });
