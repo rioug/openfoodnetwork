@@ -42,7 +42,7 @@ const mockRemoteFetch = (...responses) => {
 
 const mockDropdownScroll = (
   dropdown,
-  { scrollHeight = 1000, clientHeight = 300, scrollTop = 700 } = {},
+  { scrollHeight = 1000, clientHeight = 300, scrollTop = 700 } = {}
 ) => {
   Object.defineProperty(dropdown, "scrollHeight", {
     configurable: true,
@@ -209,7 +209,7 @@ describe("TomSelectController", () => {
       });
 
       await waitFor(() =>
-        expect(fetch).toHaveBeenCalledWith(expect.stringContaining("q=apple&page=1")),
+        expect(fetch).toHaveBeenCalledWith(expect.stringContaining("q=apple&page=1"))
       );
 
       await waitFor(() => {
@@ -227,7 +227,7 @@ describe("TomSelectController", () => {
         {
           results: buildResults(1, 31),
           pagination: { more: false },
-        },
+        }
       );
 
       openDropdown();
@@ -247,6 +247,8 @@ describe("TomSelectController", () => {
     });
 
     it("handles fetch errors gracefully", async () => {
+      // Mock console error to not polute the test output with logged error
+      const consoleMock = jest.spyOn(console, "error").mockImplementation();
       fetch.mockRejectedValueOnce(new Error("Fetch error"));
 
       openDropdown();
@@ -256,6 +258,7 @@ describe("TomSelectController", () => {
       });
 
       expect(showHttpError).not.toHaveBeenCalled();
+      expect(consoleMock).toHaveBeenCalled();
     });
 
     it("displays HTTP error on failure", async () => {
