@@ -22,3 +22,6 @@
         .menu_item
           %span.name{ "data-controller": "modal-link", "data-action": "click->modal-link#open", "data-modal-link-target-value": "cancel_orders" }
             = t('spree.admin.orders.index.cancel_orders')
+        .menu_item
+          %span.name{ "data-controller": "bulk-actions", "data-action": "click->bulk-actions#turboPerform", "data-bulk-actions-url-value": "orders/bulk_credit" }
+            = t('spree.admin.orders.index.credit_orders')
