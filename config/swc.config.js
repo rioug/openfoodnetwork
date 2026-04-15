@@ -17,5 +17,9 @@ module.exports = {
         },
       },
     },
+    // Browserslist config, needed because SWC doesn't automatically pickup browserslist config: https://github.com/swc-project/swc/issues/3365
+    env: {
+      targets: [ "defaults", "not IE 11" ],
+    },
   },
 };

@@ -62,9 +62,10 @@
     "not IE 11"
   ],
   "devDependencies": {
+    "@swc/jest": "^0.2.39",
     "@testing-library/dom": "<11.0.0",
     "jasmine-core": "~5.12.1",
-    "jest": "*",
+    "jest": "^30.3.0",
     "jest-environment-jsdom": "*",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
