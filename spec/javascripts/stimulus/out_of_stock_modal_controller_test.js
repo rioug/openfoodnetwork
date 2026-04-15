@@ -4,15 +4,16 @@
  */
 
 import { Application } from "stimulus";
-import * as locationWrapper from "js/window_location_wrapper";
+import { locationPathName } from "js/window_location_wrapper";
 import out_of_stock_modal_controller from "controllers/out_of_stock_modal_controller";
+
+// Mock the module
+jest.mock("js/window_location_wrapper");
 
 describe("OutOfStockModalController", () => {
   beforeAll(() => {
     const application = Application.start();
     application.register("out-of-stock-modal", out_of_stock_modal_controller);
-
-    jest.spyOn(locationWrapper, "locationPathName").mockImplementation(() => undefined);
   });
 
   // We use window to dispatch the closing event so we don't need to set up another controller
@@ -31,8 +32,7 @@ describe("OutOfStockModalController", () => {
       it("does not redirect", () => {
         const event = new Event("closing");
         window.dispatchEvent(event);
-
-        expect(locationWrapper.locationPathName).not.toHaveBeenCalled();
+        expect(locationPathName).not.toHaveBeenCalled();
       });
     });
 
@@ -51,7 +51,7 @@ describe("OutOfStockModalController", () => {
         const event = new Event("closing");
         window.dispatchEvent(event);
 
-        expect(locationWrapper.locationPathName).toHaveBeenCalledWith("/shop");
+        expect(locationPathName).toHaveBeenCalledWith("/shop");
       });
     });
   });
