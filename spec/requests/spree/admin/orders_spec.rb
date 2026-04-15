@@ -410,7 +410,7 @@ RSpec.describe Spree::Admin::OrdersController do
                                    distributor: create(:distributor_enterprise))
       }
 
-      it "doesn't refung the order" do
+      it "doesn't refund the order" do
         expect(Orders::CustomerCreditService).not_to receive(:new).with(other_order)
 
         post(
