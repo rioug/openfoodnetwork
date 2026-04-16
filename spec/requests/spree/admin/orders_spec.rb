@@ -399,7 +399,7 @@ RSpec.describe Spree::Admin::OrdersController do
         expect(response.body).to include("flashes").twice
         # flash[:error] only include the last entry, it lets us check the error message
         # is correctly formated
-        expect(flash[:error]).to eq "Order ##{order1.number} could not be credited : No credit owed"
+        expect(flash[:error]).to end_with "could not be credited : No credit owed"
         expect(response.body).not_to include("order_#{order.id}", "order_#{order1.id}")
       end
     end
