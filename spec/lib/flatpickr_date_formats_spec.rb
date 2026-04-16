@@ -2,19 +2,6 @@
 
 require "yaml"
 
-# Valid flatpickr format token characters (single-character tokens and common separators).
-# See: https://flatpickr.js.org/formatting/
-#
-# Tokens: Z D F G H J K M S U W Y d h i j l m n s u w y
-# Separators: . - / : (space)
-# Escape: \  (makes the next character literal)
-VALID_FLATPICKR_FORMAT_REGEX = %r{\A[ZDFGHJKMSUWYdhijlmnsuwy.\-/: \\]+\z}
-
-# Known locales with incorrect (translator-provided) format strings.
-# These should be fixed in Transifex and removed from this list as they are corrected.
-# See: https://github.com/openfoodfoundation/openfoodnetwork/issues/13360
-KNOWN_BROKEN_FLATPICKR_LOCALES = %w[cy el eu ko pa sr tr uk].freeze
-
 RSpec.describe "Flatpickr date format strings in locale files" do
   def locale_files
     Rails.root.glob("config/locales/*.yml")
@@ -42,17 +29,28 @@ RSpec.describe "Flatpickr date format strings in locale files" do
 
   shared_examples "valid flatpickr format" do |format_key|
     it "#{format_key} is a valid flatpickr format string in all locales" do
+      # Valid flatpickr format token characters (single-character tokens and common separators).
+      # See: https://flatpickr.js.org/formatting/
+      # Tokens: Z D F G H J K M S U W Y d h i j l m n s u w y
+      # Separators: . - / : (space) — Escape: \ (makes the next character literal)
+      valid_format_regex = %r{\A[ZDFGHJKMSUWYdhijlmnsuwy.\-/: \\]+\z}
+
+      # Known locales with incorrect (translator-provided) format strings.
+      # These should be fixed in Transifex and removed as they are corrected.
+      # See: https://github.com/openfoodfoundation/openfoodnetwork/issues/13360
+      known_broken_locales = %w[cy el eu ko pa sr tr uk]
+
       invalid = []
 
       locale_files.each do |file|
         locale_code = File.basename(file, ".yml")
-        next if KNOWN_BROKEN_FLATPICKR_LOCALES.include?(locale_code)
+        next if known_broken_locales.include?(locale_code)
 
         formats = date_picker_formats(file)
         format = formats[format_key]
         next unless format
 
-        invalid << "#{locale_code}: '#{format}'" unless format.match?(VALID_FLATPICKR_FORMAT_REGEX)
+        invalid << "#{locale_code}: '#{format}'" unless format.match?(valid_format_regex)
       end
 
       expect(invalid)
