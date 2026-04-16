@@ -256,7 +256,6 @@ RSpec.describe "Registration" do
         click_button "Let's get started!"
         expect(find("div#progress-bar")).to be_visible
       end
-
     end
   end
 
