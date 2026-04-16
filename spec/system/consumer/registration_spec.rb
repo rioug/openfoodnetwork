@@ -257,13 +257,6 @@ RSpec.describe "Registration" do
         expect(find("div#progress-bar")).to be_visible
       end
 
-      it "records ToS acceptance when checkbox is checked" do
-        visit registration_path
-
-        check "accept_terms"
-        wait_until { user2.reload.terms_of_service_accepted_at.present? }
-        expect(user2.terms_of_service_accepted_at).to be_present
-      end
     end
   end
 

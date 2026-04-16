@@ -44,7 +44,7 @@
         #{t(:enterprise_tos_message)}
         = link_to_platform_terms
       %p.tos-checkbox
-        %input{ type: 'checkbox', name: 'accept_terms', id: 'accept_terms', "ng-model": "tos_accepted", "ng-change": "acceptTermsOfService()" }
+        %input{ type: 'checkbox', name: 'accept_terms', id: 'accept_terms', "ng-model": "tos_accepted" }
           %label{for: "accept_terms"} #{t(:enterprise_tos_agree)}
 
     .small-12.medium-6.columns

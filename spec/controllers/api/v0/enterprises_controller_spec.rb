@@ -93,6 +93,31 @@ RSpec.describe Api::V0::EnterprisesController do
           api_post :create, { enterprise: new_enterprise_params, use_geocoder: "0" }
         end
       end
+
+      context "when Terms of Service acceptance is required" do
+        before { Spree::Config.enterprises_require_tos = true }
+        after { Spree::Config.enterprises_require_tos = false }
+
+        it "records ToS acceptance on the owner when the enterprise is created" do
+          expect {
+            api_post :create, { enterprise: new_enterprise_params }
+            enterprise_owner.reload
+          }.to change { enterprise_owner.terms_of_service_accepted_at }
+
+          expect(response).to have_http_status :created
+        end
+      end
+
+      context "when Terms of Service acceptance is not required" do
+        before { Spree::Config.enterprises_require_tos = false }
+
+        it "does not update terms_of_service_accepted_at" do
+          expect {
+            api_post :create, { enterprise: new_enterprise_params }
+            enterprise_owner.reload
+          }.not_to change { enterprise_owner.terms_of_service_accepted_at }
+        end
+      end
     end
   end
 

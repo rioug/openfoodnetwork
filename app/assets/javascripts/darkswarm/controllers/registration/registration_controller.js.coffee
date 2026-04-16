@@ -1,4 +1,4 @@
-angular.module('Darkswarm').controller "RegistrationCtrl", ($scope, RegistrationService, EnterpriseRegistrationService, UserService, availableCountries, GmapsGeo) ->
+angular.module('Darkswarm').controller "RegistrationCtrl", ($scope, RegistrationService, EnterpriseRegistrationService, availableCountries, GmapsGeo) ->
   $scope.currentStep = RegistrationService.currentStep
   $scope.enterprise = EnterpriseRegistrationService.enterprise
   $scope.select = RegistrationService.select
@@ -24,9 +24,6 @@ angular.module('Darkswarm').controller "RegistrationCtrl", ($scope, Registration
 
   $scope.countryHasStates = ->
     $scope.enterprise.country.states.length > 0
-
-  $scope.acceptTermsOfService = ->
-    UserService.acceptTermsOfService() if $scope.tos_accepted
 
   $scope.map = {center: {latitude: 0.000000, longitude: 0.000000 }, zoom: 1}
   $scope.options = {scrollwheel: false}

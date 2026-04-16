@@ -76,10 +76,6 @@ Openfoodnetwork::Application.routes.draw do
 
       resources :enterprise_fees, only: [:destroy]
 
-      resources :users, only: [] do
-        post :accept_terms_of_service, on: :collection
-      end
-
       post '/product_images/:product_id', to: 'product_images#update_product_image'
 
       resources :states, only: [:index, :show]
