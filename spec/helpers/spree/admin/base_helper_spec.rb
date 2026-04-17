@@ -85,8 +85,16 @@ RSpec.describe Spree::Admin::BaseHelper do
       end
     end
 
-    context 'when readonly, disabled and size are set' do
-      let(:options) { { type: :integer, readonly: true, disabled: false, size: 20 } }
+    context 'when additional attributes are set' do
+      let(:options) {
+        {
+          type: :integer,
+          readonly: true,
+          disabled: false,
+          size: 20,
+          autocomplete: "off",
+        }
+      }
 
       it 'returns correct options' do
         expect(subject).to eq(
@@ -95,6 +103,7 @@ RSpec.describe Spree::Admin::BaseHelper do
           step: 1,
           readonly: true,
           disabled: false,
+          autocomplete: "off",
         )
       end
     end
