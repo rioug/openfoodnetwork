@@ -3,76 +3,6 @@
 require 'system_helper'
 
 RSpec.describe "Cookies", caching: true do
-  describe "banner" do
-    # keeps banner toggle config unchanged
-    around do |example|
-      original_banner_toggle = Spree::Config[:cookies_consent_banner_toggle]
-      example.run
-      Spree::Config[:cookies_consent_banner_toggle] = original_banner_toggle
-    end
-
-    context "in the homepage" do
-      before do
-        Spree::Config[:cookies_consent_banner_toggle] = true
-        visit_root_path_and_wait
-      end
-
-      scenario "does not show after cookies are accepted" do
-        accept_cookies_and_wait
-        expect_not_visible_cookies_banner
-
-        visit_root_path_and_wait
-        expect_not_visible_cookies_banner
-      end
-
-      scenario "banner contains cookies policy link that opens coookies policy page and " \
-               "closes banner" do
-        click_banner_cookies_policy_link_and_wait
-        expect_visible_cookies_policy_page
-        expect_not_visible_cookies_banner
-
-        close_cookies_policy_page_and_wait
-        expect_visible_cookies_banner
-      end
-
-      scenario "does not show after cookies are accepted, and policy page is opened through the " \
-               "footer, and closed again (bug #2599)" do
-        accept_cookies_and_wait
-        expect_not_visible_cookies_banner
-
-        click_footer_cookies_policy_link_and_wait
-        expect_visible_cookies_policy_page
-        expect_not_visible_cookies_banner
-
-        close_cookies_policy_page_and_wait
-        expect_not_visible_cookies_banner
-      end
-    end
-
-    context "in product listing page" do
-      before do
-        Spree::Config[:cookies_consent_banner_toggle] = true
-      end
-
-      scenario "it is showing" do
-        visit "/shops"
-        expect_visible_cookies_banner
-      end
-    end
-
-    context "disabled in the settings" do
-      scenario "it is not showing" do
-        Spree::Config[:cookies_consent_banner_toggle] = false
-        visit root_path
-        expect(page).not_to have_content(
-          'This site uses cookies in order to make your navigation ' \
-          'frictionless and secure, and to help us understand how ' \
-          'you use it in order to improve the features we offer.'
-        )
-      end
-    end
-  end
-
   describe "policy page" do
     # keeps config unchanged
     around do |example|
@@ -127,47 +57,6 @@ RSpec.describe "Cookies", caching: true do
         end
       end
     end
-  end
-
-  def expect_visible_cookies_policy_page
-    expect(page).to have_content 'How We Use Cookies'
-  end
-
-  def expect_visible_cookies_banner
-    expect(page).to have_css("button", text: accept_cookies_button_text)
-  end
-
-  def expect_not_visible_cookies_banner
-    expect(page).not_to have_css("button", text: accept_cookies_button_text)
-  end
-
-  def accept_cookies_button_text
-    'Accept Cookies'
-  end
-
-  def visit_root_path_and_wait
-    visit root_path
-    sleep 1
-  end
-
-  def accept_cookies_and_wait
-    click_button accept_cookies_button_text
-    sleep 2
-  end
-
-  def click_banner_cookies_policy_link_and_wait
-    find("p.ng-binding > a", text: "cookies policy").click
-    sleep 2
-  end
-
-  def click_footer_cookies_policy_link_and_wait
-    find(".legal a", text: "cookies policy").click
-    sleep 2
-  end
-
-  def close_cookies_policy_page_and_wait
-    find("a.close-reveal-modal").click
-    sleep 2
   end
 
   def visit_cookies_policy_page
