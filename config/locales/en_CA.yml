@@ -83,6 +83,8 @@ en_CA:
       models:
         enterprise_fee:
           inherit_tax_requires_per_item_calculator: "Inheriting the tax category requires a per-item calculator."
+        enterprise_relationship:
+          inventory_vs_linked_variants: "Cannot grant both inventory and linked variants permissions."
         spree/image:
           attributes:
             attachment:

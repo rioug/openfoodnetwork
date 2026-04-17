@@ -2006,7 +2006,7 @@ hu:
         warning_forfeit_remaining_amount: "Megjegyzés: ha a rendelés végösszege kevesebb, mint a kupon értéke, előfordulhat, hogy a fennmaradó összeget nem tudod elkölteni."
     step3:
       delivery_details:
-        title: Készen áll
+        title: Átvételi mód
         edit: Szerkesztés
         address: Szállítási cím
         instructions: Megjegyzések
@@ -2291,7 +2291,7 @@ hu:
   stats_shoppers: "élelmiszerfogyasztók"
   stats_orders: "rendelés"
   checkout_title: Tovább
-  checkout_now: Utolsó lépés
+  checkout_now: Rendelés véglegesítése
   checkout_order_ready: Átvételi időpont
   checkout_hide: Elrejt
   checkout_expand: Kinyit
@@ -3607,6 +3607,7 @@ hu:
       manage_products: "termékek kezelése"
       edit_profile: "profil szerkesztése"
       add_products_to_inventory: "termékek hozzáadása a leltárhoz"
+      create_linked_variants: "kapcsolt termékváltozatok létrehozása [BÉTA]"
     resources:
       could_not_delete_customer: 'Nem sikerült törölni az ügyfelet'
     product_import:
