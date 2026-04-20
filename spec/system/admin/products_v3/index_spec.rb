@@ -33,9 +33,10 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
 
   describe "listing" do
     let!(:p1) { create(:product, name: "Product1") }
-    let!(:p2) { create(:product, name: "Product2") }
+    let(:p2) { create(:product, name: "Product2") }
 
     it "displays a list of products" do
+      p2
       visit admin_products_path
 
       within ".products" do
@@ -146,11 +147,11 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
     context "with sourced variant" do
       let(:source_producer) { create(:supplier_enterprise) }
       let(:hub) { create(:distributor_enterprise) }
-      let(:p3) { create(:product, name: "Product3", supplier_id: source_producer.id) }
+      let!(:p1) { create(:product, name: "Product1", supplier_id: source_producer.id) }
 
-      let!(:v3_source) { p3.variants.first }
-      let!(:v3_sourced) {
-        create(:variant, display_name: "Variant3-sourced", product: p3, supplier: source_producer,
+      let!(:v_source) { p1.variants.first }
+      let!(:v_sourced) {
+        create(:variant, display_name: "Variant-sourced", product: p1, supplier: source_producer,
                          hub: producer)
       }
       let!(:enterprise_relationship) {
@@ -160,25 +161,25 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
       }
 
       # I don't manage this hub, so shouldn't see see the sourced variant
-      let!(:v3_sourced_hidden) {
-        create(:variant, display_name: "Variant3-hidden", product: p3, supplier: source_producer,
+      let!(:v_sourced_hidden) {
+        create(:variant, display_name: "Variant-hidden", product: p1, supplier: source_producer,
                          hub:)
       }
 
       before do
-        v3_sourced.source_variants << v3_source
-        v3_sourced_hidden.source_variants << v3_source
+        v_sourced.source_variants << v_source
+        v_sourced_hidden.source_variants << v_source
         visit admin_products_url
       end
 
       it "shows sourced variant with indicator" do
-        within row_containing_name("Variant3-sourced") do
+        within row_containing_name("Variant-sourced") do
           expect(page).to have_selector 'span[title*="Sourced from: "]'
           expect(page).to have_selector 'span[title*="Hub: My Enterprise"]'
         end
 
         # But not variants sourced by other hubs
-        expect(page).not_to have_selector row_containing_name("Variant3-hidden")
+        expect(page).not_to have_selector row_containing_name("Variant-hidden")
       end
     end
   end
