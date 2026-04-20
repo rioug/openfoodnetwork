@@ -53,6 +53,11 @@ module Admin
         .enterprises_granting_linked_variants
     end
 
+    def managed_product_enterprises
+      @managed_product_enterprises ||= OpenFoodNetwork::Permissions.new(spree_current_user)
+        .managed_product_enterprises
+    end
+
     # Query only name of the model to avoid loading the whole record
     def selected_option(id, model)
       return [] unless id
