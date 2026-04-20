@@ -126,24 +126,21 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
     end
 
     it "displays a select box for the unit of measure for the product's variants" do
-      pending( "[BUU] Change producer, unit type and tax category #11060" )
-      p = FactoryBot.create(:product, variant_unit: 'weight', variant_unit_scale: 1,
-                                      variant_unit_name: '')
+      p1.variants.first.update! variant_unit: 'weight', variant_unit_scale: 1, variant_unit_name: ''
 
       visit spree.admin_products_path
 
-      expect(page).to have_select "variant_unit_with_scale", selected: "Weight (g)"
+      expect(page).to have_select "Unit scale", selected: "Weight (g)"
     end
 
     it "displays a text field for the item name when unit is set to 'Items'" do
-      pending( "[BUU] Change producer, unit type and tax category #11060" )
-      p = FactoryBot.create(:product, variant_unit: 'items', variant_unit_scale: nil,
-                                      variant_unit_name: 'packet')
+      p1.variants.first.update! variant_unit: 'items', variant_unit_scale: nil,
+                                variant_unit_name: 'packet'
 
       visit spree.admin_products_path
 
-      expect(page).to have_select "variant_unit_with_scale", selected: "Items"
-      expect(page).to have_field "variant_unit_name", with: "packet"
+      expect(page).to have_select "Unit scale", selected: "Items"
+      expect(page).to have_field "Items", with: "packet"
     end
 
     context "with sourced variant" do
