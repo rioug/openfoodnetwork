@@ -177,7 +177,9 @@ module.exports = {
   // A map from regular expressions to paths to transformers
   // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
   // transform: { "\\.[jt]sx?$": "babel-jest" },
-
+  transform: {
+    "^.+\\.(t|j)sx?$": "@swc/jest",
+  },
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   transformIgnorePatterns: ["/node_modules/(?!(stimulus.+|tom-select)/)"],
 
