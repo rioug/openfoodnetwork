@@ -1,4 +1,4 @@
--# locals: (producer_options:, available_tags:, flash:, allowed_producers:)
+-# locals: (available_tags:, flash:, allowed_producers:)
 - content_for :page_title do
   = t('.header.title')
 - content_for :page_actions do
@@ -15,7 +15,7 @@
 #products_v3_page{ 'data-turbo': true }
   = render partial: "content", locals: { products: @products, pagy: @pagy, search_term: @search_term,
                                 per_page: @per_page,
-                                producer_options:, producer_id: @producer_id,
+                                producer_id: @producer_id,
                                 category_id: @category_id,
                                 available_tags:, tags: @tags,
                                 flashes: flash,

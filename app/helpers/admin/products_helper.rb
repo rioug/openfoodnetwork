@@ -10,9 +10,9 @@ module Admin
       end
     end
 
-    def prepare_new_variant(product, producer_options)
+    def prepare_new_variant(product, producer_id = nil)
       product.variants.build do |new_variant|
-        new_variant.supplier_id = producer_options&.id
+        new_variant.supplier_id = producer_id
         new_variant.tax_category_id = product.variants.first.tax_category_id
       end
     end
@@ -37,8 +37,8 @@ module Admin
 
     # if user hasn't saved any preferences on products page and there's only one producer;
     # we need to hide producer column
-    def hide_producer_column?(producer_options)
-      spree_current_user.column_preferences.bulk_edit_product.empty? && producer_options.present?
+    def hide_producer_column?(allowed_producers)
+      spree_current_user.column_preferences.bulk_edit_product.empty? && allowed_producers.one?
     end
 
     # check if the user is in the "admins" group or if it's enabled for any of

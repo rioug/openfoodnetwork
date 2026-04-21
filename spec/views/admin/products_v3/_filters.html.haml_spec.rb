@@ -9,7 +9,7 @@ RSpec.describe "admin/products_v3/_filters.html.haml" do
     {
       spree_current_user:,
       search_term: "",
-      producer_options: nil,
+      allowed_producers: [],
       producer_id: nil,
       category_id: nil,
     }
@@ -18,9 +18,9 @@ RSpec.describe "admin/products_v3/_filters.html.haml" do
 
   it "shows the producer filter with the default option initially" do
     allow(view).to receive_messages locals.merge(
-      producer_options: [
-        ["Ada's Apples", 1],
-        ["Ben's Bananas", 2],
+      allowed_producers: [
+        double(Enterprise, id: 1),
+        double(Enterprise, id: 2),
       ],
     )
 
@@ -32,8 +32,8 @@ RSpec.describe "admin/products_v3/_filters.html.haml" do
 
   it "doesn't show the producer filter when there's only one option" do
     allow(view).to receive_messages locals.merge(
-      producer_options: [
-        ["Ada's Apples", 1],
+      allowed_producers: [
+        double(Enterprise, id: 1),
       ],
     )
 
