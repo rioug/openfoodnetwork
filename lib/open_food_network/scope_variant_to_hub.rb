@@ -4,14 +4,21 @@ module OpenFoodNetwork
   class ScopeVariantToHub
     def initialize(hub, variant_overrides = nil)
       @variant_overrides = variant_overrides || VariantOverride.indexed(hub)
-      @inventory_enabled = OpenFoodNetwork::FeatureToggle.enabled?(:inventory, hub)
+      @hub = hub
     end
 
     def scope(variant)
-      return unless @inventory_enabled
+      return unless inventory_enabled?
 
       variant.extend(OpenFoodNetwork::ScopeVariantToHub::ScopeVariantToHub)
       variant.instance_variable_set :@variant_override, @variant_overrides[variant]
+    end
+
+    private
+
+    def inventory_enabled?
+      OpenFoodNetwork::FeatureToggle.enabled?(:inventory, @hub) &&
+        !OpenFoodNetwork::FeatureToggle.enabled?(:variant_tag, @hub)
     end
 
     module ScopeVariantToHub
