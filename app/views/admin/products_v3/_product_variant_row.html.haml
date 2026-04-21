@@ -1,4 +1,4 @@
--# locals: (form:, product:, product_index:, producer_options:, category_options:, tax_category_options:, allowed_producers:, should_slide_in: false)
+-# locals: (form:, product:, product_index:, producer_options:, allowed_producers:, should_slide_in: false)
 = form.fields_for("products", product, index: product_index) do |product_form|
   %tbody.relaxed{ id: dom_id(product), data: { 'record-id': product_form.object.id,
                           controller: "nested-form product",
@@ -16,12 +16,12 @@
 
       = form.fields_for("products][#{product_index}][variants_attributes", variant, index: variant_index) do |variant_form|
         %tr.condensed{ id: dom_id(variant), 'data-controller': "variant", 'class': "nested-form-wrapper", 'data-new-record': variant.new_record? ? "true" : false }
-          = render partial: 'variant_row', locals: { variant:, f: variant_form, product_index:, category_options:, tax_category_options:, producer_options: }
+          = render partial: 'variant_row', locals: { variant:, f: variant_form, product_index: }
 
     = form.fields_for("products][#{product_index}][variants_attributes][NEW_RECORD", prepare_new_variant(product, producer_options)) do |new_variant_form|
       %template{ 'data-nested-form-target': "template" }
         %tr.condensed{ 'data-controller': "variant", 'class': "nested-form-wrapper", 'data-new-record': "true" }
-          = render partial: 'variant_row', locals: { variant: new_variant_form.object, f: new_variant_form, category_options:, tax_category_options:, producer_options: }
+          = render partial: 'variant_row', locals: { variant: new_variant_form.object, f: new_variant_form}
 
     %tr{ 'data-nested-form-target': "target" }
     %tr.condensed

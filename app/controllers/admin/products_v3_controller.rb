@@ -12,8 +12,7 @@ module Admin
     def index
       fetch_products
       render "index",
-             locals: { producer_options:, categories:, tax_category_options:, available_tags:,
-                       flash:, allowed_producers: }
+             locals: { producer_options:, available_tags:, flash:, allowed_producers: }
 
       session[:products_return_to_url] = request.url
     end
@@ -34,8 +33,7 @@ module Admin
 
         render "index", status: :unprocessable_entity,
                         locals: {
-                          producer_options:, categories:, tax_category_options:, available_tags:,
-                          allowed_producers:, flash:
+                          producer_options:, available_tags:, allowed_producers:, flash:
                         }
       end
     end
@@ -101,7 +99,6 @@ module Admin
         format.turbo_stream {
           render :clone, status:,
                          locals: { product:, cloned_product:, product_index:, producer_options:,
-                                   category_options: categories, tax_category_options:,
                                    allowed_producers: }
         }
       end
@@ -127,8 +124,7 @@ module Admin
 
       respond_with do |format|
         format.turbo_stream {
-          locals = { linked_variant:, variant:, product_index:, variant_index:,
-                     producer_options:, category_options: categories, tax_category_options: }
+          locals = { linked_variant:, variant:, product_index:, variant_index:, producer_options: }
           render :create_linked_variant, status:, locals:
         }
       end
@@ -181,14 +177,6 @@ module Admin
 
     def producer_options
       allowed_producers.map { |p| [p.name, p.id] }
-    end
-
-    def categories
-      Spree::Taxon.order(:name).map { |c| [c.name, c.id] }
-    end
-
-    def tax_category_options
-      Spree::TaxCategory.order(:name).pluck(:name, :id)
     end
 
     def available_tags

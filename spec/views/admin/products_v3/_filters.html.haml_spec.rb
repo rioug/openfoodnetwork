@@ -11,7 +11,6 @@ RSpec.describe "admin/products_v3/_filters.html.haml" do
       search_term: "",
       producer_options: [],
       producer_id: nil,
-      category_options: [],
       category_id: nil,
     }
   end

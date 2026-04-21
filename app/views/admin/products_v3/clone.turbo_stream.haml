@@ -1,4 +1,4 @@
--# locals: (product:, cloned_product:, product_index:, producer_options:, category_options: category, tax_category_options:, allowed_producers:)
+-# locals: (product:, cloned_product:, product_index:, producer_options:, allowed_producers:)
 - unless flash[:error]
     - product_body = nil
     - form_with do |form|
@@ -7,8 +7,6 @@
             product: cloned_product,
             product_index:,
             producer_options:,
-            category_options:,
-            tax_category_options:,
             allowed_producers:,
             should_slide_in: true },
             formats: :html)
