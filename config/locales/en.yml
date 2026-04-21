@@ -4398,8 +4398,7 @@ en:
     back_to_images_list: "Back To Images List"
 
     # Attributes of the Taler payment gateway
-    backend_url: "Backend URL"
-    api_key: "API key"
+    instance_url: "Instance URL"
 
     # TODO: remove `email` key once we get to Spree 2.0
     email: Email
