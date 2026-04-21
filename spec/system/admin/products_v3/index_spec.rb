@@ -33,9 +33,10 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
 
   describe "listing" do
     let!(:p1) { create(:product, name: "Product1") }
-    let!(:p2) { create(:product, name: "Product2") }
+    let(:p2) { create(:product, name: "Product2") }
 
     it "displays a list of products" do
+      p2
       visit admin_products_path
 
       within ".products" do
@@ -126,51 +127,59 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
     end
 
     it "displays a select box for the unit of measure for the product's variants" do
-      pending( "[BUU] Change producer, unit type and tax category #11060" )
-      p = FactoryBot.create(:product, variant_unit: 'weight', variant_unit_scale: 1,
-                                      variant_unit_name: '')
+      p1.variants.first.update! variant_unit: 'weight', variant_unit_scale: 1, variant_unit_name: ''
 
       visit spree.admin_products_path
 
-      expect(page).to have_select "variant_unit_with_scale", selected: "Weight (g)"
+      expect(page).to have_select "Unit scale", selected: "Weight (g)"
     end
 
     it "displays a text field for the item name when unit is set to 'Items'" do
-      pending( "[BUU] Change producer, unit type and tax category #11060" )
-      p = FactoryBot.create(:product, variant_unit: 'items', variant_unit_scale: nil,
-                                      variant_unit_name: 'packet')
+      p1.variants.first.update! variant_unit: 'items', variant_unit_scale: nil,
+                                variant_unit_name: 'packet'
 
       visit spree.admin_products_path
 
-      expect(page).to have_select "variant_unit_with_scale", selected: "Items"
-      expect(page).to have_field "variant_unit_name", with: "packet"
+      expect(page).to have_select "Unit scale", selected: "Items"
+      expect(page).to have_field "Items", with: "packet"
     end
 
     context "with sourced variant" do
       let(:source_producer) { create(:supplier_enterprise) }
-      let(:p3) { create(:product, name: "Product3", supplier_id: source_producer.id) }
+      let(:hub) { create(:distributor_enterprise) }
+      let!(:p1) { create(:product, name: "Product1", supplier_id: source_producer.id) }
 
-      let!(:v3_source) { p3.variants.first }
-      let!(:v3_sourced) {
-        create(:variant, display_name: "Variant3-sourced", product: p3, supplier: source_producer,
+      let!(:v_source) { p1.variants.first }
+      let!(:v_sourced) {
+        create(:variant, display_name: "Variant-sourced", product: p1, supplier: source_producer,
                          hub: producer)
       }
       let!(:enterprise_relationship) {
-        # Other producer grants me access to manage their variant
+        # Producer grants me access to manage their variant
         create(:enterprise_relationship, parent: source_producer, child: producer,
                                          permissions_list: [:manage_products])
       }
 
+      # I don't manage this hub, so shouldn't see see the sourced variant
+      let!(:v_sourced_hidden) {
+        create(:variant, display_name: "Variant-hidden", product: p1, supplier: source_producer,
+                         hub:)
+      }
+
       before do
-        v3_sourced.source_variants << v3_source
+        v_sourced.source_variants << v_source
+        v_sourced_hidden.source_variants << v_source
         visit admin_products_url
       end
 
       it "shows sourced variant with indicator" do
-        within row_containing_name("Variant3-sourced") do
+        within row_containing_name("Variant-sourced") do
           expect(page).to have_selector 'span[title*="Sourced from: "]'
           expect(page).to have_selector 'span[title*="Hub: My Enterprise"]'
         end
+
+        # But not variants sourced by other hubs
+        expect(page).not_to have_selector row_containing_name("Variant-hidden")
       end
     end
   end
