@@ -9,8 +9,8 @@ RSpec.describe "/payment_gateways/taler/:id" do
       name: "Taler",
       environment: "test",
       distributors: [shop],
-      preferred_backend_url: "https://backend.demo.taler.net/instances/sandbox",
-      preferred_api_key: "sandbox",
+      preferred_instance_url: "https://backend.demo.taler.net/instances/sandbox",
+      preferred_password: "sandbox",
     )
   }
   let!(:order) { create(:order_ready_for_confirmation, payment_method: taler) }

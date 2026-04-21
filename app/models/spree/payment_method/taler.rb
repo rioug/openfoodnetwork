@@ -15,14 +15,14 @@ module Spree
     #
     # Configure this payment method for testing with:
     #
-    # - backend_url: https://backend.demo.taler.net/instances/sandbox
-    # - api_key: sandbox
+    # - instance_url: https://backend.demo.taler.net/instances/sandbox
+    # - password: sandbox
     class Taler < PaymentMethod
       # Demo backend instances will use the KUDOS currency.
       DEMO_PREFIX = "https://backend.demo.taler.net/instances"
 
-      preference :backend_url, :string
-      preference :api_key, :password
+      preference :instance_url, :string
+      preference :password, :password
 
       def actions
         %w[credit void]
@@ -138,14 +138,14 @@ module Spree
 
       def taler_order(id: nil)
         @taler_order ||= ::Taler::Order.new(
-          backend_url: preferred_backend_url,
-          password: preferred_api_key,
+          backend_url: preferred_instance_url,
+          password: preferred_password,
           id:,
         )
       end
 
       def currency(payment)
-        return "KUDOS" if preferred_backend_url.starts_with?(DEMO_PREFIX)
+        return "KUDOS" if preferred_instance_url.starts_with?(DEMO_PREFIX)
 
         payment.order.currency
       end
