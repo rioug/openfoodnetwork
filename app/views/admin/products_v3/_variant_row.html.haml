@@ -56,14 +56,18 @@
         = f.check_box method_on_demand, 'data-action': 'change->toggle-control#disableIfPresent change->popout#closeIfChecked'
         = t(:on_demand)
 %td.col-producer.field.naked_inputs
-  = render(SearchableDropdownComponent.new(form: f,
-      name: :supplier_id,
-      aria_label: t('.producer_field_name'),
-      options: variant.supplier_id ? [[variant.supplier.name, variant.supplier_id]] : [],
-      selected_option: variant.supplier_id,
-      remote_url: admin_ajax_search_producers_url,
-      placeholder_value: t('admin.products_v3.filters.select_producer')))
-  = error_message_on variant, :supplier
+  - if variant.hub_id.blank?
+    = render(SearchableDropdownComponent.new(form: f,
+        name: :supplier_id,
+        aria_label: t('.producer_field_name'),
+        options: variant.supplier_id ? [[variant.supplier.name, variant.supplier_id]] : [],
+        selected_option: variant.supplier_id,
+        remote_url: admin_ajax_search_producers_url,
+        placeholder_value: t('admin.products_v3.filters.select_producer')))
+    = error_message_on variant, :supplier
+  - else
+    .content
+      = variant.supplier.name
 %td.col-category.field.naked_inputs
   = render(SearchableDropdownComponent.new(form: f,
       name: :primary_taxon_id,
