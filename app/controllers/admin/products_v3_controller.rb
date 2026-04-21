@@ -176,7 +176,7 @@ module Admin
     end
 
     def producer_options
-      allowed_producers.map { |p| [p.name, p.id] }
+      return allowed_producers.first if allowed_producers.one?
     end
 
     def available_tags

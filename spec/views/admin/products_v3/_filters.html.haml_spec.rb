@@ -9,7 +9,7 @@ RSpec.describe "admin/products_v3/_filters.html.haml" do
     {
       spree_current_user:,
       search_term: "",
-      producer_options: [],
+      producer_options: nil,
       producer_id: nil,
       category_id: nil,
     }
