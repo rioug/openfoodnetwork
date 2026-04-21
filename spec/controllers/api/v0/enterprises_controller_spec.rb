@@ -95,8 +95,7 @@ RSpec.describe Api::V0::EnterprisesController do
       end
 
       context "when Terms of Service acceptance is required" do
-        before { Spree::Config.enterprises_require_tos = true }
-        after { Spree::Config.enterprises_require_tos = false }
+        before { allow(Spree::Config).to receive(:enterprises_require_tos).and_return(true) }
 
         it "records ToS acceptance on the owner when the enterprise is created" do
           expect {
@@ -109,13 +108,15 @@ RSpec.describe Api::V0::EnterprisesController do
       end
 
       context "when Terms of Service acceptance is not required" do
-        before { Spree::Config.enterprises_require_tos = false }
+        before { allow(Spree::Config).to receive(:enterprises_require_tos).and_return(false) }
 
         it "does not update terms_of_service_accepted_at" do
           expect {
             api_post :create, { enterprise: new_enterprise_params }
             enterprise_owner.reload
           }.not_to change { enterprise_owner.terms_of_service_accepted_at }
+
+          expect(response).to have_http_status :created
         end
       end
     end
