@@ -44,7 +44,7 @@ RSpec.describe "Flatpickr date format strings in locale files" do
 
       locale_files.each do |file|
         locale_code = File.basename(file, ".yml")
-        next if known_broken_locales.include?(locale_code)
+        pending "locale is known to have a broken date/time format" if known_broken_locales.include?(locale_code)
 
         formats = date_picker_formats(file)
         format = formats[format_key]
