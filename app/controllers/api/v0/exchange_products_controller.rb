@@ -48,8 +48,8 @@ module Api
       end
 
       def renderer
-        @renderer ||= ExchangeProductsRenderer.
-          new(@order_cycle, spree_current_user)
+        @renderer ||= ExchangeProductsRenderer
+          .new(@order_cycle, spree_current_user, inventory_enabled: inventory_enabled?)
       end
 
       def load_data_from_exchange
@@ -84,7 +84,8 @@ module Api
         serialized_products = ActiveModel::ArraySerializer.new(
           results,
           each_serializer: Api::Admin::ForOrderCycle::SuppliedProductSerializer,
-          order_cycle: @order_cycle
+          order_cycle: @order_cycle,
+          inventory_enabled: inventory_enabled?
         )
 
         render json: {
@@ -96,6 +97,11 @@ module Api
       def exchange_params
         params.permit(:enterprise_id, :exchange_id, :order_cycle_id, :incoming).
           to_h.with_indifferent_access
+      end
+
+      def inventory_enabled?
+        OpenFoodNetwork::FeatureToggle.enabled?(:inventory, @order_cycle.coordinator) &&
+          !OpenFoodNetwork::FeatureToggle.enabled?(:variant_tag, @order_cycle.coordinator)
       end
     end
   end
