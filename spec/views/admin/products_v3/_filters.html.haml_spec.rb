@@ -19,8 +19,8 @@ RSpec.describe "admin/products_v3/_filters.html.haml" do
   it "shows the producer filter with the default option initially" do
     allow(view).to receive_messages locals.merge(
       allowed_producers: [
-        double(Enterprise, id: 1),
-        double(Enterprise, id: 2),
+        instance_double(Enterprise, id: 1),
+        instance_double(Enterprise, id: 2),
       ],
     )
 
@@ -33,7 +33,7 @@ RSpec.describe "admin/products_v3/_filters.html.haml" do
   it "doesn't show the producer filter when there's only one option" do
     allow(view).to receive_messages locals.merge(
       allowed_producers: [
-        double(Enterprise, id: 1),
+        instance_double(Enterprise, id: 1),
       ],
     )
 
