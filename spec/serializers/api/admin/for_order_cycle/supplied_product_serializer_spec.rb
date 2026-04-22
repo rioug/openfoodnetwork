@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Admin::ForOrderCycle::SuppliedProductSerializer do
-  let(:coordinator)         { create(:distributor_enterprise) }
-  let(:order_cycle)         { double(:order_cycle, coordinator:) }
+  subject(:serialized_product) { described_class.new(product, order_cycle:).to_json }
+
+  let(:coordinator) { create(:distributor_enterprise) }
+  let(:order_cycle) { instance_double(OrderCycle, coordinator:) }
   let!(:product) { create(:simple_product) }
   let!(:non_inventory_variant) { product.variants.first }
   let!(:inventory_variant) { create(:variant, product: product.reload) }
-  let(:serialized_product) {
-    Api::Admin::ForOrderCycle::SuppliedProductSerializer.new(product,
-                                                             order_cycle: ).to_json
-  }
   let!(:inventory_item) {
     create(:inventory_item, enterprise: coordinator, variant: inventory_variant, visible: true)
   }
