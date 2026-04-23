@@ -26,9 +26,6 @@
               = preference_field_tag(:shoppers_require_tos, Spree::Config[:shoppers_require_tos], :type => Spree::Config.preference_type(:shoppers_require_tos))
               = label_tag(:shoppers_require_tos, t('.shoppers_require_tos')) + tag(:br)
             .field.label-inline
-              = preference_field_tag(:cookies_consent_banner_toggle, Spree::Config[:cookies_consent_banner_toggle], :type => Spree::Config.preference_type(:cookies_consent_banner_toggle))
-              = label_tag(:cookies_consent_banner_toggle, t('.cookies_consent_banner_toggle')) + tag(:br)
-            .field.label-inline
               = preference_field_tag(:cookies_policy_matomo_section, Spree::Config[:cookies_policy_matomo_section], :type => Spree::Config.preference_type(:cookies_policy_matomo_section))
               = label_tag(:cookies_policy_matomo_section, t('.cookies_policy_matomo_section')) + tag(:br)
             .field.label-inline

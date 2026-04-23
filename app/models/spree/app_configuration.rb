@@ -103,7 +103,6 @@ module Spree
     preference :enterprises_require_tos, :boolean, default: false
     preference :shoppers_require_tos, :boolean, default: false
     preference :privacy_policy_url, :string, default: nil
-    preference :cookies_consent_banner_toggle, :boolean, default: false
     preference :cookies_policy_matomo_section, :boolean, default: false
 
     # Tax Preferences
