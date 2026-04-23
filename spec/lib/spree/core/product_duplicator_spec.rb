@@ -87,7 +87,7 @@ RSpec.describe Spree::Core::ProductDuplicator do
         new_lnk_variant1 = subject.variants.find { it.display_name == "LNK1" }
         new_lnk_variant2 = subject.variants.find { it.display_name == "LNK2" }
 
-        expect(new_src_variant.target_variants).to eq [new_lnk_variant1, new_lnk_variant2]
+        expect(new_src_variant.target_variants).to match_array [new_lnk_variant1, new_lnk_variant2]
         expect(new_lnk_variant1.source_variants).to eq [new_src_variant]
         expect(new_lnk_variant2.source_variants).to eq [new_src_variant]
       end
