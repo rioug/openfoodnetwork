@@ -141,10 +141,10 @@ FactoryBot.define do
   factory :order_with_totals_and_distribution, parent: :order_with_distributor do
     transient do
       shipping_fee { 3 }
-      variant { create(:simple_product).variants.first }
+      variant { create(:simple_product, supplier_id: distributor.id).variants.first }
     end
 
-    order_cycle { create(:simple_order_cycle) }
+    order_cycle { create(:simple_order_cycle, distributors: [distributor]) }
 
     after(:create) do |order, proxy|
       create(:line_item_with_shipment, shipping_fee: proxy.shipping_fee,

@@ -75,21 +75,8 @@ module CheckoutHelper
     tax_rates.map { |tr| number_to_percentage(tr.amount * 100, precision: 1) }.join(", ")
   end
 
-  def display_adjustment_amount(adjustment)
-    Spree::Money.new(adjustment.amount, currency: adjustment.currency)
-  end
-
   def display_checkout_total_less_tax(order)
     Spree::Money.new order.total - order.total_tax, currency: order.currency
-  end
-
-  def payment_method_price(method, order)
-    price = method.compute_amount(order)
-    if price == 0
-      t('checkout_method_free')
-    else
-      "{{ #{price} | localizeCurrency }}"
-    end
   end
 
   def payment_or_shipping_price(method, order)
