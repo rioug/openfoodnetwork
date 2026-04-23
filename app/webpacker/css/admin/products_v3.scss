@@ -45,7 +45,6 @@
     padding-top: 0; // Hide border because .form-actions is there. It is added with th padding instead.
     border-collapse: separate; // This is needed for the outer padding. Also should be helpful to give more flexibility of borders between rows.
 
-    // Additional horizontal padding to align with input contents
     thead {
       position: sticky;
       top: 0;
@@ -68,15 +67,6 @@
         background-color: white;
 
         padding: 4px 0;
-      }
-
-      th.with-input {
-        // Additional padding to line up with content of input
-        padding-left: $padding-tbl-cell + $hpadding-txt;
-
-        &.align-right {
-          padding-right: $padding-tbl-cell + $hpadding-txt;
-        }
       }
     }
 
@@ -135,6 +125,11 @@
     td {
       position: relative; // Ensure that overflowing content is covered by the following cell. We don't use overflow: hidden because that messes with the popover.
       background-color: $color-tbl-cell-bg;
+    }
+
+    // Align inherits_properties content with its header (relaxed rows have 3px horizontal padding)
+    .relaxed td.col-inherits_properties {
+      padding-left: $padding-tbl-cell;
     }
 
     // "Relaxed" row groups, containing condensed rows.
