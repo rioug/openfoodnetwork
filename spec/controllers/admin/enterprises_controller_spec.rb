@@ -637,6 +637,7 @@ RSpec.describe Admin::EnterprisesController do
     context "when an order_cycle_id is provided in params" do
       it "initializes permissions with the existing OrderCycle" do
         order_cycle = instance_double(OrderCycle)
+        allow(order_cycle).to receive(:coordinator).and_return(enterprise)
         allow(OrderCycle).to receive(:find_by).and_return(order_cycle)
 
         expect(OpenFoodNetwork::OrderCyclePermissions).to receive(:new)
@@ -649,6 +650,7 @@ RSpec.describe Admin::EnterprisesController do
     context "when a coordinator is provided in params" do
       it "initializes permissions with a new OrderCycle" do
         new_order_cycle = instance_double(OrderCycle)
+        allow(new_order_cycle).to receive(:coordinator).and_return(enterprise)
         allow(OrderCycle).to receive(:new).and_return(new_order_cycle)
 
         expect(OpenFoodNetwork::OrderCyclePermissions).to receive(:new).with(user, new_order_cycle)
@@ -660,6 +662,7 @@ RSpec.describe Admin::EnterprisesController do
     context "when both an order cycle and a coordinator are provided in params" do
       it "initializes permissions with the existing OrderCycle" do
         order_cycle = instance_double(OrderCycle)
+        allow(order_cycle).to receive(:coordinator).and_return(enterprise)
         allow(OrderCycle).to receive(:find_by).and_return(order_cycle)
 
         new_order_cycle = instance_double(OrderCycle)
@@ -668,6 +671,21 @@ RSpec.describe Admin::EnterprisesController do
         expect(OpenFoodNetwork::OrderCyclePermissions).to receive(:new).with(user, order_cycle)
 
         get :for_order_cycle, as: :json, params: { order_cycle_id: 1, coordinator_id: 1 }
+      end
+    end
+
+    context "with inventory enabled", feature: :inventory do
+      it "passes inventory_enabled true to serializer" do
+        order_cycle = create(:order_cycle)
+        expect(controller).to receive(:render).with(
+          json: nil,
+          each_serializer: Class,
+          order_cycle: Object,
+          spree_current_user: user,
+          inventory_enabled: true
+        )
+
+        get :for_order_cycle, as: :json, params: { order_cycle_id: order_cycle.id }
       end
     end
   end
