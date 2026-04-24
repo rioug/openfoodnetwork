@@ -20,11 +20,7 @@ module RespondWith
        !ApplicationController.spree_responders[self.class.to_s.to_sym]
            .try(:[], action_name.to_sym)
 
-      if action = options.delete(:action)
-        render(action:)
-      else
-        defined_response.call
-      end
+      defined_response.call
     else
       # The action name is needed for processing
       options[:action_name] = action_name.to_sym
