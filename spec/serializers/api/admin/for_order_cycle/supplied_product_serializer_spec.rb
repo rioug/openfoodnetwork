@@ -24,15 +24,19 @@ RSpec.describe Api::Admin::ForOrderCycle::SuppliedProductSerializer do
       end
 
       it "ignores the setting and renders all variants" do
-        expect(serialized_product).to have_json_size(2).at_path 'variants'
+        results = JSON.parse(serialized_product)
+
+        expect(results["variants"].length).to eq(2)
       end
 
       context "when inventory enabled" do
         let(:inventory_enabled) { true }
 
         it "renders only variants that are in the coordinators inventory" do
-          expect(serialized_product).to have_json_size(1).at_path 'variants'
-          expect(serialized_product).to be_json_eql(inventory_variant.id).at_path 'variants/0/id'
+          results = JSON.parse(serialized_product)
+
+          expect(results["variants"].length).to eq(1)
+          expect(results["variants"][0]["id"]).to eq(inventory_variant.id)
         end
       end
     end
@@ -46,8 +50,10 @@ RSpec.describe Api::Admin::ForOrderCycle::SuppliedProductSerializer do
 
       describe "supplied products" do
         it "renders variants regardless of whether they are in the coordinators inventory" do
-          expect(serialized_product).to have_json_size(2).at_path 'variants'
-          variant_ids = parse_json(serialized_product)['variants'].pluck('id')
+          results = JSON.parse(serialized_product)
+
+          expect(results["variants"].length).to eq(2)
+          variant_ids = results['variants'].pluck('id')
           expect(variant_ids).to include non_inventory_variant.id, inventory_variant.id
         end
       end

@@ -257,7 +257,6 @@ RSpec.configure do |config|
 
   # Helpers
   config.include FactoryBot::Syntax::Methods
-  config.include JsonSpec::Helpers
 
   config.include Rails.application.routes.url_helpers
   config.include Spree::UrlHelpers
