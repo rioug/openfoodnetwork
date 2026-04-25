@@ -100,6 +100,12 @@ module Api
       end
 
       def inventory_enabled?
+        # We don't have an order cycle when laoding product to create a new one, at this stage
+        # there is no way to select product_selection_from_coordinator_inventory_only?  options
+        # so the state of the inventory doesn't matter as no filtering will be applied in the
+        # renderer.
+        return false if @order_cycle.nil?
+
         OpenFoodNetwork::FeatureToggle.enabled?(:inventory, @order_cycle.coordinator) &&
           !OpenFoodNetwork::FeatureToggle.enabled?(:variant_tag, @order_cycle.coordinator)
       end
