@@ -127,11 +127,6 @@
       background-color: $color-tbl-cell-bg;
     }
 
-    // Align inherits_properties content with its header (relaxed rows have 3px horizontal padding)
-    .relaxed td.col-inherits_properties {
-      padding-left: $padding-tbl-cell;
-    }
-
     // "Relaxed" row groups, containing condensed rows.
     //
     // `display:table` enforces strict rules and won't allow border styles on tbody.
