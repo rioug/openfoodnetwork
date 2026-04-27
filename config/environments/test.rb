@@ -74,9 +74,6 @@ Rails.application.configure do
     allowed_warnings = [
       # List strings here to allow matching deprecations.
       #
-      # Setting action_dispatch.show_exceptions to true is deprecated. Set to :all instead.
-      # spec/requests/errors_spec.rb
-      "action_dispatch.show_exceptions",
     ]
     unless allowed_warnings.any? { |pattern| message.match(pattern) }
       ActiveSupport::Deprecation::DEFAULT_BEHAVIORS[:raise].call(message, callstack, deprecator)
