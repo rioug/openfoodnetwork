@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   include CablecarResponses
   include Pagy::Backend
   include RequestTimeouts
+  include RespondWith
 
   self.responder = ApplicationResponder
   respond_to :html
