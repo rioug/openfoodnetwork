@@ -42,6 +42,11 @@ module Openfoodnetwork
     # as the inializer is loaded after the configuration is checkec in the action_controller/railties
     config.action_controller.wrap_parameters_by_default = true
 
+    # this used to migrate cookie from :mashal serializer to :json serializer,
+    # default in rails 7 is :json
+    # TODO to remove once we are sure all cookies have been migrated
+    config.action_dispatch.cookies_serializer = :hybrid
+
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
