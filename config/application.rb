@@ -37,6 +37,12 @@ module Openfoodnetwork
                                                           ActiveSupport::TimeZone]
     config.active_support.cache_format_version = 7.0
 
+    # TODO This the default config for rails 7.0, to remove when we move to config.load_defaults 7.0
+    # For some reason setting this in the iniatilzer new_framework_defaults_7_0.rb does not work,
+    # as the inializer is loaded after the configuration is checkec in the action_controller/railties
+    config.action_controller.wrap_parameters_by_default = true
+
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.

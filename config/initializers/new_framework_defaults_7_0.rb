@@ -73,6 +73,7 @@ Rails.application.config.action_controller.raise_on_open_redirects = true
 # Enable parameter wrapping for JSON.
 # Previously this was set in an initializer. It's fine to keep using that initializer if you've customized it.
 # To disable parameter wrapping entirely, set this config to `false`.
+# NOTE: this has benn enabled in config/application.rb
 # Rails.application.config.action_controller.wrap_parameters_by_default = true
 
 # Specifies whether generated namespaced UUIDs follow the RFC 4122 standard for namespace IDs provided as a
