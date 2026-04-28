@@ -1,10 +1,12 @@
+-# locals: (pagy:, search_term:, producer_id:, category_id:, tags:, per_page:)
+
 #sort
   .pagination-description
     - if pagy.present?
       = t(".pagination.products_total_html", count: pagy.count, from: pagy.from, to: pagy.to)
 
     - if search_term.present? || producer_id.present? || category_id.present? || tags.present?
-      %a{ href: url_for(page: 1), class: "button disruptive", data: { 'turbo-frame': "_self", 'turbo-action': "advance" } }
+      %a{ href: admin_products_path(per_page: per_page), class: "button disruptive", data: { 'turbo-frame': "_self", 'turbo-action': "advance" } }
         = t(".pagination.clear_search")
 
   %form.with-dropdown

@@ -133,8 +133,8 @@ class Invoice
     end
 
     def tax_rate_by_id
-      all_tax_adjustments.each_with_object({}) do |adjustment, tax_rates|
-        tax_rates[adjustment.originator.id] = adjustment.originator
+      all_tax_adjustments.to_h do |adjustment|
+        [adjustment.originator.id, adjustment.originator]
       end
     end
 

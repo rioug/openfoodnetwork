@@ -83,6 +83,8 @@ en_CA:
       models:
         enterprise_fee:
           inherit_tax_requires_per_item_calculator: "Inheriting the tax category requires a per-item calculator."
+        enterprise_relationship:
+          inventory_vs_linked_variants: "Cannot grant both inventory and linked variants permissions."
         spree/image:
           attributes:
             attachment:
@@ -4398,6 +4400,7 @@ en_CA:
           resend_confirmation_confirm_html: "This will resend the confirmation email to the customer. <br />Are you sure you want to proceed?"
           send_invoice: "Send Invoices"
           send_invoice_confirm_html: "This will email customer invoices for all selected complete orders. <br> Are you sure you want to proceed?"
+          credit_orders: Credit orders
           selected:
             zero: "No order selected"
             one: "1 order selected"
@@ -4434,6 +4437,8 @@ en_CA:
           line_item_adjustments: "Line Item Adjustments"
           order_adjustments: "Order Adjustments"
           order_total: "Order Total"
+        bulk_credit:
+          could_not_credit: "Order #%{order_number} could not be credited : %{message}"
       invoices:
         index:
           order_has_changed: "The order has changed since the last invoice update.  The invoice shown here might not be up-to-date anymore. "

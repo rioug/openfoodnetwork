@@ -6,9 +6,6 @@ RSpec.describe "As a consumer, I want to checkout my order" do
   include ShopWorkflow
   include CheckoutHelper
   include FileHelper
-  include StripeHelper
-  include StripeStubs
-  include PaypalHelper
   include AuthenticationHelper
   include UIComponentHelper
 

@@ -16,8 +16,8 @@ RSpec.describe "Admin -> Order -> Payments" do
       name: "Taler",
       distributors: [distributor],
       environment: "test",
-      preferred_backend_url: "https://taler.example.com",
-      preferred_api_key: "sandbox",
+      preferred_instance_url: "https://taler.example.com",
+      preferred_password: "sandbox",
     )
   }
 

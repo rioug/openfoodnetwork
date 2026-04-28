@@ -11,6 +11,12 @@ multi-ecosystem-groups:
       interval: "daily"
     cooldown:
       default-days: 7
+  shakapacker:
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+
 
 updates:
   # turbo_power: ensure gem and package are updated together
@@ -24,6 +30,18 @@ updates:
     patterns: ["turbo_power"]
     multi-ecosystem-group: "turbo_power"
     versioning-strategy: lockfile-only
+  # shakapacker: ensure gem and package are updated together
+  - package-ecosystem: "bundler"
+    directory: "/"
+    patterns: ["shakapacker"]
+    multi-ecosystem-group: "shakapacker"
+    versioning-strategy: lockfile-only
+  - package-ecosystem: "npm"
+    directory: "/"
+    patterns: ["shkapacker"]
+    multi-ecosystem-group: "shakapacker"
+    versioning-strategy: lockfile-only
+
 
   # All others
   - package-ecosystem: "bundler"

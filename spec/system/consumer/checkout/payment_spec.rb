@@ -154,6 +154,25 @@ RSpec.describe "As a consumer, I want to checkout my order" do
             expect(page).to have_content "Select a payment method"
           end
         end
+
+        context "when updating the order after reaching payment step" do
+          it "updates the credit amount used" do
+            expect(page).to have_content "No payment required"
+            expect(page).to have_content "Credit used: $10.00"
+
+            # Update line item quantity to change the order total
+            line_item = order.line_items.first
+            order.contents.update_item(line_item, { quantity: 2 })
+
+            click_link "Your details"
+            choose free_shipping_with_required_address.name
+
+            proceed_to_payment
+
+            expect(page).to have_content "No payment required"
+            expect(page).to have_content "Credit used: $20.00"
+          end
+        end
       end
 
       describe "vouchers" do
@@ -407,7 +426,7 @@ RSpec.describe "As a consumer, I want to checkout my order" do
               Spree::PaymentMethod::Taler.create!(
                 name: "Taler",
                 environment: "test",
-                preferred_backend_url: "https://taler.example.com/",
+                preferred_instance_url: "https://taler.example.com/",
                 distributors: [distributor]
               )
             end

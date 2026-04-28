@@ -234,6 +234,25 @@ RSpec.describe OpenFoodNetwork::ScopeVariantToHub do
     end
   end
 
+  context "with inventory enabled and variant tag enabled" do
+    # We can't enable two feature when using "feature" metadata on the example, so we do it manually
+    around do |example|
+      Flipper.enable(:inventory)
+      Flipper.enable(:variant_tag)
+
+      example.run
+
+      Flipper.disable(:inventory)
+      Flipper.disable(:variant_tag)
+    end
+
+    it "doesn't override the variant" do
+      vo
+      scoper.scope(v)
+      expect(v.price).to eq(11.11)
+    end
+  end
+
   context "with inventory is disabled" do
     it "doesn't override the variant" do
       vo

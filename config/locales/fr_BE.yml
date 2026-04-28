@@ -83,6 +83,8 @@ fr_BE:
       models:
         enterprise_fee:
           inherit_tax_requires_per_item_calculator: "L'héritage de la catégorie de taxe nécessite un calculateur par article."
+        enterprise_relationship:
+          inventory_vs_linked_variants: "Impossible d'accorder simultanément les autorisations d'inventaire et de variantes liées."
         spree/image:
           attributes:
             attachment:
@@ -4425,6 +4427,7 @@ fr_BE:
           resend_confirmation_confirm_html: "Cela renverra l&#39;e-mail de confirmation au client.<br /> Êtes-vous sur de vouloir continuer?"
           send_invoice: "Envoyer les factures"
           send_invoice_confirm_html: "Cela enverra par e-mail les factures des clients pour toutes les commandes finalisées sélectionnées.<br> Êtes-vous sur de vouloir continuer?"
+          credit_orders: Créditer les commandes
           selected:
             zero: "Aucune commande sélectionnée"
             one: "1 commande sélectionnée"
@@ -4461,6 +4464,8 @@ fr_BE:
           line_item_adjustments: "Ajustements d'élément de ligne"
           order_adjustments: "Ajustement de commandes"
           order_total: "Total commande "
+        bulk_credit:
+          could_not_credit: "La commande n° %{order_number} n'a pas pu être créditée : %{message}"
       invoices:
         index:
           order_has_changed: "La commande a changé depuis la dernière mise à jour de la facture. La facture affichée ici risque donc de ne pas être à jour."

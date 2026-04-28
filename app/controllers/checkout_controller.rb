@@ -64,7 +64,7 @@ class CheckoutController < BaseController
   private
 
   def render_error
-    @paid_with_credit = calculate_credit(@order) if payment_step?
+    @paid_with_credit = calculate_credit(@order) if payment_step? || summary_step?
 
     flash.now[:error] ||= I18n.t('checkout.errors.saving_failed')
 

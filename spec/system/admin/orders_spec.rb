@@ -110,6 +110,8 @@ RSpec.describe '
         tomselect_multiselect 'Two', from: 'q[order_cycle_id_in][]'
         tomselect_multiselect 'Three', from: 'q[order_cycle_id_in][]'
 
+        # Close filter by payment state dropdown that became open for some reason
+        page.find("body").click
         page.find('.filter-actions .button[type=submit]').click
 
         # Order 2 and 3 should show, but not 4
@@ -122,6 +124,8 @@ RSpec.describe '
         tomselect_multiselect distributor2.name.to_s, from: 'q[distributor_id_in][]'
         tomselect_multiselect distributor4.name.to_s, from: 'q[distributor_id_in][]'
 
+        # Close filter by payment state dropdown that became open for some reason
+        page.find("body").click
         page.find('.filter-actions .button[type=submit]').click
 
         # Order 2 and 4 should show, but not 3
@@ -240,6 +244,19 @@ RSpec.describe '
         expect(page).not_to have_content order3.number
         expect(page).not_to have_content order4.number
         expect(page).not_to have_content order5.number
+      end
+
+      it "filter by payment state" do
+        tomselect_multiselect "paid", from: 'q[payment_state_in][]'
+        tomselect_multiselect "credit owed", from: 'q[payment_state_in][]'
+
+        page.find('.filter-actions .button[type=submit]').click
+
+        expect(page).not_to have_content order.number
+        expect(page).to have_content order2.number
+        expect(page).to have_content order3.number
+        expect(page).to have_content order4.number
+        expect(page).to have_content order5.number
       end
     end
 

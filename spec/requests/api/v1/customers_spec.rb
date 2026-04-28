@@ -145,7 +145,7 @@ RSpec.describe "Customers", swagger_doc: "v1.yaml", feature: :api_v1 do
           it "adds balance to each customer" do
             get "/api/v1/customers", params: { extra_fields: { customer: :balance } }
             balances = json_response[:data].map{ |c| c[:attributes][:balance] }
-            expect(balances.all?{ |b| b.is_a? Numeric }).to eq(true)
+            expect(balances.all?(Numeric)).to eq(true)
           end
         end
 

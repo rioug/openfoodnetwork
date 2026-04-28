@@ -83,6 +83,8 @@ fr_CA:
       models:
         enterprise_fee:
           inherit_tax_requires_per_item_calculator: "Déterminer la catégorie de taxe requiert l'utilisation du calculateur par article"
+        enterprise_relationship:
+          inventory_vs_linked_variants: "Impossible d'accorder simultanément les autorisations d'inventaire et de variantes liées."
         spree/image:
           attributes:
             attachment:
@@ -4456,6 +4458,7 @@ fr_CA:
           resend_confirmation_confirm_html: "Cette action va renvoyer l'email de confirmation de commande. Etes-vous sûr de vouloir continuer ?"
           send_invoice: "Envoyer les factures"
           send_invoice_confirm_html: "Vous allez envoyer les factures clients pour toutes les commandes sélectionnées. <br> ouhaitez-vous continuer?"
+          credit_orders: Créditer les commandes
           selected:
             zero: "Aucune commande sélectionnée"
             one: "1 commande sélectionnée"
@@ -4968,7 +4971,7 @@ fr_CA:
         delete?: Effacer?
       cards:
         authorised_shops: Boutiques autorisées
-        authorised_shops_agreement: 'Cette liste de boutique correspond aux boutiques ayant l''autorisation d''utiliser votre carte pour les commandes récurrentes auxquelles vous avez souscrit. Les détails de votre carte ne sont pas partagés avec les gérants des boutiques en question. Vous serez toujours notifié d''un paiement dès qu''il a lieu. '
+        authorised_shops_agreement: Cette liste de boutique correspond aux boutiques ayant l'autorisation d'utiliser votre carte pour les commandes récurrentes auxquelles vous avez souscrit. Les détails de votre carte ne sont pas partagés avec les gérants des boutiques en question. Vous serez toujours notifié d'un paiement dès qu'il a lieu.
         saved_cards_popover: C'est la liste des cartes que vous avez choisi d'enregistrer pour une utilisation ultérieure. Votre carte 'par défaut' sera automatiquement sélectionnée lorsque vous passerez votre commande, et pourra être facturé par tous les magasins que vous avez autorisés à le faire (voir à droite).
       authorised_shops:
         shop_name: "Nom de la boutique"

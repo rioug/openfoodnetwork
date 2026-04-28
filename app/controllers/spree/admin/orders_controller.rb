@@ -80,7 +80,7 @@ module Spree
       rescue Spree::Core::GatewayError => e
         flash[:error] = e.message.to_s
       ensure
-        redirect_back fallback_location: spree.admin_dashboard_path
+        redirect_back_or_to(spree.admin_dashboard_path)
       end
 
       def resend
@@ -88,7 +88,7 @@ module Spree
         flash[:success] = t('admin.orders.order_email_resent')
 
         respond_with(@order) do |format|
-          format.html { redirect_back(fallback_location: spree.admin_dashboard_path) }
+          format.html { redirect_back_or_to(spree.admin_dashboard_path) }
         end
       end
 
@@ -98,7 +98,7 @@ module Spree
         flash[:success] = t('admin.orders.invoice_email_sent')
 
         respond_with(@order) { |format|
-          format.html { redirect_to spree.edit_admin_order_path(@order) }
+          format.html { redirect_back_or_to spree.edit_admin_order_path(@order) }
         }
       end
 
@@ -113,6 +113,35 @@ module Spree
         end
 
         render_with_wicked_pdf InvoiceRenderer.new.args(@order, spree_current_user)
+      end
+
+      def bulk_credit
+        # Load selected orders
+        orders = Permissions::Order.new(spree_current_user).editable_orders.where(
+          id: params[:bulk_ids]
+        )
+
+        # credit orders
+        streams = []
+        orders.each do |order|
+          credit_response = ::Orders::CustomerCreditService.new(order).refund(
+            user: spree_current_user
+          )
+
+          if credit_response.failure?
+            flash[:error] =
+              t(".could_not_credit", order_number: order.number, message: credit_response.message)
+            streams << turbo_stream.append(
+              "flashes", partial: "admin/shared/flashes", locals: { flashes: flash }
+            )
+          else
+            streams << turbo_stream.replace(
+              "order_#{order.id}", partial: "spree/admin/orders/table_row", locals: { order: }
+            )
+          end
+        end
+
+        render turbo_stream: streams
       end
 
       private

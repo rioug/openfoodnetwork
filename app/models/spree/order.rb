@@ -8,6 +8,9 @@ module Spree
     include Balance
     include SetUnusedAddressFields
 
+    PAYMENT_STATES = %w{balance_due completed checkout credit_owed failed paid pending
+                        requires_authorization processing void invalid}.freeze
+
     searchable_attributes :number, :state, :shipment_state, :payment_state, :distributor_id,
                           :order_cycle_id, :email, :total, :customer_id, :distributor_name_alias
     searchable_associations :shipping_method, :bill_address, :distributor

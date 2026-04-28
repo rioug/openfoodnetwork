@@ -18,7 +18,7 @@ gem 'activemerchant'
 gem 'angular-rails-templates'
 gem 'ransack', '~> 4.1.0'
 gem 'responders'
-gem 'shakapacker', '8.4.0'
+gem 'shakapacker', '~> 9.7'
 
 # Indirect dependency but we access it directly in JS specs.
 # It turns out to be hard to upgrade but please do if you can.
@@ -56,7 +56,7 @@ gem 'paranoia', '~> 2.4'
 gem 'state_machines-activerecord'
 gem 'stringex', '~> 2.8.5', require: false
 
-gem 'paypal-sdk-merchant', '1.117.2'
+gem 'paypal-sdk-merchant'
 gem 'stripe'
 gem "taler"
 

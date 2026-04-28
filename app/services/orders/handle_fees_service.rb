@@ -6,7 +6,7 @@ module Orders
 
     delegate :distributor, :order_cycle, to: :order
 
-    FeeValue = Struct.new(:fee, :role, keyword_init: true)
+    FeeValue = Struct.new(:fee, :role)
 
     def initialize(order)
       @order = order

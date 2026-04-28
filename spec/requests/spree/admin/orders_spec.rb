@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe Spree::Admin::OrdersController do
+  let(:admin) { create(:admin_user) }
+
   describe "#edit" do
     let!(:order) { create(:order_with_totals_and_distribution, ship_address: create(:address)) }
 
-    before { controller_login_as_admin }
+    before { sign_in admin }
 
     describe "view" do
-      render_views
-
       it "does not show ineligible payment adjustments" do
         adjustment = create(
           :adjustment,
@@ -20,7 +20,7 @@ RSpec.describe Spree::Admin::OrdersController do
           amount: 0
         )
 
-        spree_get :edit, id: order
+        get "/admin/orders/#{order.id}/edit"
 
         expect(response.body).not_to match adjustment.label
       end
@@ -35,15 +35,13 @@ RSpec.describe Spree::Admin::OrdersController do
                  order_cycle_id: order.order_cycle_id } }
     end
 
-    before { controller_login_as_admin }
+    before { sign_in admin }
 
     context "complete order" do
       let(:order) { create :completed_order_with_totals }
 
       it "does not throw an error if no order object is given in params" do
-        params = { id: order }
-
-        spree_put :update, params
+        put "/admin/orders/#{order.number}"
 
         expect(response).to have_http_status :found
       end
@@ -57,7 +55,7 @@ RSpec.describe Spree::Admin::OrdersController do
           expect(order).to receive(:recreate_all_fees!)
           expect(order).to receive(:create_tax_charge!).at_least :once
 
-          spree_put :update, params
+          put("/admin/orders/#{order.id}", params:)
 
           expect(response).to redirect_to spree.edit_admin_order_path(order)
         end
@@ -88,11 +86,6 @@ RSpec.describe Spree::Admin::OrdersController do
           order
         end
 
-        before do
-          allow(controller).to receive(:spree_current_user) { user }
-          allow(controller).to receive(:order_to_update) { order }
-        end
-
         it "recalculates fees if the orders contents have changed" do
           expect(order.total)
             .to eq order.item_total + (enterprise_fee.calculator.preferred_amount * 2)
@@ -100,7 +93,7 @@ RSpec.describe Spree::Admin::OrdersController do
 
           order.contents.add(order.line_items.first.variant, 1)
 
-          spree_put :update, { id: order.number }
+          put("/admin/orders/#{order.number}")
 
           expect(order.reload.total)
             .to eq order.item_total + (enterprise_fee.calculator.preferred_amount * 3)
@@ -116,7 +109,7 @@ RSpec.describe Spree::Admin::OrdersController do
 
             enterprise_fee.destroy
 
-            spree_put :update, { id: order.number }
+            put("/admin/orders/#{order.number}")
 
             expect(order.reload.total).to eq order.item_total
             expect(order.adjustment_total).to eq 0
@@ -134,7 +127,7 @@ RSpec.describe Spree::Admin::OrdersController do
 
             enterprise_fee.really_destroy!
 
-            spree_put :update, { id: order.number }
+            put("/admin/orders/#{order.number}")
 
             expect(order.reload.total).to eq order.item_total
             expect(order.adjustment_total).to eq 0
@@ -157,9 +150,9 @@ RSpec.describe Spree::Admin::OrdersController do
 
           context "with included taxes" do
             it "taxes fees correctly" do
-              spree_put :update, { id: order.number }
-              order.reload
+              put("/admin/orders/#{order.number}")
 
+              order.reload
               expect(order.all_adjustments.tax.count).to eq 2
               expect(order.enterprise_fee_tax).to eq 0.4
 
@@ -172,9 +165,9 @@ RSpec.describe Spree::Admin::OrdersController do
             let(:tax_included) { false }
 
             it "taxes fees correctly" do
-              spree_put :update, { id: order.number }
-              order.reload
+              put("/admin/orders/#{order.number}")
 
+              order.reload
               expect(order.all_adjustments.tax.count).to eq 2
               expect(order.enterprise_fee_tax).to eq 0.5
 
@@ -198,9 +191,9 @@ RSpec.describe Spree::Admin::OrdersController do
                 expect(order.all_adjustments.tax).to include legacy_tax_adjustment
                 expect(order.additional_tax_total).to eq 0.5
 
-                spree_put :update, { id: order.number }
-                order.reload
+                put("/admin/orders/#{order.number}")
 
+                order.reload
                 expect(order.all_adjustments.tax.count).to eq 2
                 expect(order.all_adjustments.tax).not_to include legacy_tax_adjustment
                 expect(order.additional_tax_total).to eq 0.5
@@ -217,7 +210,7 @@ RSpec.describe Spree::Admin::OrdersController do
 
       context "without line items" do
         it "redirects to order details page with flash error" do
-          spree_put :update, params
+          put("/admin/orders/#{order.number}", params:)
 
           expect(flash[:error]).to eq "Line items can't be blank"
           expect(response).to redirect_to spree.edit_admin_order_path(order)
@@ -228,7 +221,7 @@ RSpec.describe Spree::Admin::OrdersController do
         it "redirects to order details page with flash error" do
           order.update(shipment_state: :ready)
           order.update(shipment_state: :shipped)
-          spree_put :update, { id: order }
+          put("/admin/orders/#{order.number}")
 
           expect(flash[:error]).to eq "Cannot add item to shipped order"
           expect(response).to redirect_to spree.edit_admin_order_path(order)
@@ -262,7 +255,7 @@ RSpec.describe Spree::Admin::OrdersController do
               .to receive(:ensure_available_shipping_rates).and_return(true)
 
             expect {
-              spree_put :update, params
+              put("/admin/orders/#{order.number}", params:)
             }.to change { order.reload.state }.from("cart").to("payment")
             expect(response).to redirect_to spree.admin_order_payments_path(order)
           end
@@ -272,7 +265,7 @@ RSpec.describe Spree::Admin::OrdersController do
           it "redirects to order details page with flash error" do
             params[:order][:distributor_id] = create(:distributor_enterprise).id
 
-            spree_put :update, params
+            put("/admin/orders/#{order.number}", params:)
 
             expect(flash[:error])
               .to eq "Distributor or order cycle cannot supply the products in your cart"
@@ -285,10 +278,11 @@ RSpec.describe Spree::Admin::OrdersController do
 
   describe "#index" do
     context "as a regular user" do
-      before { allow(controller).to receive(:spree_current_user) { create(:user) } }
+      before { sign_in create(:user) }
 
-      it "should deny me access to the index action" do
-        spree_get :index
+      it "denies access to the index action" do
+        get "/admin/orders"
+
         expect(response).to redirect_to unauthorized_path
       end
     end
@@ -296,9 +290,11 @@ RSpec.describe Spree::Admin::OrdersController do
     context "as an enterprise user" do
       let!(:order) { create(:order_with_distributor) }
 
-      before { allow(controller).to receive(:spree_current_user) { order.distributor.owner } }
+      before { sign_in order.distributor.owner }
 
-      it "should allow access" do
+      it "allows access" do
+        get "/admin/orders"
+
         expect(response).to have_http_status :ok
       end
     end
@@ -306,26 +302,26 @@ RSpec.describe Spree::Admin::OrdersController do
 
   describe "#fire" do
     let(:order) { create(:completed_order_with_totals) }
+    let(:headers) { { HTTP_REFERER: spree.edit_admin_order_path(order) } }
 
     before do
-      controller_login_as_admin
+      sign_in admin
 
       allow(Spree::Order).to receive_message_chain(:includes, :find_by!).and_return(order)
-      @request.env['HTTP_REFERER'] = spree.edit_admin_order_path(order)
     end
 
     %w{cancel resume}.each do |event|
       it "calls allowed event #{event}" do
         expect(order).to receive(:public_send).with(event)
 
-        spree_get :fire, { id: order, e: event }
+        get("/admin/orders/#{order.number}/fire", params: { e: event }, headers:)
 
         expect(response).to redirect_to spree.edit_admin_order_path(order)
       end
     end
 
     it "returns a success flash message" do
-      spree_get :fire, { id: order, e: "cancel" }
+      get("/admin/orders/#{order.number}/fire", params: { e: "cancel" }, headers:)
 
       expect(flash[:success]).to eq "Order Updated"
     end
@@ -333,14 +329,14 @@ RSpec.describe Spree::Admin::OrdersController do
     it "amends back order" do
       expect(AmendBackorderJob).to receive(:perform_later)
 
-      spree_get :fire, { id: order, e: "cancel" }
+      get("/admin/orders/#{order.number}/fire", params: { e: "cancel" }, headers:)
     end
 
     context "with a non allowed event" do
       it "returns an error" do
         expect(order).not_to receive(:public_send).with("state")
 
-        spree_get :fire, { id: order, e: "state" }
+        get("/admin/orders/#{order.number}/fire", params: { e: "state" }, headers:)
 
         expect(flash[:error]).to eq "Can not perform this operation"
         expect(response).to redirect_to spree.edit_admin_order_path(order)
@@ -351,11 +347,90 @@ RSpec.describe Spree::Admin::OrdersController do
       it "returns an error flash message" do
         allow(order).to receive(:public_send).and_raise(Spree::Core::GatewayError, "Some error")
 
-        spree_get :fire, { id: order, e: "cancel" }
+        get("/admin/orders/#{order.number}/fire", params: { e: "cancel" }, headers:)
 
         expect(flash[:error]).to eq "Some error"
         expect(response).to redirect_to spree.edit_admin_order_path(order)
       end
     end
+  end
+
+  describe "#bulk_credit" do
+    let(:order) { create(:order_with_totals, payment_state: "credit_owed", distributor:) }
+    let(:order1) { create(:order_with_totals, payment_state: "credit_owed", distributor:) }
+    let(:order2) { create(:order_with_totals, payment_state: "credit_owed", distributor:) }
+    let(:distributor) { create(:distributor_enterprise) }
+    let(:service_response) { instance_double(Orders::CustomerCreditService::Response) }
+    let(:format) { :turbo_stream }
+
+    before do
+      sign_in distributor.owner
+    end
+
+    it "credits the given orders" do
+      credit_service_mock = mock_credit_service_for(orders: [order, order1, order2])
+
+      allow(service_response).to receive(:failure?).and_return(false)
+      expect(credit_service_mock).to receive(:refund).and_return(service_response).exactly(3).times
+
+      post(
+        "/admin/orders/bulk_credit", params: { bulk_ids: [order.id, order1.id, order2.id], format: }
+      )
+
+      expect(response).to have_http_status :ok
+      expect(response.body).to include("order_#{order.id}", "order_#{order1.id}",
+                                       "order_#{order2.id}")
+    end
+
+    context "when refund fails" do
+      it "displays an error" do
+        credit_service_mock = mock_credit_service_for(orders: [order, order1])
+
+        allow(service_response).to receive(:failure?).and_return(true)
+        allow(service_response).to receive(:message).and_return("No credit owed")
+        expect(credit_service_mock).to receive(:refund).and_return(service_response)
+          .exactly(2).times
+
+        post("/admin/orders/bulk_credit", params: { bulk_ids: [order.id, order1.id], format: })
+
+        expect(response).to have_http_status :ok
+        # For some reason the flashes template is not rendered, but we can check the "flashes"
+        # target is included twice
+        expect(response.body).to include("flashes").twice
+        # flash[:error] only include the last entry, it lets us check the error message
+        # is correctly formated
+        expect(flash[:error]).to end_with "could not be credited : No credit owed"
+        expect(response.body).not_to include("order_#{order.id}", "order_#{order1.id}")
+      end
+    end
+
+    context "with a non editable order" do
+      let(:other_order) {
+        create(:order_with_totals, payment_state: "credit_owed",
+                                   distributor: create(:distributor_enterprise))
+      }
+
+      it "doesn't refund the order" do
+        expect(Orders::CustomerCreditService).not_to receive(:new).with(other_order)
+
+        post(
+          "/admin/orders/bulk_credit", params: { bulk_ids: [other_order], format: }
+        )
+
+        expect(response).to have_http_status :ok
+        expect(response.body).not_to include("order_#{other_order.id}")
+      end
+    end
+  end
+
+  def mock_credit_service_for(orders: [])
+    credit_service_mock = instance_double(Orders::CustomerCreditService)
+    orders.each do |order|
+      expect(Orders::CustomerCreditService).to receive(:new).with(order).and_return(
+        credit_service_mock
+      )
+    end
+
+    credit_service_mock
   end
 end

@@ -4313,6 +4313,7 @@ es:
           check: "Efectivo / transferencia / etc. (pagos para los que no se requiere validación automática)"
           paypalexpress: "PayPal Express"
           stripesca: "Stripe SCA"
+          taler: "Taler"
           customercredit: "Saldo de la consumidora"
       payments:
         source_forms:
@@ -4617,6 +4618,8 @@ es:
         title: API key
       webhook_endpoints:
         description: Los eventos del sistema pueden desencadenar webhooks a sistemas externos.
+        event_type:
+          header: Tipo de evento
       developer_settings:
         title: Configuración de desarrollo
       form:
@@ -4627,6 +4630,7 @@ es:
           orders: Pedidos
           cards: Tarjetas de crédito
           transactions: Transacciones
+          customer_account_transactions: Transacciones de consumidora
           settings: Configuración de la cuenta
         unconfirmed_email: "Correo electrónico pendiente de confirmación para: %{unconfirmed_email}. Su dirección de correo electrónico se actualizará una vez que se confirme el nuevo correo electrónico."
       orders:
@@ -4637,6 +4641,7 @@ es:
         authorisation_required: Autorización requerida
         authorise: Autorizar
       customer_account_transactions:
+        title: Transacciones de consumidora
         credit_available: "Saldo disponible: %{credit}"
         description: Descripción
         amount: Cantidad

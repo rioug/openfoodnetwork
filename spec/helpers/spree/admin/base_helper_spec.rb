@@ -27,8 +27,10 @@ RSpec.describe Spree::Admin::BaseHelper do
       let(:options) { { type: :integer } }
 
       it 'returns correct options' do
-        expect(subject).to eq({ size: nil, class: 'input_integer', step: 1, readonly: nil,
-                                disabled: nil })
+        expect(subject).to eq(
+          class: 'input_integer',
+          step: 1,
+        )
       end
     end
 
@@ -36,8 +38,10 @@ RSpec.describe Spree::Admin::BaseHelper do
       let(:options) { { type: :decimal } }
 
       it 'returns correct options' do
-        expect(subject).to eq({ size: nil, class: 'input_integer', step: :any, readonly: nil,
-                                disabled: nil })
+        expect(subject).to eq(
+          class: 'input_integer',
+          step: :any,
+        )
       end
     end
 
@@ -45,7 +49,7 @@ RSpec.describe Spree::Admin::BaseHelper do
       let(:options) { { type: :boolean } }
 
       it 'returns correct options' do
-        expect(subject).to eq({ readonly: nil, disabled: nil, size: nil })
+        expect(subject).to eq({})
       end
     end
 
@@ -53,8 +57,9 @@ RSpec.describe Spree::Admin::BaseHelper do
       let(:options) { { type: :password } }
 
       it 'returns correct options' do
-        expect(subject).to eq({ size: nil, class: 'password_string fullwidth', readonly: nil,
-                                disabled: nil })
+        expect(subject).to eq(
+          class: 'password_string fullwidth',
+        )
       end
     end
 
@@ -62,8 +67,11 @@ RSpec.describe Spree::Admin::BaseHelper do
       let(:options) { { type: :text } }
 
       it 'returns correct options' do
-        expect(subject).to eq({ size: nil, rows: 15, cols: 85, class: 'fullwidth', readonly: nil,
-                                disabled: nil })
+        expect(subject).to eq(
+          rows: 15,
+          cols: 85,
+          class: 'fullwidth',
+        )
       end
     end
 
@@ -71,17 +79,32 @@ RSpec.describe Spree::Admin::BaseHelper do
       let(:options) { { type: :string } }
 
       it 'returns correct options' do
-        expect(subject).to eq({ size: nil, class: 'input_string fullwidth', readonly: nil,
-                                disabled: nil })
+        expect(subject).to eq(
+          class: 'input_string fullwidth',
+        )
       end
     end
 
-    context 'when readonly, disabled and size are set' do
-      let(:options) { { type: :integer, readonly: true, disabled: false, size: 20 } }
+    context 'when additional attributes are set' do
+      let(:options) {
+        {
+          type: :integer,
+          readonly: true,
+          disabled: false,
+          size: 20,
+          autocomplete: "off",
+        }
+      }
 
       it 'returns correct options' do
-        expect(subject).to eq({ size: 20, class: 'input_integer', step: 1, readonly: true,
-                                disabled: false })
+        expect(subject).to eq(
+          size: 20,
+          class: 'input_integer',
+          step: 1,
+          readonly: true,
+          disabled: false,
+          autocomplete: "off",
+        )
       end
     end
   end

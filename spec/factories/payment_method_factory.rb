@@ -25,6 +25,12 @@ FactoryBot.define do
     preferred_enterprise_id { distributors.first.id }
   end
 
+  factory :paypal_payment_method, class: Spree::Gateway::PayPalExpress do
+    name { 'Paypal Express' }
+    environment { 'test' }
+    distributors { [Enterprise.is_distributor.first || FactoryBot.create(:distributor_enterprise)] }
+  end
+
   factory :distributor_payment_method, class: DistributorPaymentMethod do
     distributor { FactoryBot.create(:distributor_enterprise) }
     payment_method { FactoryBot.create(:payment_method) }

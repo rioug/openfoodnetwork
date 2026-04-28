@@ -58,10 +58,10 @@
         %th.col-image.align-left= # image
         = render partial: 'spree/admin/shared/stimulus_sortable_header',
             locals: { column: :name, sorted: params.dig(:q, :s), default: 'name asc' }
-        %th.align-left.col-sku.with-input= t('admin.products_page.columns.sku')
-        %th.align-left.col-unit_scale.with-input= t('admin.products_page.columns.unit_scale')
-        %th.align-left.col-unit.with-input= t('admin.products_page.columns.unit')
-        %th.align-left.col-price.with-input= t('admin.products_page.columns.price')
+        %th.align-left.col-sku= t('admin.products_page.columns.sku')
+        %th.align-left.col-unit_scale= t('admin.products_page.columns.unit_scale')
+        %th.align-left.col-unit= t('admin.products_page.columns.unit')
+        %th.align-left.col-price= t('admin.products_page.columns.price')
         = render partial: 'spree/admin/shared/stimulus_sortable_header',
             locals: { column: :on_hand, sorted: params.dig(:q, :s), default: 'name asc' }
         %th.align-left.col-producer= t('admin.products_page.columns.producer')
