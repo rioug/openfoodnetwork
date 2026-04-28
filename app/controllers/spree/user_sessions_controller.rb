@@ -13,9 +13,9 @@ module Spree
     helper 'spree/base'
 
     prepend_before_action :handle_unconfirmed_email
-    before_action :tmp_delete_old_cookie, only: :create
     before_action :set_checkout_redirect, only: :create
     after_action :ensure_valid_locale_persisted, only: :create
+    before_action :tmp_delete_old_cookie, only: :destroy
     skip_before_action :check_disabled_user
 
     def create
