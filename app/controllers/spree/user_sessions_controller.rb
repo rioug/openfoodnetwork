@@ -13,6 +13,7 @@ module Spree
     helper 'spree/base'
 
     prepend_before_action :handle_unconfirmed_email
+    before_action :tmp_delete_old_cookie, only: :create
     before_action :set_checkout_redirect, only: :create
     after_action :ensure_valid_locale_persisted, only: :create
     skip_before_action :check_disabled_user
@@ -43,6 +44,15 @@ module Spree
     private
 
     attr_reader :shopfront_redirect
+
+    def tmp_delete_old_cookie
+      # Delete old domain-based cookie, if any. We no longer specify domain in session_store.rb,
+      # meaning new session cookies are 'host-only'. But the old cookie will override the new one,
+      # so we need to delete the old one when logging in.
+      # This may be removed in the future, after all new browser sessions have ended
+      # (since pr #14055 deployed).
+      cookies.delete :_ofn_session_id, domain: ENV['SITE_URL'] if ENV['SITE_URL'].present?
+    end
 
     def accurate_title
       Spree.t(:login)
