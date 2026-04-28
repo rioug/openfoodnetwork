@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails"
@@ -20,6 +22,7 @@ require_relative '../lib/spree/core/environment'
 require_relative '../lib/spree/core/mail_interceptor'
 require_relative "../lib/i18n_digests"
 require_relative "../lib/git_utils"
+require_relative "../lib/session_cookie_upgrader"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -47,6 +50,17 @@ module Openfoodnetwork
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
+
+    config.middleware.insert_before(
+      ActionDispatch::Cookies,
+      SessionCookieUpgrader, {
+        old_key: "_ofn_session_id",
+        new_key: "_h-ofn_session_id",
+        domain: ENV.fetch("SITE_URL", nil),
+        attrs: { http_only: true, secure: true },
+      }
+    ) if Rails.env.staging? || Rails.env.production?
+
     config.time_zone = ENV.fetch("TIMEZONE", nil)
     # config.eager_load_paths << Rails.root.join("extras")
 

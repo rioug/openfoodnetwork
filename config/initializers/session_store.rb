@@ -9,5 +9,5 @@
 
 Openfoodnetwork::Application.config.session_store(
   :active_record_store,
-  key: "_ofn_session_id"
+  key: "_h-ofn_session_id"
 )
