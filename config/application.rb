@@ -46,6 +46,7 @@ module Openfoodnetwork
     # default in rails 7 is :json
     # TODO to remove once we are sure all cookies have been migrated
     config.action_dispatch.cookies_serializer = :hybrid
+    config.active_support.disable_to_s_conversion = true
 
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
