@@ -10,7 +10,7 @@
       white-space: nowrap;
       border-color: transparent;
       font-weight: normal;
-      padding-left: $border-radius; // Super compact
+      padding-left: $hpadding-txt - 1px; // Align text with adjacent input columns
       padding-right: 1rem; // Retain space for arrow
       height: auto;
       min-width: 2em;
