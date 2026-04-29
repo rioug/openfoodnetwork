@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Admin::ForOrderCycle::SuppliedProductSerializer do
-  subject(:serialized_product) {
-    described_class.new(product, order_cycle:, inventory_enabled:).to_json
-  }
+  subject(:serialized_product) { described_class.new(product, order_cycle:, inventory_enabled:) }
 
   let(:coordinator) { create(:distributor_enterprise) }
   let(:order_cycle) { instance_double(OrderCycle, coordinator:) }
@@ -24,19 +22,15 @@ RSpec.describe Api::Admin::ForOrderCycle::SuppliedProductSerializer do
       end
 
       it "ignores the setting and renders all variants" do
-        results = JSON.parse(serialized_product)
-
-        expect(results["variants"].length).to eq(2)
+        expect(serialized_product.variants.length).to eq(2)
       end
 
       context "when inventory enabled" do
         let(:inventory_enabled) { true }
 
         it "renders only variants that are in the coordinators inventory" do
-          results = JSON.parse(serialized_product)
-
-          expect(results["variants"].length).to eq(1)
-          expect(results["variants"][0]["id"]).to eq(inventory_variant.id)
+          expect(serialized_product.variants.length).to eq(1)
+          expect(serialized_product.variants[0][:id]).to eq(inventory_variant.id)
         end
       end
     end
@@ -50,10 +44,8 @@ RSpec.describe Api::Admin::ForOrderCycle::SuppliedProductSerializer do
 
       describe "supplied products" do
         it "renders variants regardless of whether they are in the coordinators inventory" do
-          results = JSON.parse(serialized_product)
-
-          expect(results["variants"].length).to eq(2)
-          variant_ids = results['variants'].pluck('id')
+          expect(serialized_product.variants.length).to eq(2)
+          variant_ids = serialized_product.variants.pluck(:id)
           expect(variant_ids).to include non_inventory_variant.id, inventory_variant.id
         end
       end
