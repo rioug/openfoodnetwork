@@ -103,7 +103,6 @@ module ProductsHelper
   def click_product_clone(product_name)
     within row_containing_name(product_name) do
       page.find(".vertical-ellipsis-menu").click
-      expect(page).to have_link "Clone"
       click_link('Clone')
     end
   end
