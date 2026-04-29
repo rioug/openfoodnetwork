@@ -74,6 +74,7 @@ Rails.application.configure do
     allowed_warnings = [
       # List strings here to allow matching deprecations.
       #
+      "config.active_support.disable_to_s_conversion"
     ]
     unless allowed_warnings.any? { |pattern| message.match(pattern) }
       ActiveSupport::Deprecation::DEFAULT_BEHAVIORS[:raise].call(message, callstack, deprecator)
