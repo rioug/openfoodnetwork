@@ -145,7 +145,7 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
     end
 
     context "with sourced variant" do
-      let(:source_producer) { create(:supplier_enterprise) }
+      let(:source_producer) { create(:supplier_enterprise, name: "Producer Enterprise") }
       let(:hub) { create(:distributor_enterprise) }
       let!(:p1) { create(:product, name: "Product1", supplier_id: source_producer.id) }
 
@@ -176,6 +176,10 @@ RSpec.describe 'As an enterprise user, I can browse my products' do
         within row_containing_name("Variant-sourced") do
           expect(page).to have_selector 'span[title*="Sourced from: "]'
           expect(page).to have_selector 'span[title*="Hub: My Enterprise"]'
+
+          # Can't change the producer of a linked variant
+          expect(page).not_to have_select "Producer"
+          expect(page).to have_content "Producer Enterprise"
         end
 
         # But not variants sourced by other hubs

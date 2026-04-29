@@ -1,4 +1,4 @@
--# locals: (products:, producer_options:, category_options:, tax_category_options:, allowed_producers:)
+-# locals: (products:, allowed_producers:)
 = form_with url: admin_products_bulk_update_path, method: :post, id: "products-form",
             builder: BulkFormBuilder,
             html: { data: { 'turbo-frame': "_self",
@@ -16,7 +16,7 @@
   - @tags.each do |tag|
     = hidden_field_tag 'tags_name_in[]', tag
 
-  %table.products{ 'data-column-preferences-target': "table", class: (hide_producer_column?(producer_options) ? 'hide-producer' : '') }
+  %table.products{ 'data-column-preferences-target': "table", class: (hide_producer_column?(allowed_producers) ? 'hide-producer' : '') }
     %colgroup
       -# The `min-width` property works in Chrome but not Firefox so is considered progressive enhancement.
       %col.col-image{ width:"44px" }= # (image size + padding)
@@ -72,4 +72,4 @@
         %th.align-left.col-inherits_properties= t('admin.products_page.columns.inherits_properties')
         %th.align-right= t('admin.products_page.columns.actions')
     - products.each_with_index do |product, product_index|
-      = render partial: 'product_variant_row', locals: { form:, product:, product_index:, producer_options:, category_options:, tax_category_options: , allowed_producers:}
+      = render partial: 'product_variant_row', locals: { form:, product:, product_index:, allowed_producers:}

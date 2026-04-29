@@ -6,7 +6,7 @@
   .query
     .search-input
       = text_field_tag :search_term, search_term, placeholder: t('.search_products')
-  - if producer_options.many?
+  - if allowed_producers.many?
     .producers
       = label_tag :producer_id, t('.producers.label')
       = render(SearchableDropdownComponent.new(name: :producer_id,
