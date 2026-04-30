@@ -67,6 +67,7 @@ gem 'jwt', '~> 2.3'
 gem 'oauth2', '~> 1.4.7' # Used for Stripe Connect
 
 gem 'datafoodconsortium-connector'
+gem 'datafoodconsortium-connector-v1'
 gem 'jsonapi-serializer'
 gem 'pagy', '~> 9'
 
