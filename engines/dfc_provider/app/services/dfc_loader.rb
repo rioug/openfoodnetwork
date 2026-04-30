@@ -3,7 +3,7 @@
 class DfcLoader
   def self.connector
     unless @connector
-      @connector = DataFoodConsortium::Connector::Connector.instance
+      @connector = DataFoodConsortium::ConnectorV1::Connector.instance
       load_vocabularies
     end
 

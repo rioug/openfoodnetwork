@@ -48,7 +48,7 @@ RSpec.describe QuantitativeValueBuilder do
     let(:variant) { Spree::Variant.new }
 
     it "uses items for anything unknown" do
-      quantity = DataFoodConsortium::Connector::QuantitativeValue.new(
+      quantity = DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
         unit: quantity_unit.JAR,
         value: 3,
       )
@@ -62,7 +62,7 @@ RSpec.describe QuantitativeValueBuilder do
     end
 
     it "knows metric units" do
-      quantity = DataFoodConsortium::Connector::QuantitativeValue.new(
+      quantity = DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
         unit: quantity_unit.LITRE,
         value: 2,
       )
@@ -76,7 +76,7 @@ RSpec.describe QuantitativeValueBuilder do
     end
 
     it "knows metric units with a scale in OFN" do
-      quantity = DataFoodConsortium::Connector::QuantitativeValue.new(
+      quantity = DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
         unit: quantity_unit.KILOGRAM,
         value: 4,
       )
@@ -90,7 +90,7 @@ RSpec.describe QuantitativeValueBuilder do
     end
 
     it "knows metric units with a small scale" do
-      quantity = DataFoodConsortium::Connector::QuantitativeValue.new(
+      quantity = DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
         unit: quantity_unit.MILLIGRAM,
         value: 5,
       )
@@ -104,7 +104,7 @@ RSpec.describe QuantitativeValueBuilder do
     end
 
     it "interpretes values given as a string" do
-      quantity = DataFoodConsortium::Connector::QuantitativeValue.new(
+      quantity = DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
         unit: quantity_unit.KILOGRAM,
         value: "0.4",
       )
@@ -118,7 +118,7 @@ RSpec.describe QuantitativeValueBuilder do
     end
 
     it "knows imperial units" do
-      quantity = DataFoodConsortium::Connector::QuantitativeValue.new(
+      quantity = DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
         unit: quantity_unit.POUNDMASS,
         value: 10,
       )
@@ -132,7 +132,7 @@ RSpec.describe QuantitativeValueBuilder do
     end
 
     it "knows customary units" do
-      quantity = DataFoodConsortium::Connector::QuantitativeValue.new(
+      quantity = DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
         unit: quantity_unit.DOZEN,
         value: 2,
       )

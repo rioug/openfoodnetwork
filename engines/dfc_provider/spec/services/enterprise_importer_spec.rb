@@ -6,11 +6,11 @@ RSpec.describe EnterpriseImporter do
   subject { EnterpriseImporter.new(owner, dfc_enterprise) }
   let(:owner) { Spree::User.new }
   let(:dfc_enterprise) {
-    DataFoodConsortium::Connector::Enterprise.new(
+    DataFoodConsortium::ConnectorV1::Enterprise.new(
       "litefarm.org",
       name: "Test Farm",
       localizations: [
-        DataFoodConsortium::Connector::Address.new(
+        DataFoodConsortium::ConnectorV1::Address.new(
           nil,
           region: "Victoria",
           country: {
@@ -21,7 +21,7 @@ RSpec.describe EnterpriseImporter do
         )
       ],
       socialMedias: [
-        DataFoodConsortium::Connector::SocialMedia.new(
+        DataFoodConsortium::ConnectorV1::SocialMedia.new(
           nil,
           name: "Facebook",
           url: "dfc_test_farm",

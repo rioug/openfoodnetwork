@@ -9,7 +9,7 @@ RSpec.describe AffiliateSalesDataBuilder do
     let(:person) { described_class.person(user) }
 
     it "returns data as Person" do
-      expect(person).to be_a DataFoodConsortium::Connector::Person
+      expect(person).to be_a DataFoodConsortium::ConnectorV1::Person
       expect(person.semanticId).to eq "http://test.host/api/dfc/affiliate_sales_data"
     end
 

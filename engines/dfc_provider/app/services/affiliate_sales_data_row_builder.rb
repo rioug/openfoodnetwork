@@ -10,7 +10,7 @@ class AffiliateSalesDataRowBuilder < DfcBuilder
   end
 
   def build_supplier
-    DataFoodConsortium::Connector::Enterprise.new(
+    DataFoodConsortium::ConnectorV1::Enterprise.new(
       nil,
       localizations: [build_address(
         item[:supplier_postcode],
@@ -21,7 +21,7 @@ class AffiliateSalesDataRowBuilder < DfcBuilder
   end
 
   def build_distributor
-    DataFoodConsortium::Connector::Enterprise.new(
+    DataFoodConsortium::ConnectorV1::Enterprise.new(
       nil,
       localizations: [build_address(
         item[:distributor_postcode],
@@ -31,7 +31,7 @@ class AffiliateSalesDataRowBuilder < DfcBuilder
   end
 
   def build_product
-    DataFoodConsortium::Connector::SuppliedProduct.new(
+    DataFoodConsortium::ConnectorV1::SuppliedProduct.new(
       nil,
       name: item[:product_name],
       quantity: build_product_quantity,
@@ -43,7 +43,7 @@ class AffiliateSalesDataRowBuilder < DfcBuilder
   end
 
   def build_order_line
-    DataFoodConsortium::Connector::OrderLine.new(
+    DataFoodConsortium::ConnectorV1::OrderLine.new(
       nil,
       quantity: build_line_quantity,
       price: build_price,
@@ -52,14 +52,14 @@ class AffiliateSalesDataRowBuilder < DfcBuilder
   end
 
   def build_order
-    DataFoodConsortium::Connector::Order.new(
+    DataFoodConsortium::ConnectorV1::Order.new(
       nil,
       saleSession: build_sale_session,
     )
   end
 
   def build_sale_session
-    DataFoodConsortium::Connector::SaleSession.new(
+    DataFoodConsortium::ConnectorV1::SaleSession.new(
       nil,
     ).tap do |session|
       session.registerSemanticProperty("dfc-b:objectOf") {
@@ -76,27 +76,27 @@ class AffiliateSalesDataRowBuilder < DfcBuilder
   end
 
   def build_product_quantity
-    DataFoodConsortium::Connector::QuantitativeValue.new(
+    DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
       unit: QuantitativeValueBuilder.unit(item[:unit_type]),
       value: item[:units]&.to_f,
     )
   end
 
   def build_line_quantity
-    DataFoodConsortium::Connector::QuantitativeValue.new(
+    DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
       unit: DfcLoader.connector.MEASURES.PIECE,
       value: item[:quantity_sold]&.to_f,
     )
   end
 
   def build_price
-    DataFoodConsortium::Connector::QuantitativeValue.new(
+    DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
       value: item[:price]&.to_f,
     )
   end
 
   def build_address(postcode, country)
-    DataFoodConsortium::Connector::Address.new(
+    DataFoodConsortium::ConnectorV1::Address.new(
       nil,
       country:,
       postalCode: postcode,

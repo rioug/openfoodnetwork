@@ -5,10 +5,10 @@ require_relative "../spec_helper"
 RSpec.describe VirtualAssembly::Semantizer::SemanticObject do
   describe "#pretty_inspect" do
     it "provides a clean output for Address" do
-      subject = DataFoodConsortium::Connector::Address.new("some/id")
+      subject = DataFoodConsortium::ConnectorV1::Address.new("some/id")
 
       expect(subject.pretty_inspect).to match <<~HEREDOC
-        #<DataFoodConsortium::Connector::Address:.*
+        #<DataFoodConsortium::ConnectorV1::Address:.*
          @semanticId="some/id",
          @semanticType="dfc-b:Address",
          @street=nil,
@@ -22,10 +22,10 @@ RSpec.describe VirtualAssembly::Semantizer::SemanticObject do
     end
 
     it "provides a clean output for OrderLine" do
-      subject = DataFoodConsortium::Connector::OrderLine.new("some/id")
+      subject = DataFoodConsortium::ConnectorV1::OrderLine.new("some/id")
 
       expect(subject.pretty_inspect).to match <<~HEREDOC
-        #<DataFoodConsortium::Connector::OrderLine:.*
+        #<DataFoodConsortium::ConnectorV1::OrderLine:.*
          @semanticId="some/id",
          @semanticType="dfc-b:OrderLine",
          @description=nil,

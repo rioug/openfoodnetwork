@@ -7,7 +7,7 @@ class ProductGroupBuilder < DfcBuilder
       SuppliedProductBuilder.semantic_id(spree_variant)
     end
 
-    DataFoodConsortium::Connector::SuppliedProduct.new(
+    DataFoodConsortium::ConnectorV1::SuppliedProduct.new(
       id, variants:,
           name: product.name,
     )

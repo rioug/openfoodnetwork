@@ -21,7 +21,7 @@ class DfcCatalog
   # But we don't return the parent products having variants.
   def products
     @products ||= @graph.select do |subject|
-      subject.is_a?(DataFoodConsortium::Connector::SuppliedProduct) &&
+      subject.is_a?(DataFoodConsortium::ConnectorV1::SuppliedProduct) &&
         subject.variants.blank?
     end
   end

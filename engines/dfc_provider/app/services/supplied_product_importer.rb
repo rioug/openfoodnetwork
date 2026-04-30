@@ -2,7 +2,7 @@
 
 class SuppliedProductImporter < DfcBuilder
   def self.store_product(subject, enterprise)
-    return unless subject.is_a? DataFoodConsortium::Connector::SuppliedProduct
+    return unless subject.is_a? DataFoodConsortium::ConnectorV1::SuppliedProduct
 
     variant = import_variant(subject, enterprise)
     product = variant.product

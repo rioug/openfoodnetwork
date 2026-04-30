@@ -99,12 +99,12 @@ RSpec.describe FdcBackorderer do
       let(:subject) { FdcBackorderer.new(nil, nil) }
 
       it "recognises new orders" do
-        order = DataFoodConsortium::Connector::Order.new(nil)
+        order = DataFoodConsortium::ConnectorV1::Order.new(nil)
         expect(subject.new?(order)).to eq true
       end
 
       it "recognises existing orders" do
-        order = DataFoodConsortium::Connector::Order.new("https://order")
+        order = DataFoodConsortium::ConnectorV1::Order.new("https://order")
         expect(subject.new?(order)).to eq false
       end
     end

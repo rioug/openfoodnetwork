@@ -21,7 +21,7 @@ class ProductTypeImporter < DfcBuilder
     return [] if type.nil?
 
     broaders = type.broaders.map do |id|
-      DataFoodConsortium::Connector::SKOSParser.concepts[id]
+      DataFoodConsortium::ConnectorV1::SKOSParser.concepts[id]
     end
 
     broaders + broaders.flat_map do |broader|

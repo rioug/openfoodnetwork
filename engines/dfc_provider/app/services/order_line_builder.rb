@@ -2,7 +2,7 @@
 
 class OrderLineBuilder < DfcBuilder
   def self.build(offer, quantity)
-    DataFoodConsortium::Connector::OrderLine.new(
+    DataFoodConsortium::ConnectorV1::OrderLine.new(
       nil, offer:, quantity:,
     )
   end

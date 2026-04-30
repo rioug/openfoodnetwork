@@ -4,13 +4,13 @@ require_relative "../spec_helper"
 
 RSpec.describe DfcIo do
   let(:person) do
-    DataFoodConsortium::Connector::Person.new("Pete")
+    DataFoodConsortium::ConnectorV1::Person.new("Pete")
   end
   let(:enterprise) do
-    DataFoodConsortium::Connector::Enterprise.new("Pete's Pumpkins")
+    DataFoodConsortium::ConnectorV1::Enterprise.new("Pete's Pumpkins")
   end
   let(:order) do
-    DataFoodConsortium::Connector::Order.new("https://example.net", orderStatus: orderstate.HELD)
+    DataFoodConsortium::ConnectorV1::Order.new("https://example.net", orderStatus: orderstate.HELD)
   end
   let(:orderstate) do
     DfcLoader.vocabulary("vocabulary").STATES.ORDERSTATE

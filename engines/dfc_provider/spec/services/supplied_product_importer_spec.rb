@@ -27,7 +27,7 @@ RSpec.describe SuppliedProductImporter do
     let(:subject) { importer.store_product(product, supplier) }
     let(:product) {
       DfcIo.import(product_json).find do |subject|
-        subject.is_a? DataFoodConsortium::Connector::SuppliedProduct
+        subject.is_a? DataFoodConsortium::ConnectorV1::SuppliedProduct
       end
     }
     let(:product_json) { ExampleJson.read("product.GET") }
@@ -66,7 +66,7 @@ RSpec.describe SuppliedProductImporter do
     let(:subject) { importer.update_product(product, variant) }
     let(:product) {
       DfcIo.import(product_json).find do |subject|
-        subject.is_a? DataFoodConsortium::Connector::SuppliedProduct
+        subject.is_a? DataFoodConsortium::ConnectorV1::SuppliedProduct
       end
     }
     let(:product_json) { ExampleJson.read("product.GET") }
@@ -93,7 +93,7 @@ RSpec.describe SuppliedProductImporter do
         "https://example.net/tomato",
         name: "Tomato",
         description: "Awesome tomato",
-        quantity: DataFoodConsortium::Connector::QuantitativeValue.new(
+        quantity: DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
           unit: DfcLoader.connector.MEASURES.KILOGRAM,
           value: 2,
         ),
@@ -144,7 +144,7 @@ RSpec.describe SuppliedProductImporter do
         "https://example.net/tomato",
         name: "Tomato",
         description: "Awesome tomato",
-        quantity: DataFoodConsortium::Connector::QuantitativeValue.new(
+        quantity: DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
           unit: DfcLoader.connector.MEASURES.KILOGRAM,
           value: 2,
         ),
@@ -154,7 +154,7 @@ RSpec.describe SuppliedProductImporter do
     end
     let(:product_type) { DfcLoader.connector.PRODUCT_TYPES.VEGETABLE.NON_LOCAL_VEGETABLE }
     let(:catalog_item) {
-      DataFoodConsortium::Connector::CatalogItem.new(
+      DataFoodConsortium::ConnectorV1::CatalogItem.new(
         nil,
         # On-demand is expressed as negative stock.
         # And some APIs send strings instead of numbers...
@@ -163,9 +163,9 @@ RSpec.describe SuppliedProductImporter do
       )
     }
     let(:offer) {
-      DataFoodConsortium::Connector::Offer.new(
+      DataFoodConsortium::ConnectorV1::Offer.new(
         nil,
-        price: DataFoodConsortium::Connector::Price.new(value: "15.50"),
+        price: DataFoodConsortium::ConnectorV1::Price.new(value: "15.50"),
       )
     }
 
@@ -203,7 +203,7 @@ RSpec.describe SuppliedProductImporter do
           "https://example.net/tomato",
           name: "Tomato",
           description: "Better Awesome tomato",
-          quantity: DataFoodConsortium::Connector::QuantitativeValue.new(
+          quantity: DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
             unit: DfcLoader.connector.MEASURES.KILOGRAM,
             value: 2,
           ),
@@ -275,7 +275,7 @@ RSpec.describe SuppliedProductImporter do
             "https://example.net/tomato",
             name: "Tomato",
             description: "Awesome tomato",
-            quantity: DataFoodConsortium::Connector::QuantitativeValue.new(
+            quantity: DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
               unit: DfcLoader.connector.MEASURES.KILOGRAM,
               value: 2,
             ),
@@ -285,7 +285,7 @@ RSpec.describe SuppliedProductImporter do
           )
         end
         let(:product_group) do
-          DataFoodConsortium::Connector::SuppliedProduct.new(
+          DataFoodConsortium::ConnectorV1::SuppliedProduct.new(
             "http://test.host/api/dfc/product_groups/6"
           )
         end
@@ -323,7 +323,7 @@ RSpec.describe SuppliedProductImporter do
     it "returns a product referenced by semantic id" do
       variant.save!
       supplied_product.isVariantOf <<
-        DataFoodConsortium::Connector::SuppliedProduct.new(
+        DataFoodConsortium::ConnectorV1::SuppliedProduct.new(
           "http://test.host/api/dfc/product_groups/6"
         )
       expect(result).to eq spree_product
@@ -332,7 +332,7 @@ RSpec.describe SuppliedProductImporter do
     it "returns a product referenced by external URI" do
       variant.save!
       supplied_product.isVariantOf <<
-        DataFoodConsortium::Connector::SuppliedProduct.new(
+        DataFoodConsortium::ConnectorV1::SuppliedProduct.new(
           "http://example.net/product_group"
         )
       SemanticLink.create!(
