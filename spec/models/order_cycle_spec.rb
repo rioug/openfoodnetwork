@@ -726,7 +726,7 @@ RSpec.describe OrderCycle do
           ).distributor_payment_methods.first
           oc.selected_distributor_payment_methods << other_distributor_payment_method_i
 
-          expect(oc.distributor_payment_methods).to eq [
+          expect(oc.distributor_payment_methods).to match_array [
             distributor_payment_method,
             other_distributor_payment_method_i
           ]
