@@ -215,7 +215,7 @@ GEM
     bugsnag (6.30.0)
       concurrent-ruby (~> 1.0)
     builder (3.3.0)
-    bullet (8.1.0)
+    bullet (8.1.1)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     cable_ready (5.0.6)
@@ -1180,7 +1180,7 @@ CHECKSUMS
   bootsnap (1.23.0) sha256=c1254f458d58558b58be0f8eb8f6eec2821456785b7cdd1e16248e2020d3f214
   bugsnag (6.30.0) sha256=c496cfceb4a9811ce718b0d2ff66c5a35d158804b79e60c3d2ba12d9084ff19e
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
-  bullet (8.1.0) sha256=604b7e2636ec2137dcab3ba61a56248c39a0004a0c9405d58bad0686d23b98ff
+  bullet (8.1.1) sha256=3ddecdf3787c64a3f1e5b316256840bc034d60c1070b1b16d3fe5b5932d42b87
   cable_ready (5.0.6) sha256=de1c94beab04b15a47c8794507a0b5d0ce9c0f25edb1b60a7542adc5413ea894
   cancancan (1.15.0) sha256=05f540c62143fde51f7ceaba8584f8dc0e34c93e43ab7a6c1a832b4553216b16
   capybara (3.40.0) sha256=42dba720578ea1ca65fd7a41d163dd368502c191804558f6e0f71b391054aeef
