@@ -2361,7 +2361,6 @@ fi:
       essential_cookies_note: "Useimmat evästeet sisältävät vain yksilöllisen tunnisteen, mutta eivät muita tietoja, joten esimerkiksi sähköpostiosoitettasi ja salasanaasi ei koskaan sisällytetä niihin eivätkä ne koskaan paljastu."
       cookie_domain: "Asettanut:"
       cookie_session_desc: "Käytetään, jotta verkkosivusto muistaa käyttäjät sivuvierailujen välillä, esimerkiksi ostoskorissa olevien tuotteiden muistamiseksi."
-      cookie_consent_desc: "Käytetään ylläpitämään käyttäjän evästeiden tallentamiseen antaman suostumuksen tilaa"
       cookie_remember_me_desc: "Käytetään, jos käyttäjä on pyytänyt verkkosivustoa muistamaan hänet. Tämä eväste poistetaan automaattisesti 12 päivän kuluttua. Jos käyttäjänä haluat evästeen poistettavan, sinun tarvitsee vain kirjautua ulos. Jos et halua evästeen asennettavan tietokoneellesi, sinun ei tule valita &quot;muista minut&quot; -valintaruutua kirjautumisen yhteydessä."
       cookie_openstreemap_desc: "Ystävällisen avoimen lähdekoodin karttapalveluntarjoajamme (OpenStreetMap) käyttää tätä varmistaakseen, ettei se saa liian montaa pyyntöä tietyn ajanjakson aikana ja estääkseen palveluidensa väärinkäyttöä."
       cookie_stripe_desc: "Maksupalveluntarjoajamme Stripen keräämät tiedot petosten havaitsemiseksi https://stripe.com/cookies-policy/legal. Kaikki kaupat eivät käytä Stripeä maksutapana, mutta petosten estämiseksi on hyvä käytäntö käyttää sitä kaikilla sivuilla. Stripe todennäköisesti muodostaa kuvan siitä, mitkä sivuistamme yleensä ovat vuorovaikutuksessa heidän API:nsa kanssa, ja merkitsee sitten kaikki epätavalliset asiat. Stripe-evästeen asettamisella on siis laajempi tehtävä kuin pelkkä maksutavan tarjoaminen käyttäjälle. Sen poistaminen voi vaikuttaa itse palvelun turvallisuuteen. Voit lukea lisää Stripestä ja sen tietosuojakäytännön osoitteesta https://stripe.com/privacy."
@@ -2379,13 +2378,6 @@ fi:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Mutta huomaa, että jos poistat tai muokkaat Open Food Networkin käyttämiä välttämättömiä evästeitä, verkkosivusto ei toimi, etkä voi lisätä mitään ostoskoriisi etkä esimerkiksi kassalle."
-    cookies_banner:
-      cookies_usage: "Tämä sivusto käyttää evästeitä, jotta navigointisi olisi kitkatonta ja turvallista, ja jotta voimme ymmärtää, miten käytät sivustoa, jotta voimme parantaa tarjoamiamme ominaisuuksia."
-      cookies_definition: "Evästeet ovat hyvin pieniä tekstitiedostoja, jotka tallennetaan tietokoneellesi, kun vierailet joillakin verkkosivustoilla."
-      cookies_desc: "Käytämme vain evästeitä, jotka ovat välttämättömiä voidaksemme tarjota sinulle verkkokaupan myynti-/ostopalvelun. Emme myy mitään tietojasi. Käytämme evästeitä pääasiassa muistaaksemme kuka olet, jos kirjaudut sisään palveluun, tai muistaaksemme ostoskoriisi lisäämäsi tuotteet, vaikka et olisi kirjautunut sisään. Jos jatkat verkkosivustolla navigointia napsauttamatta &quot;Hyväksy evästeet&quot;, oletamme, että annat meille suostumuksen verkkosivuston toiminnan kannalta välttämättömien evästeiden tallentamiseen."
-      cookies_policy_link_desc: "Jos haluat lisätietoja, tutustu"
-      cookies_policy_link: "evästekäytäntö"
-      cookies_accept_button: "Hyväksy evästeet"
   home_shop: Osta nyt
   brandstory_headline: "Osta suoraan tuottajilta, läheltä sinua."
   brandstory_intro: "Paikalliseen myyntiin ja yhteistyöhön."
@@ -4188,8 +4180,6 @@ fi:
     alt_text: "Vaihtoehtoinen teksti"
     thumbnail: "Pienoiskuva"
     back_to_images_list: "Takaisin kuvaluetteloon"
-    backend_url: "Taustapalvelun URL-osoite"
-    api_key: "API-avain"
     email: Sähköposti
     account_updated: "Tili päivitetty!"
     email_updated: "Tili päivitetään, kun uusi sähköpostiosoite on vahvistettu."
@@ -4664,7 +4654,6 @@ fi:
       general_settings:
         edit:
           legal_settings: "Lakiasetukset"
-          cookies_consent_banner_toggle: "Näytä evästeiden suostumusbanneri"
           privacy_policy_url: "Tietosuojakäytännön URL-osoite"
           enterprises_require_tos: "Yritysten on hyväksyttävä käyttöehdot"
           shoppers_require_tos: "Ostajien on hyväksyttävä käyttöehdot"

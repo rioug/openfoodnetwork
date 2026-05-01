@@ -1703,7 +1703,6 @@ pt_BR:
       essential_cookies_note: "A maioria dos cookies contém apenas um identificador exclusivo, mas nenhum outro dado; portanto, seu endereço de email e senha, por exemplo, nunca estão contidos neles e nunca são expostos."
       cookie_domain: "Definido por:"
       cookie_session_desc: "Usado para permitir que o site lembre os usuários entre as visitas à página, por exemplo, lembrar-se dos itens no seu carrinho."
-      cookie_consent_desc: "Usado para manter o status de consentimento do usuário para armazenar cookies"
       cookie_remember_me_desc: "Usado se o usuário solicitou que o site se lembrasse dele. Este cookie é excluído automaticamente após 12 dias. Se, como usuário, você deseja que esse cookie seja excluído, você só precisa sair. Se você não deseja que esse cookie seja instalado no seu computador, não marque a caixa de seleção \"lembrar-se de mim\" , ao fazer login."
       cookie_openstreemap_desc: "Usado pelo nosso amigável provedor de mapeamento de código aberto (OpenStreetMap) para garantir que ele não receba muitas solicitações durante um determinado período de tempo, para evitar o abuso de seus serviços."
       cookie_stripe_desc: "Dados coletados pelo nosso processador de pagamentos Stripe para detecção de fraude https://stripe.com/cookies-policy/legal. Nem todas as lojas usam o Stripe como método de pagamento, mas é uma boa prática para evitar fraudes aplicá-lo a todas as páginas. O Stripe provavelmente cria uma imagem de quais de nossas páginas geralmente interagem com a API e sinaliza algo incomum. Portanto, definir o cookie Stripe tem uma função mais ampla do que simplesmente fornecer um método de pagamento a um usuário. Removê-lo pode afetar a segurança do próprio serviço. Você pode aprender mais sobre o Stripe e ler sua política de privacidade em https://stripe.com/privacy."
@@ -1721,13 +1720,6 @@ pt_BR:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Mas lembre-se de que, se você excluir ou modificar os cookies essenciais usados pela Ajunta, o site não funcionará, você não poderá adicionar nada ao carrinho nem fazer checkout, por exemplo."
-    cookies_banner:
-      cookies_usage: "Este site usa cookies para tornar sua navegação segura e sem atritos, e para nos ajudar a entender como você a utiliza para melhorar os recursos que oferecemos."
-      cookies_definition: "Cookies são arquivos de texto muito pequenos que são armazenados no seu computador quando você visita alguns sites."
-      cookies_desc: "Utilizamos apenas os cookies necessários para fornecer a você o serviço de venda / compra de alimentos on-line. Nós não vendemos nenhum dos seus dados. Utilizamos cookies principalmente para lembrar quem você é, se você acessa o serviço, ou para poder lembrar os itens que coloca no carrinho, mesmo que não esteja logado. Se você continuar navegando no site sem clicar em \"Aceitar cookies\"  entendemos que você está dando seu consentimento para armazenar os cookies essenciais para o funcionamento do site."
-      cookies_policy_link_desc: "Se você quiser saber mais, consulte nosso"
-      cookies_policy_link: "política de cookies"
-      cookies_accept_button: "Aceitar Cookies"
   home_shop: Compre Agora
   brandstory_headline: "Comida de verdade, com autonomia "
   brandstory_intro: "Comer é um ato político! Por trás de todo alimento há pessoas, processos e histórias. "
@@ -3784,7 +3776,6 @@ pt_BR:
       general_settings:
         edit:
           legal_settings: "Configurações de Legislação"
-          cookies_consent_banner_toggle: "Mostrar banner sobre permissão para cookies"
           privacy_policy_url: " Política de Privacidade URL"
           enterprises_require_tos: "As iniciativas devem aceitar os Termos de Serviço"
           shoppers_require_tos: "Compradores precisam aceitar Termos de Serviço"

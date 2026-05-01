@@ -1970,7 +1970,6 @@ ca:
       essential_cookies_note: "La majoria de les cookies només contenen un identificador únic, però no hi ha altres dades, de manera que la teva adreça de correu electrònic i contrasenya, per exemple, mai no estan contingudes ni exposades."
       cookie_domain: "Establert per:"
       cookie_session_desc: "S'utilitza per permetre que el lloc web recordi usuaris entre visites a la pàgina, per exemple, recordar els articles de la vostra cistella."
-      cookie_consent_desc: "S'utilitza per mantenir l'estat del consentiment de l'usuari per emmagatzemar cookies"
       cookie_remember_me_desc: "S'utilitza si l'usuari ha demanat que el lloc web el recordi. Aquesta cookie s'elimina automàticament després de 12 dies. Si com a usuari voleu que se suprimeixi aquesta cookie, només heu de tancar la sessió. Si no voleu que aquesta cookie s'instal·li a l'ordinador, no haureu de marcar la casella \"Recorda'm\" quan inicieu la sessió."
       cookie_openstreemap_desc: "Utilitzat pel nostre proveïdor de confiança d'emmagatzematge de codi obert (OpenStreetMap) per garantir que no rebis massa sol·licituds durant un període de temps determinat, per evitar l'abús dels seus serveis."
       cookie_stripe_desc: "Dades recollides pel nostre processador de pagaments Stripe per a la detecció de frau https://stripe.com/cookies-policy/legal. No totes les botigues utilitzen Stripe com a mètode de pagament, però és una bona pràctica per evitar que el frau s'apliqui a totes les pàgines. Probablement Stripe construeixi una imatge de quines de les nostres pàgines solen interactuar amb la seva API i, a continuació, marca qualsevol cosa inusual. Així, configurar les cookies d'Stripe té una funció més àmplia que simplement proporcionar un mètode de pagament a un usuari. Eliminant-lo podria afectar la seguretat del propi servei. Pots obtenir més informació sobre Stripe i llegir la seva política de privadesa a https://stripe.com/privacy."
@@ -1988,13 +1987,6 @@ ca:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Però tingueu en compte que si suprimiu o modifiqueu les cookies essencials que utilitza Open Food Network el lloc web no funcionarà; no podreu afegir res a la vostra cistella ni per validar la compra, per exemple."
-    cookies_banner:
-      cookies_usage: "Aquest lloc utilitza cookies per fer que la teva navegació no sigui problemàtica i sigui segura i ens ajuda a comprendre com navegues per millorar les funcions que oferim."
-      cookies_definition: "Les cookies són fitxers de text molt petits que s'emmagatzemen a l'ordinador quan visites alguns llocs web."
-      cookies_desc: "Utilitzem només les cookies que són necessàries per oferir-te el servei de compra/venda d'aliments en línia. No venem cap de les teves dades. Utilitzem cookies principalment per recordar qui ets si inicies la sessió al servei o per recordar els elements que has introduït a la teva cistella encara que no hagis iniciat la sessió. Si continues navegant al lloc web sense fer clic \"Acceptar cookies\", suposem que ens estàs donant el consentiment per emmagatzemar les cookies que són essencials per al funcionament del lloc web."
-      cookies_policy_link_desc: "Si vols obtenir més informació consulta la nostra"
-      cookies_policy_link: "política de cookies"
-      cookies_accept_button: "Acceptar les cookies"
   home_shop: Compra ara
   brandstory_headline: "Aliments de proximitat."
   brandstory_intro: "De vegades la millor manera de solucionar el sistema és començar una nova ..."
@@ -3656,7 +3648,6 @@ ca:
     alt_text: "Text alternatiu"
     thumbnail: "Miniatura"
     back_to_images_list: "Torna a la llista d’imatges"
-    api_key: "Clau API"
     email: Correu electrònic
     account_updated: "Compte actualitzat!"
     email_updated: "El compte s’actualitzarà un cop es confirmi el nou correu electrònic."
@@ -4091,7 +4082,6 @@ ca:
       general_settings:
         edit:
           legal_settings: "Paràmetres legals"
-          cookies_consent_banner_toggle: "Mostra banner de consentiment de cookies"
           privacy_policy_url: "URL de la política de privacitat "
           enterprises_require_tos: "Les organitzacions han d'acceptar les condicions del servei"
           shoppers_require_tos: "Els compradors han d’acceptar les condicions del servei"

@@ -2126,7 +2126,6 @@ eu:
       essential_cookies_note: "Cookie gehienek identifikatzaile bakarra dute, baina ez beste datu batzuk, eta, beraz, haien helbide elektronikoa eta pasahitza, adibidez, ez dira inoiz sartzen eta ez dira azaltzen."
       cookie_domain: "Nork ezarria:"
       cookie_session_desc: "Webgunea bisiten artean erabiltzaileei gogorarazteko erabiltzen da; adibidez, zure orgatxoko artikuluak gogoratzeko."
-      cookie_consent_desc: "Cookieak gordetzeko erabiltzailearen baimenaren egoera mantentzeko erabiltzen da"
       cookie_remember_me_desc: "Erabiltzaileak webgunea gogorarazteko eskatu badu erabiltzen da. Cookie hau automatikoki ezabatzen da 12 egunen ondoren. Erabiltzaile gisa cookie hori ezabatzea nahi baduzu, deskonektatu besterik ez duzu egin behar. Cookiea zure ordenagailuan instalatzea nahi ez baduzu, ez duzu\"gogoratu\" laukitxoa markatu behar saioa hastean. "
       cookie_openstreemap_desc: "Kode irekiko mapaketa (OpenStreetMap) gure lagun hornitzaileak erabiltzen du denbora jakin batean eskaera gehiegi jasotzen ez dituzula bermatzeko, bere zerbitzuen abusua saihesteko."
       cookie_stripe_desc: "Stripe gure ordainketa-prozesadoreak bildutako datuak, iruzurrak detektatzeko https://stripe.com/cookies-policy/legal. Denda guztiek ez dute Stripe erabiltzen ordaintzeko metodo gisa, baina jardunbide egokia da iruzurrik ez egitea orrialde guztietan. Stripek, ziur aski, irudi bat sortzen du gure orrialdeetako zeinek elkarreragiten duten normalean bere APIarekin, eta, ondoren, ezohiko edozer markatzen du. Beraz, Stripe cookiea konfiguratzeak erabiltzaile bati ordaintzeko metodo bat hornitze hutsak baino funtzio zabalagoa du. Ezabatzeak zerbitzuaren segurtasunari eragin diezaioke. Striperi buruzko informazio gehiago jaso dezakezu eta pribatutasun-politika irakurri hemen: https://stripe.com/privacy. "
@@ -2144,13 +2143,6 @@ eu:
       disabling_cookies_ie_link: "https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/es/cookies /"
       disabling_cookies_note: "Baina kontuan izan Open Food Networkek erabiltzen dituen funtsezko cookieak ezabatzen edo aldatzen baditu, webguneak ez duela funtzionatuko, ezingo duela saskian ezer gehitu edo eskaerarik egin, adibidez."
-    cookies_banner:
-      cookies_usage: "Webgune honek cookieak erabiltzen ditu nabigazioa arina eta segurua izan dadin, eta nola erabiltzen duen ulertzen laguntzeko, eskaintzen ditugun funtzioak hobetzeko."
-      cookies_definition: "Cookieak testu-fitxategi oso txikiak dira, eta zure ordenagailuan gordetzen dira webgune batzuk bisitatzen dituzunean."
-      cookies_desc: "Elikagaiak online saltzeko/erosteko zerbitzua eskaintzeko beharrezkoak diren cookieak bakarrik erabiltzen ditugu. Ez dugu zure daturik saltzen. Cookieak erabiltzen ditugu, batez ere, gogoan izateko nor zaren zerbitzuan 'saioa hasten' baduzu, edo zure saskian jarri zenituen artikuluak gogoratu ahal izateko, saioa hasi ez baduzu ere. Webgunean nabigatzen jarraitzen baduzu\"Cookieak onartu\" n klik egin gabe, onartzen dugu baimena ematen digula webgunearen funtzionamendurako funtsezkoak diren cookieak gordetzeko. "
-      cookies_policy_link_desc: "Informazio gehiago nahi izanez gero, kontsultatu gure"
-      cookies_policy_link: "cookie-politika"
-      cookies_accept_button: "Cookieak onartu"
   home_shop: Erosi orain
   brandstory_headline: "Kontsumitu balioekin."
   brandstory_intro: "Batzuetan sistema konpontzeko modurik onena berria hastea da..."
@@ -4227,7 +4219,6 @@ eu:
       general_settings:
         edit:
           legal_settings: "Legezko konfigurazioak"
-          cookies_consent_banner_toggle: "Erakutsi cookieak baimentzeko bannerra"
           privacy_policy_url: "Pribatutasun-politikarekiko lotura"
           enterprises_require_tos: "Erakundeek zerbitzuaren baldintzak onartu behar dituzte"
           shoppers_require_tos: "Erosleek zerbitzu-baldintzak onartu behar dituzte"

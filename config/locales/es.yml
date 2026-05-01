@@ -2218,7 +2218,6 @@ es:
       essential_cookies_note: "La mayoría de las cookies solo contienen un identificador único, pero no otros datos, por lo que su dirección de correo electrónico y contraseña, por ejemplo, nunca se incluyen ni se exponen."
       cookie_domain: "Establecido por:"
       cookie_session_desc: "Se usa para permitir que el sitio web recuerde a los usuarios entre las visitas a la página, por ejemplo, recordar los artículos en tu carrito."
-      cookie_consent_desc: "Se usa para mantener el estado del consentimiento del usuario para almacenar cookies"
       cookie_remember_me_desc: "Se usa si el usuario ha solicitado que el sitio web lo recuerde. Esta cookie se elimina automáticamente después de 12 días. Si como usuario deseas que se elimine esa cookie, solo necesitas desconectarte. Si no deseas que la cookie se instale en tu computadora no debes marcar la casilla \"recordarme\" al iniciar sesión."
       cookie_openstreemap_desc: "Utilizado por nuestro amigo proveedor de mapeo de código abierto (OpenStreetMap) para garantizar que no recibas demasiadas solicitudes durante un período de tiempo determinado, para evitar el abuso de sus servicios."
       cookie_stripe_desc: "Datos recopilados por nuestro procesador de pagos Stripe para detectar fraudes https://stripe.com/cookies-policy/legal. No todas las tiendas usan Stripe como método de pago pero es una buena práctica evitar fraude aplicarlo a todas las páginas. Stripe probablemente crea una imagen de cuáles de nuestras páginas generalmente interactúan con su API y luego marca cualquier cosa inusual. Por lo tanto configurar la cookie Stripe tiene una función más amplia que la simple provisión de un método de pago a un usuario. Eliminarla podría afectar la seguridad del servicio en sí. Puede obtener más información acerca de Stripe y leer su política de privacidad en https://stripe.com/privacy."
@@ -2236,13 +2235,6 @@ es:
       disabling_cookies_ie_link: "https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/es/cookies/"
       disabling_cookies_note: "Pero tenga en cuenta que si elimina o modifica las cookies esenciales utilizadas por Open Food Network, el sitio web no funcionará, no podrá agregar nada a su carrito ni realizar pedidos, por ejemplo."
-    cookies_banner:
-      cookies_usage: "Este sitio utiliza cookies para que su navegación sea fluida y segura, y para ayudarnos a comprender cómo lo usa para mejorar las funciones que ofrecemos."
-      cookies_definition: "Las cookies son archivos de texto muy pequeños que se almacenan en tu ordenador cuando visitas algunos sitios web."
-      cookies_desc: "Utilizamos solo las cookies que son necesarias para ofrecerle el servicio de venta / compra de alimentos en línea. No vendemos ninguno de sus datos. Utilizamos cookies principalmente para recordar quién es usted si 'inicia sesión' en el servicio, o para poder recordar los artículos que puso en su carrito, incluso si no ha iniciado sesión. Si continúa navegando en el sitio web sin hacer clic en \"Aceptar cookies\", asumimos que nos da su consentimiento para almacenar las cookies que son esenciales para el funcionamiento del sitio web."
-      cookies_policy_link_desc: "Si desea obtener más información, consulte nuestro"
-      cookies_policy_link: "política de cookies"
-      cookies_accept_button: "Aceptar cookies"
   home_shop: Comprar ahora
   brandstory_headline: "Consume con valores."
   brandstory_intro: "A veces la mejor forma de arreglar el sistema es empezar uno nuevo…"
@@ -4002,7 +3994,6 @@ es:
     alt_text: "Texto Alternativo"
     thumbnail: "Miniatura"
     back_to_images_list: "Volver a lista de imágenes "
-    api_key: "API key"
     email: Email
     account_updated: "Cuenta actualizada!"
     email_updated: "La cuenta se actualizará una vez que se confirme el nuevo correo electrónico."
@@ -4466,7 +4457,6 @@ es:
       general_settings:
         edit:
           legal_settings: "Configuraciones legales"
-          cookies_consent_banner_toggle: "Mostrar el banner de consentimiento de cookies"
           privacy_policy_url: "Vínculo con la Política de privacidad"
           enterprises_require_tos: "Las organizaciones deben aceptar los Términos del Servicio"
           shoppers_require_tos: "Los compradores deben aceptar los términos de servicio"

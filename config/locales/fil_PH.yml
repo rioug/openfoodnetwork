@@ -1581,7 +1581,6 @@ fil_PH:
       essential_cookies_note: "karamihan sa mga cookies ay naglalaman lamang ng natatanging pagkakakilanlan at wala ng iba, kung kaya ang iyong email address at password halimbawa ay hindi kailanman mai-se-save at maipapalam sa iba."
       cookie_domain: "Sinet ng:"
       cookie_session_desc: "ginagamit upang payagan ang website na matandaan ang mga gumagamit kapag dumadalaw sa pahina, halimbawa, alalahanin ang mga item na nasa cart."
-      cookie_consent_desc: "ginagamit upang mapanatili ang status ng permiso ng gumagamit sa pag-store ng cookies"
       cookie_remember_me_desc: "ginagamit  kapag ang user ay humingi ng pahintulot na siya ay maalala. ang cookie na ito ay awtomatikong nabubura makalipas ang 12 araw. kung bilang gumagamit ay nais mong mabura ang cookie, kailangan mo lamang maglog-out. kung hindi mo nais na mailagay ang cookie sa iyong computer, hindi mo dapat lagyan ng check ang \"alalahanin ako\" na kahon kapag nagla-log-in."
       cookie_openstreemap_desc: "ay ginagamit ng tagapagbigay sa atin ng serbisyo ukol sa open source mapping(OpennStreetMap) para masiguradong hindi ito makakatanggap ng maraming request sa tinakdang oras, at upang maiwasan na din ang pag-abuso sa kanilang serbisyo."
       cookie_stripe_desc: "Mga data na nakolekta ng Stripe, ang tagaproseso para sa bayad, upang magamit sa pag-detect ng fraud https://stripe.com/cookies-policy/legal. hindi lahat ng shop ay gumagamit ng Stripe bilang paraan ng pagbabayad ngunit iminumungkahi namin itong gamitin sa lahat ng pahina upang maiwasan ang fraud at ilegal na pagkuha ng iyong impormasyon."
@@ -1599,13 +1598,6 @@ fil_PH:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Ngunit dapat mong malaman na kapag binura o binago mo ang kinakailangang cookies na ginagamit ng Open Food Network, ang website ay hindi gagana at, halimbawa, hindi ka maaring makapaglagay sa iyong cart upang makapagcheckout."
-    cookies_banner:
-      cookies_usage: "ang site na ito ay gumagamit ng mga cookies upang maging mas ligtas at madali ang paggamit ng site. nakakatulong din ito sa amin upang maintindihan kung paano ang inyong paggamit para mas maging maayos ang serbisyong aming ibibigay sa inyo."
-      cookies_definition: "ang mga cookies ay maliliit na text files na naiimbak sa iyong computer kapag bumibisita ka sa mga website"
-      cookies_desc: "ginagamit lang namin ang mga cookies na kinakailangan para sa pagbibigay ng serbisyo ng pagbebenta/pamimili ng pagkain gamit ang internet. Hindi namin gagamitin ang inyong data para kumita. ang pangunahing dahilan sa paggamit ng cookies ay para matandaan kung sino ka kapag ikaw ay naglog-in sa serbisyo at upang panatilihin ang mga item na nilagay mo sa iyong cart habang ikaw ay hindi pa nakalog-in. kung ikaw ay gumagamit ng website ng hindi pinipindot ang \"tanggapin ang cookies\", ipapalagay namin na binibigyan mo kami ng pahintulot na i-save ang mga cookies na lubhang mahalaga sa maayos na paggamit ng website."
-      cookies_policy_link_desc: "para sa karagdagangn impormasyon, tignan ang"
-      cookies_policy_link: "patakaran ng cookies"
-      cookies_accept_button: "tanggapin ang cookies"
   home_shop: Mamili Ngayon
   brandstory_headline: "Etikal na pagkain."
   brandstory_intro: "Minsan ang pinakamabuting paraan para ayusin ang sistema ay ang pagbuo ulit ng bago..."
@@ -3499,7 +3491,6 @@ fil_PH:
       general_settings:
         edit:
           legal_settings: "Legal Settings"
-          cookies_consent_banner_toggle: "ipakita ang banner ng pagpayag sa cookies"
           privacy_policy_url: "Patakaran sa privacy URL"
           enterprises_require_tos: "ang mga enterprise ay dapat tanggapin ang Termino ng serbisyo."
           cookies_policy_matomo_section: "ipakita ang seksyon ng Matomo sa pahina ng patakaran sa cookies"

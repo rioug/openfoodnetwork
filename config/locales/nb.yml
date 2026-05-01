@@ -2261,7 +2261,6 @@ nb:
       essential_cookies_note: "De fleste informasjonskapsler inneholder bare en unik identifikator, men ingen andre data, slik at epostadressen og passordet ditt for eksempel aldri er inneholdt i dem og aldri blir eksponert."
       cookie_domain: "Satt av:"
       cookie_session_desc: "Brukes til å tillate nettstedet å huske brukere mellom sidebesøk, for eksempel, husk elementer i handlekurven din."
-      cookie_consent_desc: "Brukes til å opprettholde status for brukerens samtykke til å lagre informasjonskapsler"
       cookie_remember_me_desc: "Brukes hvis brukeren har bedt nettsiden om å huske ham. Denne informasjonskapsel slettes automatisk etter 12 dager. Hvis du som bruker ønsker at cookien skal slettes, trenger du bare å logge ut. Hvis du ikke vil at cookien skal installeres på datamaskinen, bør du ikke merke avkrysningsruten «husk meg» når du logger inn."
       cookie_openstreemap_desc: "Brukes av vår vennlige open source kartleverandør (OpenStreetMap) for å sikre at den ikke mottar for mange forespørsler i en gitt tidsperiode for å forhindre misbruk av sine tjenester."
       cookie_stripe_desc: "Data samlet inn av betalingsprosessoren vår Stripe for svindeloppdagelse https://stripe.com/cookies-policy/legal. Ikke alle butikker bruker Stripe som betalingsmetode, men det er en god praksis å forhindre at svindel gjelder for alle sider. Stripe bygger sannsynligvis et bilde av hvilke av våre sider som til vanlig samhandler med API-en og deretter flagge alt uvanlig. Så å sette Stripe-cookien har en bredere funksjon enn bare å levere en betalingsmetode til en bruker. Fjerning av det kan påvirke sikkerheten til selve tjenesten. Du kan lære mer om Stripe og lese retningslinjene for personvern på https://stripe.com/privacy."
@@ -2279,13 +2278,6 @@ nb:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Men vær oppmerksom på at hvis du sletter eller endrer de essensielle informasjonskapslene som brukes av Open Food Network, vil nettstedet ikke fungere, du vil ikke kunne legge til noe i handlekurven din eller for eksempel for å sjekke ut."
-    cookies_banner:
-      cookies_usage: "Dette nettstedet bruker informasjonskapsler for å gjøre navigasjonen friksjonsfri og sikker, og for å hjelpe oss å forstå hvordan du bruker den for å forbedre funksjonene vi tilbyr."
-      cookies_definition: "Informasjonskapsler er svært små tekstfiler som er lagret på datamaskinen din når du besøker noen nettsteder."
-      cookies_desc: "Vi bruker bare informasjonskapsler som er nødvendige for å levere deg tjenesten til å selge/kjøpe mat på nettet. Vi selger ikke noen av dataene dine. Vi bruker informasjonskapsler hovedsakelig for å huske hvem du er hvis du logger inn på tjenesten, eller for å kunne huske elementene du legger inn i handlekurven din selv om du ikke er logget inn. Hvis du fortsetter å navigere på nettstedet uten å klikke på \"Godta cookies\", antar vi at du gir oss samtykke til å lagre informasjonskapslene som er avgjørende for nettstedet."
-      cookies_policy_link_desc: "Hvis du vil lære mer, sjekk vår"
-      cookies_policy_link: "policy om informasjonskapsler"
-      cookies_accept_button: "Godta Informasjonskapsler"
   home_shop: Handle nå
   brandstory_headline: "Food, unincorporated."
   brandstory_intro: "Noen ganger er det best å fikse systemet ved å starte et nytt..."
@@ -4024,7 +4016,6 @@ nb:
     alt_text: "Alternativ Tekst"
     thumbnail: "Miniatyrbilde"
     back_to_images_list: "Tilbake til bildelisten"
-    api_key: "API-nøkkel"
     email: Epost
     account_updated: "Konto oppdatert!"
     email_updated: "Kontoen vil bli oppdatert når den nye epostadressen er bekreftet."
@@ -4495,7 +4486,6 @@ nb:
       general_settings:
         edit:
           legal_settings: "Juridiske innstillinger"
-          cookies_consent_banner_toggle: "Vis informasjonskapsler samtykkebanner"
           privacy_policy_url: "Personvernspolicy URL"
           enterprises_require_tos: "Bedrifter må godta Tjenestevilkår"
           shoppers_require_tos: "Kundene må godta vilkårene for bruk"

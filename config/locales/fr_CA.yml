@@ -2405,7 +2405,6 @@ fr_CA:
       essential_cookies_note: "Les cookies contiennent un identifiant unique, mais pas d'autres données. Vos emails et mots de passe par exemple ne sont jamais exposés dans les cookies!"
       cookie_domain: "Déposé par!"
       cookie_session_desc: "Utilisé pour garder en mémoire l'utilisateur d'une page à l'autre lors de la navigation sur le site, ou pour se souvenir des produits dans le panier."
-      cookie_consent_desc: "Utilisé pour se souvenir du consentement de l'utilisation à l'utilisation de cookies."
       cookie_remember_me_desc: "Utilisé si l'utilisateur a cliqué sur \"se souvenir de moi\" (pour ne pas avoir à se reconnecter à chaque fois). Ce cookie est automatiquement supprimé après 12 jours. Si l'utilisateur souhaite supprimer ce cookie, il n'a qu'à se déconnecter. Si l'utilisateur ne souhaite pas que ce cookie soit installé sur son terminal, il suffit de ne pas cocher la case \"se souvenir de moi\" au moment de la connexion."
       cookie_openstreemap_desc: "Utilisé par le logiciel de cartographie open source  pour assurer qu'il ne reçoit pas trop de requêtes sur un laps de temps déterminé, et éviter ainsi les risques d'abus de leurs services."
       cookie_stripe_desc: "Utilisé par le terminal de payement en ligne Stripe (proposé aux utilisateurs d'Open Food France) https://stripe.com/fr/cookies-policy/legal. Même si toutes les boutiques n'utilisent pas Stripe, c'est une bonne pratique en matière de sécurité d'appliquer ce cookie sur toutes les pages vues. Stripe construit probablement une image des pages qui ont un quelconque lien avec l'API connectant Open Food France à leur système de paiement pour détecter les comportements anormaux pouvant suggérer un risque de fraude. Donc ce cookie a un rôle qui va au-delà de la simple fourniture d'un système de paiement. Le supprimer pourrait affecter la sécurité du service. Pour en savoir plus sur la politique de confidentialité de Stripe: https://stripe.com/fr/privacy."
@@ -2423,13 +2422,6 @@ fr_CA:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Mais gardez bien en tête que si vous supprimez ou modifiez un des cookies essentiels utilisés par Open Food France, le site ne fonctionnera pas correctement, vous ne pourrez pas ajouter des produits à votre panier ni finaliser votre commande par exemple."
-    cookies_banner:
-      cookies_usage: "Ce site utilise des cookies pour rendre votre navigation fluide et sécurisée, et nous aider à comprendre l'usage que vous faites de la plateforme afin d'améliorer les fonctionnalités offertes."
-      cookies_definition: "Les cookies sont de tout petits fichiers texte qui sont stockés sur votre ordinateur quand vous naviguez sur certains sites web."
-      cookies_desc: "Nous n'utilisons que les cookies nécessaires pour vous offrir un service de vente/achat de produits alimentaires en ligne performant. Nous ne vendons aucune de vos données. Nous utilisons ces cookies principalement pour vous permettre de rester connecté(e) après votre première connexion, ou encore pour mémoriser les produits dans votre panier lorsque vous n'êtes pas connecté(e). Si vous naviguez sur le site sans cliquer sur \"Accepter les cookies\", cela vaut consentement à l'utilisation des cookies nécessaires au bon fonctionnement du site."
-      cookies_policy_link_desc: "Si vous voulez en savoir plus, consultez notre"
-      cookies_policy_link: "politique de cookies"
-      cookies_accept_button: "Accepter les cookies"
   home_shop: Faire mes courses
   brandstory_headline: "Des aliments porteurs de sens."
   brandstory_intro: "Parfois, le meilleur moyen de réparer le système, c'est d'en inventer un autre..."
@@ -4282,8 +4274,6 @@ fr_CA:
     alt_text: "Texte alternatif"
     thumbnail: "Miniature"
     back_to_images_list: "Retour à la liste des images"
-    backend_url: "URL du backend"
-    api_key: "Clé API"
     email: Email
     account_updated: "Compte mis à jour!"
     email_updated: "Le compte sera mis à jour une fois la nouvelle adresse email confirmée."
@@ -4761,7 +4751,6 @@ fr_CA:
       general_settings:
         edit:
           legal_settings: "Configuration légales"
-          cookies_consent_banner_toggle: "Afficher la bannière de consentement à l'utilisation des cookies"
           privacy_policy_url: "URL de la politique de confidentialité"
           enterprises_require_tos: "Les entreprises doivent accepter les Conditions Générales d'Utilisation"
           shoppers_require_tos: "Les acheteurs doivent accepter les CGU."

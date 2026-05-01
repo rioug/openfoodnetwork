@@ -1637,7 +1637,6 @@ pt:
       essential_cookies_note: "A maioria das cookies contém apenas um identificador e portanto o seu email e password nunca são guardados nas cookies."
       cookie_domain: "Definida por:"
       cookie_session_desc: "Usada para identificar o utilizador entre páginas, por exemplo, items contidos no carrinho de compras."
-      cookie_consent_desc: "Usado para manter o estado do consentimento sobre a utilização de cookies."
       cookie_remember_me_desc: "Usado no caso em que o/a utilizador/a pediu ao website para se lembrar. Esta cookie é automaticamente apagada passados 12 dias."
       cookie_openstreemap_desc: "Usado pelo nosso fornecedor amigável e de código aberto (OpenStreetMap) para garantir que não recebe demasiados pedidos durante um certo período de tempo, para evitar que os seus servidores sejam abusados."
       cookie_stripe_desc: "Cookie definida pelo nosso fornecedor de serviços de pagamento Stripe. Para mais informações veja https://stripe.com/cookies-policy/legal e https://stripe.com/privacy."
@@ -1655,13 +1654,6 @@ pt:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Repare que se desactivar as cookies totalmente o website deixará de funcionar."
-    cookies_banner:
-      cookies_usage: "Este website usa cookies para melhorar a experiência do utilizador."
-      cookies_definition: "Cookies são pequenos ficheiros de texto que são guardados no seu computador quando visita um website."
-      cookies_desc: "Usamos Cookies essencialmente para lembrar se fez login no website e que items é que tem no seu carrinho. Se continuar a navegar no website sem aceitar a política de cookies, nós assumimos que nos está a dar consentimento para guardar as cookies que são essenciais para o funcionamento do website. Aqui está a lista de cookies que usamos!"
-      cookies_policy_link_desc: "Se quer saber mais, veja a nossa"
-      cookies_policy_link: "politíca de cookies"
-      cookies_accept_button: "Aceitar Cookies"
   home_shop: Ir às compras
   brandstory_headline: "Para quem consome com princípios"
   brandstory_intro: "Às vezes a melhor forma de consertar o sistema é construir um novo..."
@@ -3488,7 +3480,6 @@ pt:
       general_settings:
         edit:
           legal_settings: "Configurações Legais"
-          cookies_consent_banner_toggle: "Mostrar o Banner de consentimento de Cookies"
           privacy_policy_url: "URL da Politíca de Privacidade"
           enterprises_require_tos: "As organizações têm de aceitar os Termos de Serviço"
           cookies_policy_matomo_section: "Mostrar a secção do Matomo na página da política de Cookies"

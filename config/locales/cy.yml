@@ -2290,7 +2290,6 @@ cy:
       essential_cookies_note: "Mae'r mwyafrif o gwcis yn cynnwys dynodwr unigryw, ond dim data arall, felly nid yw'ch cyfeiriad e-bost a'ch cyfrinair er enghraifft byth yn cael eu cynnwys ynddynt ac nid ydynt yn cael eu rhyddhau."
       cookie_domain: "Gosodwyd Gan:"
       cookie_session_desc: "Fe'i defnyddir i ganiatáu i'r wefan gofio defnyddwyr rhwng ymweliadau, er enghraifft, cofio eitemau yn eich basged."
-      cookie_consent_desc: "Fe'i defnyddir i gynnal statws caniatâd defnyddiwr i storio cwcis"
       cookie_remember_me_desc: "Defnyddir hwn os yw'r defnyddiwr wedi gofyn i'r wefan ei gofio. Caiff y cwci hwn ei ddileu'n awtomatig ar ôl 12 diwrnod. Os ydych chi fel defnyddiwr eisiau i'r cwci hwnnw gael ei ddileu, y cwbl sydd angen ei wneud yw allgofnodi. Os nad ydych chi am i'r cwci hwnnw gael ei osod ar eich cyfrifiadur peidiwch â thicio'r blwch gwirio “cofio fi” wrth fewngofnodi."
       cookie_openstreemap_desc: "Yn cael ei ddefnyddio gan ein darparwr mapio ffynhonnell agored cyfeillgar (OpenStreetMap) i sicrhau nad yw'n derbyn gormod o geisiadau yn ystod cyfnod penodol, i atal cam-ddefnyddio eu gwasanaethau."
       cookie_stripe_desc: "Data a gesglir gan ein prosesydd talu Stripe er mwyn darganfod twyll https://stripe.com/cookies-policy/legal. Nid yw pob siop yn defnyddio Stripe fel dull talu ond mae'n arfer da o ran atal twyll i'w ddefnyddio ar bob tudalen. Mae'n debyg bod Stripe yn adeiladu llun o ba rai o'n tudalennau sydd fel arfer yn rhyngweithio â'u API ac yna'n tynnu sylw at unrhyw beth anarferol. Felly mae gosod cwci Stripe yn golygu swyddogaeth ehangach na darparu dull talu i ddefnyddiwr yn unig. Gall ei ddileu effeithio ar ddiogelwch y gwasanaeth ei hun. Gellir dysgu mwy am Stripe a darllen ei bolisi preifatrwydd yn https://stripe.com/privacy."
@@ -2308,13 +2307,6 @@ cy:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/cy-ww/cookies/"
       disabling_cookies_note: "Ond byddwch yn ymwybodol, os byddwch chi'n dileu neu'n addasu'r cwcis hanfodol a ddefnyddir gan y Open Food Network, ni fydd y wefan yn gweithio, ni fyddwch yn gallu ychwanegu unrhyw beth at eich basged na thalu, er enghraifft."
-    cookies_banner:
-      cookies_usage: "Mae'r wefan hon yn defnyddio cwcis er mwyn hwyluso a diogelu eich profiad llywio, ac i'n helpu ni i ddeall sut rydych chi'n ei defnyddio er mwyn gwella'r nodweddion rydyn ni'n eu cynnig."
-      cookies_definition: "Ffeiliau testun bach iawn yw cwcis sy'n cael eu storio ar eich cyfrifiadur wrth ichi ymweld â rhai gwefannau."
-      cookies_desc: "Rydym yn defnyddio'r cwcis yn unig sy'n angenrheidiol i ddarparu gwasanaeth i chi o ran gwerthu / prynu bwyd ar-lein. Nid ydym yn gwerthu unrhyw ran o'ch data. Rydyn ni'n defnyddio cwcis yn bennaf i gofio pwy ydych chi os ydych chi'n 'mewngofnodi i'r gwasanaeth, neu i allu cofio'r eitemau rydych chi'n eu rhoi yn eich basged hyd yn oed os nad ydych chi wedi mewngofnodi. Os ydych chi'n dal i lywio ar y wefan heb glicio ar “Derbyn cwcis”, rydym yn cymryd eich bod yn rhoi caniatâd i ni storio'r cwcis sy'n hanfodol ar gyfer rhedeg y wefan."
-      cookies_policy_link_desc: "Os ydych chi eisiau dysgu mwy, gwiriwch ein"
-      cookies_policy_link: "polisi cwcis"
-      cookies_accept_button: "Derbyn Cwcis"
   home_shop: Siopa Nawr
   brandstory_headline: "Tyfu bwyd lleol ar lein."
   brandstory_intro: "Weithiau y ffordd orau i drwsio'r system yw trwy cychwyn un newydd ....."
@@ -4122,7 +4114,6 @@ cy:
     alt_text: "Testun Amgen"
     thumbnail: "Cryno-lun"
     back_to_images_list: "Yn ôl i'r Rhestr Delweddau"
-    api_key: "Allwedd API"
     email: E-bost
     account_updated: "Diweddarwyd y cyfrif!"
     email_updated: "Bydd y cyfrif yn cael ei ddiweddaru ar ôl cadarnhau'r cyfeiriad e-bost newydd."
@@ -4595,7 +4586,6 @@ cy:
       general_settings:
         edit:
           legal_settings: "Gosodiadau Cyfreithiol"
-          cookies_consent_banner_toggle: "Arddangos baner cytuno â chwcis"
           privacy_policy_url: "URL Polisi Preifatrwydd"
           enterprises_require_tos: "Rhaid i fentrau dderbyn Telerau Gwasanaeth"
           shoppers_require_tos: "Mae'n rhaid i Siopwyr dderbyn y Telerau Gwasanaeth."

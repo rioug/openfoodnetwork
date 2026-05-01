@@ -1621,7 +1621,6 @@ nl_BE:
       essential_cookies_note: "De meeste cookies bevatten slechts een uniek identificatienummer, maar geen andere gegevens, dus je e-mailadres en wachtwoord worden bijvoorbeeld niet gebruikt en worden dus ook niet blootgesteld."
       cookie_domain: "Ingesteld Door:"
       cookie_session_desc: "Wordt gebruikt om we website toe te laten de gebruikers te onthouden tussen paginabezoeken, bijvoorbeeld, het onthouden van artikels in je winkelwagentje."
-      cookie_consent_desc: "Gebruikt om de toestand van de gebruikers toestemming om cookies te bewaren"
       cookie_remember_me_desc: "Wordt gebruikt indien de gebruiker heeft ingesteld dat de website hem mag onthouden. Deze cookie wordt na 12 dagen automatisch verwijderd. Indine je als gebruiker wil dat deze cookie wordt verwijderd, dan hoef je slechts uit te loggen. Als je niet wil dat deze cookie geïnstalleerd wordt op je computer dan moet je het vakje 'onthoudt me' niet aanvinken wanneer je inlogt."
       cookie_openstreemap_desc: "Gebruikt door onze bevriende opensource kaartaanbieder (OpenStreetMap) om te verzekeren dat ze niet te veel aanvragen krijgen gedurende een bepaalde tijdsperiode, en zo te verhinderen dat er misbruik wordt gemaakt van hun diensten."
       cookie_stripe_desc: "Gegevens verzamelt door onze betalingsverwerker Stripe voor fraudedetectie https://stripe.com/cookies-policy/legal. Niet alle winkels gebruiken Stripe als een betaalmethode maar het is een goede manier om te verhinderen dat er gefraudeerd wordt op alle webpagina's. Waarschijnlijk heeft Stripe een idee welke van onze pagina's vaak met hun API interageren en signaleren dan zo ongebruikelijke activiteit. Dus het instellen van de Stripe cookie heeft een ruimer nut dan enkel het voorzien van een betaalmethode naar een gebruiker. De cookie verwijderen kan dus een invloed hebben op de veiligheid van de dienst zelf. Je kan meer te weten komen over Stripe en hun privacy beleid op https://stripe.com/privacy."
@@ -1639,13 +1638,6 @@ nl_BE:
       disabling_cookies_ie_link: "https://support.microsoft.com/nl-be/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://support.apple.com/nl-be/guide/safari/sfri11471/mac"
       disabling_cookies_note: "Maar wees je er van bewust dat wannneer je essentiële cookies aanpast of verwijderd gebruikt door het Open Food Network, de website niet zal werken, je zal dan niets kunnen toevoegen aan je winkelwagentje of verder gaan naar de kassa bijvoorbeeld."
-    cookies_banner:
-      cookies_usage: "Deze site maakt gebruikt van cookies om navigatie vlot en veilig te maken, en om ons te helpen begrijpen hoe we de toepassingen die we aanbieden in de toekomst te verbeteren."
-      cookies_definition: "Cookies zijn héél kleine tekstbestandjes die opgeslagen worden op je computer wanneer je bepaalde websites bezoekt."
-      cookies_desc: "We gebruiken cookies hoofdzakelijk om te onthouden wie je bent wanneer op het portaal inlogt, of om in staat te zijn de artikels te onthouden die je aan je winkelwagentje hebt toegevoegd zelfs wanneer je niet ingelogd bent. Als je op de website blijft navigeren zonder geklikt te hebben op 'Accepteer cookies', dan veronderstellen we dat je ons de toestemming geeft om cookies te bewaren die essentieel zijn voor het functioneren van de website."
-      cookies_policy_link_desc: "Als je meer wil te weten komen, kijk eens naar onze"
-      cookies_policy_link: "cookie policy"
-      cookies_accept_button: "Aanvaard Cookies"
   home_shop: Winkel Nu
   brandstory_headline: "Zinvol voedsel"
   brandstory_intro: "De beste manier om een systeem te herstellen is om een nieuwe te starten..."
@@ -3510,7 +3502,6 @@ nl_BE:
       general_settings:
         edit:
           legal_settings: "De legale instelling"
-          cookies_consent_banner_toggle: "Laat de strook met uw akkoord voor de cookies zien"
           privacy_policy_url: "Privacybeleid URL"
           enterprises_require_tos: "Debedrijven moeten de Algemene gebruiksvoorwaarden aanvaarden"
           cookies_policy_matomo_section: "Geef Matomosectie weer op cookiesprivacypagina"

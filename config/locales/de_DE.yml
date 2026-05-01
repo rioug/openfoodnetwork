@@ -2129,7 +2129,6 @@ de_DE:
       essential_cookies_note: "Die meisten Cookies enthalten nur einen eindeutigen Bezeichner, aber keine anderen Daten. Ihre E-Mail-Adresse und Ihr Kennwort sind zum Beispiel niemals darin enthalten und werden nie veröffentlicht."
       cookie_domain: "Einstellen nach:"
       cookie_session_desc: "Wird verwendet, damit die Website sich zwischen den Seitenbesuchen an die Benutzer erinnern kann, z. B. an Artikel im Warenkorb."
-      cookie_consent_desc: "Wird verwendet, um den Status der Benutzerzustimmung zum Speichern von Cookies beizubehalten."
       cookie_remember_me_desc: "Wird verwendet, wenn der Benutzer die Website aufgefordert hat, sich an ihn zu erinnern. Dieses Cookie wird nach 12 Tagen automatisch gelöscht. Wenn Sie als Benutzer möchten, dass dieses Cookie gelöscht wird, müssen Sie sich einfach ausloggen. Wenn Sie nicht möchten, dass das Cookie auf Ihrem Computer gespeichert wird, sollten Sie das Kontrollkästchen \"Eingeloggt bleiben\" deaktivieren, wenn Sie sich einloggen."
       cookie_openstreemap_desc: "Wird von unserem freundlichen Open-Source-Mapping-Anbieter (OpenStreetMap) verwendet, um sicherzustellen, dass während eines bestimmten Zeitraums nicht zu viele Anfragen eingehen, um den Missbrauch ihrer Dienste zu verhindern."
       cookie_stripe_desc: "Daten, gesammelt von unserem Zahlungsabwickler Stripe für die Betrugserkennung https://stripe.com/cookies-policy/legal. Nicht alle Läden verwenden Stripe als Zahlungsart, aber es hat sich bewährt, es auf alle Seiten anzuwenden. Stripe erstellt wahrscheinlich ein Bild davon, welche unserer Seiten normalerweise mit ihrer API interagieren und merkt, wenn etwas Ungewöhnliches passiert. Das Festlegen des Stripe-Cookies hat also eine breitere Funktion als die Bereitstellung einer Zahlungsart für einen Benutzer. Das Entfernen könnte die Sicherheit des Dienstes selbst beeinträchtigen. Sie können mehr über Stripe erfahren und dessen Datenschutzrichtlinie unter https://stripe.com/privacy lesen."
@@ -2147,13 +2146,6 @@ de_DE:
       disabling_cookies_ie_link: "https://support.microsoft.com/de-de/topic/l%C3%B6schen-und-verwalten-von-cookies-168dab11-0753-043d-7c16-ede5947fc64d"
       disabling_cookies_safari_link: "https://www.apple.com/de/legal/privacy/de-ww/cookies/"
       disabling_cookies_note: "Beachten Sie jedoch, dass die Website nicht funktioniert, wenn Sie die essentiellen Cookies, die von Open Food Network verwendet werden, löschen oder ändern. Sie können also nichts zum Warenkorb hinzufügen und auch nicht zur Kasse gehen."
-    cookies_banner:
-      cookies_usage: "Diese Website verwendet Cookies, um Ihr Kauferlebnis reibungslos und sicher zu gestalten und um darüber hinaus zu verstehen, wie Sie die Website verwenden, um die von uns angebotenen Funktionen zu verbessern."
-      cookies_definition: "Cookies sind sehr kleine Textdateien, die beim Besuch einiger Websites auf Ihrem Computer gespeichert werden."
-      cookies_desc: "Wir verwenden nur die Cookies, die notwendig sind, um Ihnen den Service des Online-Kaufs/-Verkaufs von Lebensmitteln zu bieten. Wir verkaufen keine Ihrer Daten. Wir verwenden Cookies hauptsächlich, um uns daran zu erinnern, wer Sie sind, wenn Sie sich bei unserem Dienst einloggen, oder um uns die Artikel merken zu können, die Sie in Ihren Warenkorb legen, auch wenn Sie nicht eingeloggt sind. Wenn Sie die Weite nutzen, ohne auf \"Cookies akzeptieren\" zu klicken, nehmen wir an, dass Sie uns die Speicherung von Cookies erlauben, die für das Funktionieren der Website notwendig sind."
-      cookies_policy_link_desc: "Wenn Sie mehr erfahren möchten, lesen Sie unsere"
-      cookies_policy_link: "Hinweise zu Cookies"
-      cookies_accept_button: "Cookies akzeptieren"
   home_shop: Jetzt regional einkaufen
   brandstory_headline: "Regionale Lebensmittel direkt online kaufen"
   brandstory_intro: "Produkte von Produzenten vor Ort finden, online bestellen und abholen oder liefern lassen.\nWerden Sie Teil einer Bewegung, die mit jedem Einkauf ein Zeichen setzt für hochwertige regionale Produkte, faire Preise, Nachhaltigkeit und Transparenz. Helfen Sie uns bei ..."
@@ -3888,7 +3880,6 @@ de_DE:
     alt_text: "Alternativtext"
     thumbnail: "Miniaturansicht"
     back_to_images_list: "Zurück zur Bilderliste"
-    api_key: "API-Schlüssel"
     email: E-Mail-Adresse
     account_updated: "Konto aktualisiert!"
     email_updated: "Das Konto wird aktualisiert, sobald die neue E-Mail-Adresse bestätigt wurde."
@@ -4345,7 +4336,6 @@ de_DE:
       general_settings:
         edit:
           legal_settings: "Rechtliche Einstellungen"
-          cookies_consent_banner_toggle: "Zustimmungsbanner für Cookies anzeigen"
           privacy_policy_url: "URL der Datenschutzerklärung"
           enterprises_require_tos: "Unternehmen müssen den Nutzungsbedingungen zustimmen"
           shoppers_require_tos: "Kunden müssen den Allgemeinen Geschäftsbedingungen zustimmen"

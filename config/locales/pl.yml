@@ -1487,7 +1487,6 @@ pl:
       essential_cookies_note: "Większość plików cookie zawiera tylko unikalny identyfikator, ale żadnych innych danych, więc na przykład Twój adres e-mail i hasło nigdy nie są w nich zawarte i nigdy nie są ujawniane."
       cookie_domain: "Ustanowiony:"
       cookie_session_desc: "Służy do umożliwienia witrynie zapamiętania użytkowników między wizytami na stronie, na przykład zapamiętania pozycji w koszyku."
-      cookie_consent_desc: "Służy do zachowania statusu zgody użytkownika na przechowywanie plików cookies"
       cookie_remember_me_desc: "Używane, gdy użytkownik zażądał, aby witryna go zapamiętała. Ten plik cookie jest automatycznie usuwany po 12 dniach. Jeśli jako użytkownik chcesz, aby ten plik cookie został usunięty, wystarczy się wylogować. Jeśli nie chcesz, aby ten plik cookie był instalowany na Twoim komputerze, nie zaznaczaj pola wyboru „zapamiętaj mnie” podczas logowania."
       cookie_openstreemap_desc: "Używany przez naszego przyjaznego dostawcę mapowania typu open source (OpenStreetMap), aby zapewnić, że nie otrzyma zbyt wielu żądań w danym okresie, aby zapobiec nadużyciom ich usług."
       cookie_stripe_desc: "Dane zbierane przez nasz procesor płatności Stripe w celu wykrywania oszustw https://stripe.com/cookies-policy/legal. Nie wszystkie sklepy używają Stripe jako metody płatności, ale dobrą praktyką jest zapobieganie oszustwom i stosowanie go na wszystkich stronach. Stripe prawdopodobnie tworzy obraz tego, które z naszych stron zwykle wchodzą w interakcję z ich API, a następnie zaznacza wszystko, co nietypowe. Zatem ustawienie pliku cookie Stripe ma szerszą funkcję niż zwykłe udostępnienie metody płatności użytkownikowi. Usunięcie go może wpłynąć na bezpieczeństwo samej usługi. Możesz dowiedzieć się więcej o Stripe i przeczytać jego politykę prywatności pod adresem https://stripe.com/privacy."
@@ -1505,13 +1504,6 @@ pl:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Należy jednak pamiętać, że jeśli usuniesz lub zmodyfikujesz podstawowe pliki cookie używane przez Open Food Network, strona nie będzie działać, nie będziesz mógł nic dodać do koszyka ani na przykład do kasy."
-    cookies_banner:
-      cookies_usage: "Ta strona wykorzystuje pliki cookie, aby nawigacja była bezpieczna i bezproblemowa oraz aby pomóc nam zrozumieć, w jaki sposób z niej korzystasz, aby ulepszyć oferowane przez nas funkcje."
-      cookies_definition: "Pliki cookie to bardzo małe pliki tekstowe, które są przechowywane na komputerze podczas odwiedzania niektórych witryn internetowych."
-      cookies_desc: "Używamy tylko tych plików cookie, które są niezbędne do świadczenia usługi sprzedaży / kupowania żywności online. Nie sprzedajemy żadnych Twoich danych. Używamy plików cookie głównie po to, aby zapamiętać, kim jesteś, jeśli „logujesz się” do usługi, lub aby móc zapamiętać pozycje, które umieszczasz w koszyku, nawet jeśli nie jesteś zalogowany. Jeśli nadal poruszasz się po stronie bez klikania na „Akceptuj pliki cookie”, zakładamy, że wyrażasz zgodę na przechowywanie plików cookie, które są niezbędne do funkcjonowania serwisu."
-      cookies_policy_link_desc: "Jeśli chcesz dowiedzieć się więcej, zajrzyj do naszego"
-      cookies_policy_link: "polityka plików cookies"
-      cookies_accept_button: "Akceptuje ciasteczka"
   home_shop: Zrób zakupy
   brandstory_headline: "Żywność, uspołeczniona."
   brandstory_intro: "Czasami najlepszym sposobem naprawienia systemu jest rozpoczęcie nowego…"
@@ -3452,7 +3444,6 @@ pl:
       general_settings:
         edit:
           legal_settings: "Ustawienia prawne"
-          cookies_consent_banner_toggle: "Wyświetl baner zgody na pliki cookie"
           privacy_policy_url: "Adres URL polityki prywatności"
           enterprises_require_tos: "Podmioty muszą zaakceptować warunki korzystania z usługi"
           cookies_policy_matomo_section: "Wyświetl sekcję Matomo na stronie z polityką plików cookie"

@@ -1735,7 +1735,6 @@ tr:
       essential_cookies_note: "Çerezlerin çoğu yalnızca benzersiz bir tanımlayıcı içerir, ancak başka hiçbir veri içermez, bu nedenle örneğin e-posta adresiniz ve şifreniz hiçbir zaman bunlarda bulunmaz ve hiçbir zaman açıklanmaz."
       cookie_domain: "Olarak ayarla:"
       cookie_session_desc: "Web sitesinin sayfa ziyaretleri arasındaki kullanıcıları hatırlamasına, örneğin sepetinizdeki öğeleri hatırlamasına izin vermek için kullanılır."
-      cookie_consent_desc: "Çerezleri depolamak için kullanıcı onayının durumunu korumak amacıyla kullanılır"
       cookie_remember_me_desc: "Kullanıcı web sitesinden kendisini hatırlamasını isterse kullanılır. Bu çerez 12 gün sonra otomatik olarak silinir. Kullanıcı olarak bu çerezin silinmesini istiyorsanız, hesabınızdan çıkış yapmanız yeterli. Bu çerezin bilgisayarınıza yüklenmesini istemiyorsanız, giriş yaparken “beni hatırla” onay kutusunu işaretlememelisiniz."
       cookie_openstreemap_desc: "Sevecen açık kaynak harita sağlayıcımız (OpenStreetMap) tarafından, belirli bir süre içinde çok fazla istek almamasını ve hizmetlerinin kötüye kullanılmasını önlemek için kullanılır."
       cookie_stripe_desc: "Sahtekarlık tespiti için ödeme işlemcimiz Stripe tarafından toplanan veriler https://stripe.com/cookies-policy/legal. Tüm mağazalar Stripe'ı ödeme yöntemi olarak kullanmaz, ancak dolandırıcılığın tüm sayfalara uygulanmasını önlemek iyi bir yöntemdir. Stripe muhtemelen sayfalarımızdan hangilerinin genellikle API'leriyle etkileşime girdiğini gösteren bir resim oluşturur ve daha sonra olağandışı bir şeyi işaretler. Dolayısıyla, Stripe çerezinin ayarlanması, kullanıcıya ödeme yönteminin sağlanmasından daha geniş bir işleve sahiptir. Kaldırılması hizmetin güvenliğini etkileyebilir. Stripe hakkında daha fazla bilgi edinebilir ve gizlilik politikasını https://stripe.com/privacy adresinde okuyabilirsiniz."
@@ -1753,13 +1752,6 @@ tr:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Ancak, Açık Gıda Ağı tarafından kullanılan temel çerezleri silerseniz veya değiştirirseniz, web sitesinin çalışmadığını, örneğin ödeme yapmak için sepetinize hiçbir şey ekleyemeyeceğinizi unutmayın."
-    cookies_banner:
-      cookies_usage: "Bu site, gezinmenizi sorunsuz ve güvenli hale getirmek ve sunduğumuz özellikleri iyileştirmek için nasıl kullandığınızı anlamamıza yardımcı olmak için çerezleri kullanır."
-      cookies_definition: "Çerezler, bazı web sitelerini ziyaret ettiğinizde bilgisayarınızda depolanan çok küçük metin dosyalarıdır."
-      cookies_desc: "Yalnızca size çevrimiçi yiyecek satma / satın alma hizmetini sunmak için gerekli olan çerezleri kullanıyoruz. Verilerinizin hiçbirini satmıyoruz. Hizmete giriş yaptığınızda kim olduğunuzu hatırlamak veya giriş yapmamış olsanız bile sepetinize koyduğunuz öğeleri hatırlayabilmek için çerezleri kullanırız. Tıklamadan web sitesinde gezinmeye devam ederseniz “Çerezleri kabul et”, web sitesinin çalışması için gerekli olan çerezleri saklamak için bize izin verdiğinizi varsayıyoruz."
-      cookies_policy_link_desc: "Daha fazla bilgi edinmek istiyorsanız,"
-      cookies_policy_link: "çerezler politikası"
-      cookies_accept_button: "Çerezleri kabul et"
   home_shop: 'ALIŞVERİŞE BAŞLAYIN '
   brandstory_headline: "Yerel, adil ve temiz gıda."
   brandstory_intro: "Eğer sistemi düzeltemiyorsak en iyi yol yeni bir sistem yaratmaktır."
@@ -3813,7 +3805,6 @@ tr:
       general_settings:
         edit:
           legal_settings: "Yasal Ayarlar"
-          cookies_consent_banner_toggle: "Çerezler onay başlığını göster"
           privacy_policy_url: "Gizlilik Politikası URLsi"
           enterprises_require_tos: "İşletmeler Üyelik Sözleşmesini kabul etmelidir"
           shoppers_require_tos: "Alıcılar Üyelik Sözleşmesini kabul etmelidir"

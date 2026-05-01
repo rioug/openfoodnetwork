@@ -83,6 +83,8 @@ hu:
       models:
         enterprise_fee:
           inherit_tax_requires_per_item_calculator: "Az adókategória örökléséhez tételenkénti kalkulátor szükséges."
+        enterprise_relationship:
+          inventory_vs_linked_variants: "Nem lehet egyszerre leltár és kapcsolt termékváltozat engedélyeket adni."
         spree/image:
           attributes:
             attachment:
@@ -869,7 +871,7 @@ hu:
             other: "A keresési feltételek alapján <strong>%{count} terméket</strong> találtunk. %{from} – %{to} megjelenítése."
           per_page:
             show: Mutass
-            per_page: "%{num}/ oldal"
+            per_page: "%{num} / oldal"
           clear_search: Keresés törlése
       no_products:
         no_products_found: Nem találtunk termékeket
@@ -1310,6 +1312,7 @@ hu:
           show_hide_payment: 'Fizetési módok megjelenítése vagy elrejtése rendelés leadásakor'
           show_hide_order_cycles: 'Rendelési ciklusok megjelenítése vagy elrejtése a kínálatomban'
         users:
+          description: Az alábbi felhasználók rendelkeznek a vállalkozás kezelésére vonatkozó engedéllyel.
           legend: "Felhasználók"
           email_confirmation_notice_html: "Az email megerősítés függőben van. Megerősítő emailt küldtünk a következő címre: %{email}."
           resend: Újraküldés
@@ -1658,6 +1661,10 @@ hu:
           images: "Képek"
           contact: "Kapcsolat"
           web: "Webes források"
+      stimulus_pagination:
+        page: "%{number}. oldal"
+        previous: Előző oldal
+        next: Következő oldal
     enterprise_issues:
       create_new: Újat készíteni
       resend_email: E-mail újraküldése
@@ -1667,6 +1674,8 @@ hu:
       not_visible: "%{enterprise} nem látható, ezért nem található a térképen vagy a keresésekben"
     reports:
       none: n.a.
+      metadata:
+        report_title: Jelentés címe
       deprecated: "Ez a jelentés elavult, és egy későbbi kiadásban eltávolításra kerül."
       hidden_field: "< Rejtett >"
       unitsize: EGYSÉGMÉRET
@@ -2037,7 +2046,9 @@ hu:
       select_a_payment_method: Válassz fizetési módot
       no_shipping_methods_available: Átvételi és szállítási lehetőségek hiánya miatt a fizetés nem lehetséges. Kérjük, lépj kapcsolatba az üzlet tulajdonosával.
       voucher_code_blank: Kérjük, valós kupon kódot adj meg
+      voucher_code_not_found: érvénytelen. Vagy nem létezik, vagy beváltották.
       add_voucher_error: Hiba történt a kupon hozzáadása során
+      create_voucher_error: "Hiba történt a %{error} utalvány létrehozásakor."
       voucher_redeeming_error: Hiba történt a kupon beváltásakor
   shops:
     hubs:
@@ -2242,7 +2253,6 @@ hu:
       essential_cookies_note: "A legtöbb süti csak egyedi azonosítót tartalmaz, más adatot azonban nem, így például az e-mail címed és jelszavad soha nem szerepel bennük, és soha nem kerül nyilvánosságra."
       cookie_domain: "Által meghatározott:"
       cookie_session_desc: "Arra szolgál, hogy a webhely emlékezzen a felhasználókra az oldalváltások között, például emlékezzen a kosárban lévő tételekre."
-      cookie_consent_desc: "A sütik tárolására vonatkozó felhasználói hozzájárulás állapotának fenntartására szolgál"
       cookie_remember_me_desc: "Akkor használjuk, ha a felhasználóként megkéred a weboldalt, hogy emlékezzen rád. Ez a süti 12 nap után automatikusan törlődik. Ha felhasználóként szeretnéd törölni a sütit, csak ki kell jelentkezned. Ha nem szeretnéd, hogy a süti települjön, ne jelöld be az „emlékezz rám” jelölőnégyzetet bejelentkezéskor."
       cookie_openstreemap_desc: "Ezt a sütit barátságos, nyílt forráskódú térképszolgáltatónk (OpenStreetMap) használja annak biztosítására, hogy egy adott időszakon belül ne kapjon túl sok kérést, és megakadályozza a szolgáltatásaikkal való visszaélést."
       cookie_stripe_desc: "A Stripe fizetési szolgáltató által a csalások felderítése céljából gyűjtött adatok https://stripe.com/cookies-policy/legal. Nem minden átvételi pont vagy termelő használja a Stripe-ot fizetési módszerként, de a csalás megelőzése érdekében jó gyakorlat, hogy minden oldalon alkalmazzuk. A Stripe valószínűleg képet alkot arról, hogy mely oldalaink lépnek általában kapcsolatba az API-jukkal, majd minden szokatlant megjelöl. A Stripe cookie beállításának tehát szélesebb funkciója van, mint egyszerűen a fizetési mód biztosítása a felhasználó számára. Eltávolítása befolyásolhatja magának a szolgáltatásnak a biztonságát. A Stripe-ról többet megtudhatsz, és elolvashatod adatvédelmi irányelveit a https://stripe.com/privacy oldalon."
@@ -2260,13 +2270,6 @@ hu:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "Ügyelj arra, hogy ha törlöd vagy módosítod az Open Food Network által használt alapvető sütiket, a webhely nem fog működni, nem tudsz semmit sem a kosárba tenni, és fizetni sem fogsz tudni."
-    cookies_banner:
-      cookies_usage: "Ez az oldal sütiket használ a zökkenőmentes és biztonságos navigációhoz és az oldal működésének javításához."
-      cookies_definition: "A sütik nagyon kisméretű szöveges fájlok, amelyek bizonyos webhelyek meglátogatásakor a számítógépén tárolódnak."
-      cookies_desc: "Csak az online értékesítéshez/vásárláshoz szükséges sütiket használjuk. Ezek segítenek megjegyezni a bejelentkezést és a kosár tartalmát. Adataidat nem adjuk el. Még ha nem is fogadod el a sütiket, a működéshez elengedhetetleneket akkor is használjuk, különben az oldal nem működne."
-      cookies_policy_link_desc: "Ha többet szeretnél megtudni, olvasd el a "
-      cookies_policy_link: "sütikre vonatkozó szabályzatot"
-      cookies_accept_button: "Sütik elfogadása"
   home_shop: Tovább a termelőkhöz, átvételi pontokhoz
   brandstory_headline: "Együtt, az élelem önrendelkezésért!"
   brandstory_intro: "Közösség által irányított élelmiszerrendszert építünk."
@@ -2350,8 +2353,15 @@ hu:
   email_confirmed: "Köszönjük, hogy megerősítetted az e-mail címed."
   email_confirmation_activate_account: "Mielőtt aktiválhatnánk az új fiókodat, meg kell erősíteni az e-mail címed."
   email_confirmation_greeting: "Kedves %{contact}!"
+  email_confirmation_profile_created: >
+      Sikeresen létrehoztuk %{name} profilodat! A profil aktiválásához meg kell erősíteni
+      ezt az e-mail címet.
   email_confirmation_click_link: "Kérjük, kattints az alábbi linkre az e-mail-cím megerősítéséhez és a profil beállításának folytatásához."
   email_confirmation_link_label: "E-mail cím megerősítése »"
+  email_confirmation_help_html: >
+      Az e-mail cím megerősítése után hozzáférhetsz a vállalkozás adminisztrációjához.
+      A %{link} dokumentumban további információkat találsz %{sitename} funkcióiról,
+      valamint a profilod vagy online áruházad használatának megkezdéséhez.
   email_confirmation_notice_unexpected: "Azért kaptad ezt az üzenetet, mert regisztráltál a(z) %{sitename} webhelyen, vagy egy olyan személy, akit valószínűleg ismersz, meghívott. Ha nem érted, miért kaptad ezt az e-mailt, kérjük, írj a %{contact} címre."
   email_social: "Lépj kapcsolatba velünk:"
   email_contact: "Küldj emailt nekünk:"
@@ -4023,7 +4033,6 @@ hu:
     alt_text: "Alternatív szöveg"
     thumbnail: "Miniatűr"
     back_to_images_list: "Vissza a képek listájához"
-    api_key: "API kulcs"
     email: Email
     account_updated: "Fiók frissítve!"
     email_updated: "A fiók az új e-mail-cím megerősítését követően frissül."
@@ -4496,7 +4505,6 @@ hu:
       general_settings:
         edit:
           legal_settings: "Jogi beállítások"
-          cookies_consent_banner_toggle: "A cookie-k beleegyezését kérő szalaghirdetés megjelenítése"
           privacy_policy_url: "Adatvédelmi nyilatkozat URL-címe"
           enterprises_require_tos: "A vállalkozásoknak el kell fogadniuk a Szolgáltatási feltételeket"
           shoppers_require_tos: "A vásárlóknak el kell fogadniuk a Szolgáltatási feltételeket"
@@ -4813,3 +4821,6 @@ hu:
   invisible_captcha:
     sentence_for_humans: "Kérjük, hagyd üresen"
     timestamp_error_message: "Kérjük, próbáld meg 5 másodperc múlva."
+  credit_payment_method:
+    errors:
+      customer_not_found: Az ügyfél nem található

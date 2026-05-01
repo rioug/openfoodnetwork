@@ -5,13 +5,23 @@ en_US:
       spree/product: Product
       spree/shipping_method: Shipping Method
     attributes:
+      spree/image:
+        attachment: Attachment
       spree/order/ship_address:
+        address1: "Shipping address (House number + Street)"
+        address2: "Shipping address line 2"
+        city: "Shipping address city"
         phone: "Phone number"
         firstname: "First name"
         lastname: "Last name"
         zipcode: "Shipping address zip code"
       spree/order/bill_address:
+        address1: "Billing address (House number & Street)"
         zipcode: "Billing address zip code"
+        city: "Billing address City"
+        firstname: "Billing address first name"
+        lastname: "Billing address last name"
+        phone: Customer phone
       spree/user:
         password: "Password"
         password_confirmation: "Password confirmation"
@@ -49,8 +59,14 @@ en_US:
         orders_close_at: Close Date
       variant_override:
         count_on_hand: "On Hand"
+      spree/payment_method/calculator:
+        preferred_flat_percent: "Calculator Flat Percent:"
+        preferred_first_item: "Calculator First Item:"
+        preferred_additional_item: "Additional Item Cost"
     errors:
       models:
+        enterprise_relationship:
+          inventory_vs_linked_variants: "Can not grant both inventory and linked variants permissions."
         spree/user:
           attributes:
             email:
@@ -73,6 +89,11 @@ en_US:
             limited_stock_but_no_count_on_hand: "must be specified because forcing limited stock"
       messages:
         blank: "can't be blank"
+  errors:
+    messages:
+      media_metadata_missing: "is not a valid media file"
+    internal_server_error:
+      title: "We're sorry, but something went wrong (500)"
   stripe:
     error_code:
       incorrect_number: "The card number is incorrect."
@@ -257,7 +278,13 @@ en_US:
   producer_mailer:
     order_cycle:
       subject: "Order cycle report for %{producer}"
+    order_cycle_report:
+      order_number: "Order Number"
   provider_settings: "Provider settings"
+  report_mailer:
+    report_ready:
+      subject: "Report ready"
+      heading: "Report ready for download"
   shipment_mailer:
     shipped_email:
       dear_customer: "Dear Customer,"
@@ -322,7 +349,9 @@ en_US:
   confirm_send_invoice: "An invoice for this order will be sent to the customer. Are you sure you want to continue?"
   confirm_resend_order_confirmation: "Are you sure you want to resend the order confirmation email?"
   invoice: "Invoice"
+  file: "File"
   active: "Active"
+  download: "Download"
   cancelled: "Cancelled"
   more: "More"
   say_no: "No"
@@ -542,6 +571,8 @@ en_US:
         terms_of_service: "Terms of Service"
         delete: "Delete file"
         confirm_delete: "Are you sure you want to delete the current Terms of Service file?"
+        attachment: "Attachment"
+        create_terms_of_service: "Create Terms of service file"
     number_localization:
       number_localization_settings: "Number Localization Settings"
       enable_localized_number: "Use the international thousand/decimal separator logic"
@@ -1836,7 +1867,6 @@ en_US:
       essential_cookies_note: "Most cookies only contain a unique identifier, but no other data, so your email address and password for instance are never contained in them and never exposed."
       cookie_domain: "Set By:"
       cookie_session_desc: "Used to allow the website to remember users between page visits, for example, remember items in your cart."
-      cookie_consent_desc: "Used to maintain status of user consent to store cookies"
       cookie_remember_me_desc: "Used if the user has requested the website to remember him. This cookie is automatically deleted after 12 days. If as a user you want that cookie to be deleted, you only need to logout. If you don’t want that cookie to be installed on your computer you shouldn’t check the “remember me” checkbox when logging in."
       cookie_openstreemap_desc: "Used by our friendly open source mapping provider (OpenStreetMap) to ensure that it does not receive too many requests during a given time period, to prevent abuse of their services."
       cookie_stripe_desc: "Data collected by our payment processor Stripe for fraud detection https://stripe.com/cookies-policy/legal. Not all shops use Stripe as a payment method but it is a good practice to prevent fraud to apply it to all pages. Stripe probably build a picture of which of our pages usually interact with their API and then flag anything unusual. So setting the Stripe cookie has a broader function than simply the provision of a payment method to a user. Removing it could affect the security of the service itself. You can learn more about Stripe and read its privacy policy at https://stripe.com/privacy."
@@ -1854,13 +1884,6 @@ en_US:
       disabling_cookies_ie_link: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
       disabling_cookies_safari_link: "https://www.apple.com/legal/privacy/en-ww/cookies/"
       disabling_cookies_note: "But be aware that if you delete or modify the essential cookies used by Open Food Network, the website won’t work, you will not be able to add anything to your cart or to check out, for instance."
-    cookies_banner:
-      cookies_usage: "This site uses cookies in order to make your navigation frictionless and secure, and to help us understand how you use it in order to improve the features we offer."
-      cookies_definition: "Cookies are very small text files that are stored on your computer when you visit some websites."
-      cookies_desc: "We use only the cookies that are necessary for delivering you the service of selling/buying food online. We don’t sell any of your data. We use cookies mainly to remember who you are if you ‘log in’ to the service, or to be able to remember the items you put in your cart even if you are not logged in. If you keep navigating on the website without clicking on “Accept cookies”, we assume you are giving us consent to store the cookies that are essential for the functioning of the website."
-      cookies_policy_link_desc: "If you want to learn more, check our"
-      cookies_policy_link: "cookies policy"
-      cookies_accept_button: "Accept Cookies"
   home_shop: Shop Now
   brandstory_headline: "Food, unincorporated."
   brandstory_intro: "Sometimes the best way to fix the system is to start a new one…"
@@ -2831,6 +2854,7 @@ en_US:
   new_payment: "New Payment"
   date_completed: "Date Completed"
   amount: "Amount"
+  invoice_file: "File"
   state_names:
     ready: Ready
     pending: Pending
@@ -3688,6 +3712,7 @@ en_US:
           from: "From"
           to: "Bill to"
           shipping: "Shipping"
+          order_number: "Order Number"
           payments_list:
             date_time: "Date/time"
             payment_method: "Payment method"
@@ -3926,7 +3951,6 @@ en_US:
       general_settings:
         edit:
           legal_settings: "Legal Settings"
-          cookies_consent_banner_toggle: "Display cookies consent banner"
           privacy_policy_url: "Privacy Policy URL"
           enterprises_require_tos: "Enterprises must accept Terms of Service"
           shoppers_require_tos: "Shoppers must accept Terms of Service"
