@@ -22,7 +22,7 @@ class SocialMediaBuilder < DfcBuilder
 
     url = "https://#{url}" unless url.starts_with?(%r{https?://})
 
-    DataFoodConsortium::Connector::SocialMedia.new(
+    DataFoodConsortium::ConnectorV1::SocialMedia.new(
       urls.enterprise_social_media_url(enterprise.id, name),
       name:, url:,
     )

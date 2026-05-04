@@ -31,7 +31,7 @@ class SuppliedProductBuilder < DfcBuilder
   def self.product_type(variant)
     taxon_dfc_id = variant.primary_taxon&.dfc_id
 
-    DataFoodConsortium::Connector::SKOSParser.concepts[taxon_dfc_id]
+    DataFoodConsortium::ConnectorV1::SKOSParser.concepts[taxon_dfc_id]
   end
 
   private_class_method :product_type

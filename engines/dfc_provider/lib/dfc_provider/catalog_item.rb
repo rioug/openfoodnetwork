@@ -2,7 +2,7 @@
 
 # Temporary solution.
 module DfcProvider
-  class CatalogItem < DataFoodConsortium::Connector::CatalogItem
+  class CatalogItem < DataFoodConsortium::ConnectorV1::CatalogItem
     attr_accessor :managedBy
 
     def initialize(semantic_id, managedBy: "", **properties)

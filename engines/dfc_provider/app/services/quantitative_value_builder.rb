@@ -10,7 +10,7 @@
 # standardised data within OFN to map to these types.
 class QuantitativeValueBuilder < DfcBuilder
   def self.quantity(variant)
-    DataFoodConsortium::Connector::QuantitativeValue.new(
+    DataFoodConsortium::ConnectorV1::QuantitativeValue.new(
       unit: unit(variant.variant_unit),
       value: variant.unit_value,
     )

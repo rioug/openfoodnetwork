@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-if defined? DataFoodConsortium::Connector::Coordination
+if defined? DataFoodConsortium::ConnectorV1::Coordination
   ActiveSupport::Deprecation.warn <<~TEXT
-    DataFoodConsortium::Connector::Coordination is now available.
+    DataFoodConsortium::ConnectorV1::Coordination is now available.
     Please replace your own implementation with the official class.
   TEXT
 end

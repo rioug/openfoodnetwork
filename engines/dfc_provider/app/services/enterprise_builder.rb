@@ -10,7 +10,7 @@ class EnterpriseBuilder < DfcBuilder
     supplied_products = catalog_items.map(&:product)
     address = AddressBuilder.address(enterprise.address)
 
-    DataFoodConsortium::Connector::Enterprise.new(
+    DataFoodConsortium::ConnectorV1::Enterprise.new(
       urls.enterprise_url(enterprise.id),
       name: enterprise.name,
       description: enterprise.description,
@@ -49,7 +49,7 @@ class EnterpriseBuilder < DfcBuilder
       urls.enterprise_url(member.id)
     end
 
-    DataFoodConsortium::Connector::Enterprise.new(
+    DataFoodConsortium::ConnectorV1::Enterprise.new(
       urls.enterprise_group_url(group.id),
       name: group.name,
       description: group.description,
@@ -65,7 +65,7 @@ class EnterpriseBuilder < DfcBuilder
   def self.contact(enterprise)
     firstName, lastName = enterprise.contact_name&.split(/ ([^ ]+)$/) # rubocop:disable Naming/VariableName
 
-    DataFoodConsortium::Connector::Person.new(
+    DataFoodConsortium::ConnectorV1::Person.new(
       urls.enterprise_url(enterprise.id, anchor: "mainContact"),
       firstName:, # rubocop:disable Naming/VariableName
       lastName:, # rubocop:disable Naming/VariableName
@@ -75,7 +75,7 @@ class EnterpriseBuilder < DfcBuilder
   def self.phone_numbers(enterprise)
     return [] if enterprise.phone.blank?
 
-    number = DataFoodConsortium::Connector::PhoneNumber.new(
+    number = DataFoodConsortium::ConnectorV1::PhoneNumber.new(
       nil,
       phoneNumber: enterprise.phone,
     )

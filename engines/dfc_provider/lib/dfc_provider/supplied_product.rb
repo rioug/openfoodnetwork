@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DfcProvider
-  class SuppliedProduct < DataFoodConsortium::Connector::SuppliedProduct
+  class SuppliedProduct < DataFoodConsortium::ConnectorV1::SuppliedProduct
     attr_accessor :spree_product_id, :spree_product_uri, :image
 
     def initialize(

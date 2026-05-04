@@ -121,7 +121,7 @@ RSpec.describe CompleteBackorderJob do
       distributor = nil
       order_cycle = nil
       order_id = nil
-      backorder = DataFoodConsortium::Connector::Order.new(
+      backorder = DataFoodConsortium::ConnectorV1::Order.new(
         order_id, orderStatus: "dfc-v:Held"
       )
       expect_any_instance_of(FdcBackorderer)

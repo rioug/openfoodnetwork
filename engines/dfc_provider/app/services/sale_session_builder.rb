@@ -2,7 +2,7 @@
 
 class SaleSessionBuilder < DfcBuilder
   def self.build(order_cycle)
-    DataFoodConsortium::Connector::SaleSession.new(
+    DataFoodConsortium::ConnectorV1::SaleSession.new(
       nil,
       beginDate: stringify_time(order_cycle&.orders_open_at),
       endDate: stringify_time(order_cycle&.orders_close_at),

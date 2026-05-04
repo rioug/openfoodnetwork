@@ -2,6 +2,7 @@
 
 # Load the DFC Connector:
 require "datafoodconsortium/connector"
+require "datafoodconsortium/connector_v1"
 
 # Our Rails engine
 require "dfc_provider/engine"
@@ -16,5 +17,5 @@ require "dfc_provider/coordination"
 require "semantic_object_inspect"
 
 module DfcProvider
-  DataFoodConsortium::Connector::Importer.register_type(SuppliedProduct)
+  DataFoodConsortium::ConnectorV1::Importer.register_type(SuppliedProduct)
 end

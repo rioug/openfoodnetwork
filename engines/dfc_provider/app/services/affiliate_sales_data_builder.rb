@@ -8,7 +8,7 @@ class AffiliateSalesDataBuilder < DfcBuilder
         AffiliateSalesDataRowBuilder.new(row).build_supplier
       end
 
-      DataFoodConsortium::Connector::Person.new(
+      DataFoodConsortium::ConnectorV1::Person.new(
         urls.affiliate_sales_data_url,
         affiliatedOrganizations: suppliers,
       )
