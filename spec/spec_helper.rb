@@ -248,6 +248,12 @@ RSpec.configure do |config|
     end
   end
 
+  # Add reference to help navigate debug logs
+  config.before(:each) do |example|
+    Rails.logger.debug(example.full_description)
+    Rails.logger.debug(example.location)
+  end
+
   config.infer_spec_type_from_file_location!
 
   # You can use `rspec -n` to run only failed specs.

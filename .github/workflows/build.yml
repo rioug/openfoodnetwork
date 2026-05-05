@@ -12,7 +12,6 @@ env:
   TIMEZONE: UTC
   COVERAGE: true
   RAILS_ENV: test
-
 permissions:
   contents: read
 
@@ -82,9 +81,13 @@ jobs:
           # https://knapsackpro.com/faq/question/how-to-split-slow-rspec-test-files-by-test-examples-by-individual-it
           #KNAPSACK_PRO_RSPEC_SPLIT_BY_TEST_EXAMPLES: true
           KNAPSACK_PRO_TEST_FILE_PATTERN: "{spec/controllers/**/*_spec.rb,spec/models/**/*_spec.rb}"
+          # Enable debug logging if user checked "Enable debug logging" when re-running a workflow
+          RAILS_LOG_LEVEL: ${{ case(runner.debug == '1', 'debug', 'fatal') }}
+          SPEC_OPTS: ${{ case(runner.debug == '1', '--format documentation', '') }}
         run: |
           git show --no-patch # the commit being tested (which is often a merge due to actions/checkout@v3)
-          bin/rails assets:precompile knapsack_pro:rspec
+          bin/rails assets:precompile 2>&1 | sed '/INFO -- : Writing/d' # strip unnecessary output
+          bin/rails knapsack_pro:rspec
 
       - name: Save SimpleCov file
         uses: actions/upload-artifact@v4
@@ -94,6 +97,15 @@ jobs:
           retention-days: 2 # doesn't need to be long, because it's the combined results that matter
           if-no-files-found: ignore
           include-hidden-files: true
+
+      - name: Archive debug log files
+        if: runner.debug
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-system_${{ matrix.ci_node_index }}-tests-logs
+          path: log/*
+          retention-days: 7
+          if-no-files-found: ignore
 
   system:
     runs-on: ubuntu-22.04
@@ -160,9 +172,13 @@ jobs:
           # https://knapsackpro.com/faq/question/how-to-split-slow-rspec-test-files-by-test-examples-by-individual-it
           #KNAPSACK_PRO_RSPEC_SPLIT_BY_TEST_EXAMPLES: true
           KNAPSACK_PRO_TEST_FILE_PATTERN: "{spec/system/admin/**/*_spec.rb,spec/system/consumer/**/*_spec.rb}"
+          # Enable debug logging if user checked "Enable debug logging" when re-running a workflow
+          RAILS_LOG_LEVEL: ${{ case(runner.debug == '1', 'debug', 'fatal') }}
+          SPEC_OPTS: ${{ case(runner.debug == '1', '--format documentation', '') }}
 
         run: |
-          bin/rails assets:precompile knapsack_pro:queue:rspec
+          bin/rails assets:precompile 2>&1 | sed '/INFO -- : Writing/d' # strip unnecessary output
+          bin/rails knapsack_pro:rspec
 
       - name: Save SimpleCov file
         uses: actions/upload-artifact@v4
@@ -179,6 +195,15 @@ jobs:
         with:
           name: failed-system_${{ matrix.ci_node_index }}-tests-screenshots
           path: tmp/capybara/screenshots/*.png
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Archive debug log files
+        if: runner.debug
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-system_${{ matrix.ci_node_index }}-tests-logs
+          path: log/*
           retention-days: 7
           if-no-files-found: ignore
 
@@ -248,9 +273,12 @@ jobs:
           # https://knapsackpro.com/faq/question/how-to-split-slow-rspec-test-files-by-test-examples-by-individual-it
           #KNAPSACK_PRO_RSPEC_SPLIT_BY_TEST_EXAMPLES: true
           KNAPSACK_PRO_TEST_FILE_PATTERN: "{spec/lib/**/*_spec.rb,spec/migrations/**/*_spec.rb,spec/serializers/**/*_spec.rb,engines/**/*_spec.rb}"
+          # Enable debug logging if user checked "Enable debug logging" when re-running a workflow
+          RAILS_LOG_LEVEL: ${{ case(runner.debug == '1', 'debug', 'fatal') }}
+          SPEC_OPTS: ${{ case(runner.debug == '1', '--format documentation', '') }}
 
         run: |
-          bin/rails assets:precompile knapsack_pro:rspec
+          bin/rails assets:precompile knapsack_pro:rspec 2>&1 | sed '/INFO -- : Writing/d' # strip unnecessary output
 
       - name: Save SimpleCov file
         uses: actions/upload-artifact@v4
@@ -260,6 +288,15 @@ jobs:
           retention-days: 2 # doesn't need to be long, because it's the combined results that matter
           if-no-files-found: ignore
           include-hidden-files: true
+
+      - name: Archive debug log files
+        if: runner.debug
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-system_${{ matrix.ci_node_index }}-tests-logs
+          path: log/*
+          retention-days: 7
+          if-no-files-found: ignore
 
   test_the_rest:
     runs-on: ubuntu-22.04
@@ -326,8 +363,12 @@ jobs:
           # https://knapsackpro.com/faq/question/how-to-split-slow-rspec-test-files-by-test-examples-by-individual-it
           #KNAPSACK_PRO_RSPEC_SPLIT_BY_TEST_EXAMPLES: true
           KNAPSACK_PRO_TEST_FILE_EXCLUDE_PATTERN: "{engines/**/*_spec.rb,spec/models/**/*_spec.rb,spec/controllers/**/*_spec.rb,spec/serializers/**/*_spec.rb,spec/lib/**/*_spec.rb,spec/migrations/**/*_spec.rb,spec/system/**/*_spec.rb}"
+          # Enable debug logging if user checked "Enable debug logging" when re-running a workflow
+          RAILS_LOG_LEVEL: ${{ case(runner.debug == '1', 'debug', 'fatal') }}
+          SPEC_OPTS: ${{ case(runner.debug == '1', '--format documentation', '') }}
+
         run: |
-          bin/rails assets:precompile knapsack_pro:rspec
+          bin/rails assets:precompile knapsack_pro:rspec 2>&1 | sed '/INFO -- : Writing/d' # strip unnecessary output
 
       - name: Save SimpleCov file
         uses: actions/upload-artifact@v4
@@ -337,6 +378,15 @@ jobs:
           retention-days: 2 # doesn't need to be long, because it's the combined results that matter
           if-no-files-found: ignore
           include-hidden-files: true
+
+      - name: Archive debug log files
+        if: runner.debug
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-system_${{ matrix.ci_node_index }}-tests-logs
+          path: log/*
+          retention-days: 7
+          if-no-files-found: ignore
 
   non_knapsack_jest_karma:
     runs-on: ubuntu-22.04
