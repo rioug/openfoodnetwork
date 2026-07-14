@@ -47,7 +47,7 @@ gem "arel-helpers", "~> 2.12"
 gem "pg"
 
 gem 'acts_as_list', '1.0.4'
-gem 'cancancan', '~> 1.15.0'
+gem 'cancancan', '2.0.0'
 gem 'digest'
 gem 'ffaker'
 gem 'highline'
