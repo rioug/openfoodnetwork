@@ -7,17 +7,6 @@ module Api
     class UserSerializer < ActiveModel::Serializer
       attributes :id, :email, :confirmed
 
-      has_one :ship_address, serializer: Api::AddressSerializer
-      has_one :bill_address, serializer: Api::AddressSerializer
-
-      def ship_address
-        OpenFoodNetwork::AddressFinder.new(email: object.email, user: object).ship_address
-      end
-
-      def bill_address
-        OpenFoodNetwork::AddressFinder.new(email: object.email, user: object).bill_address
-      end
-
       def confirmed
         object.confirmed?
       end
